@@ -18,7 +18,7 @@ import java.util.UUID;
 public class GhostCommand {
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
-        dispatcher.register(CommandManager.literal("ghost")
+        dispatcher.register(CommandManager.literal("dominium:ghost")
                 .requires(source -> source.hasPermissionLevel(2))
                 .then(CommandManager.literal("add")
                         .then(CommandManager.argument("player", EntityArgumentType.player())
