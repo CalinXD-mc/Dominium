@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:book"
+    },
+    "D": {
+      "item": "minecraft:deepslate_tiles"
+    },
+    "R": {
+      "item": "minecraft:red_dye"
+    }
+  },
+  "pattern": [
+    "BD ",
+    "DR ",
+    "   "
+  ],
+  "result": {
+    "item": "dominium:contract"
+  },
+  "show_notification": true
+}

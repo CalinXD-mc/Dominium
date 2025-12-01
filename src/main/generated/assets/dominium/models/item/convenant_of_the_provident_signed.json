@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "dominium:item/convenant_of_the_provident_signed"
+  }
+}

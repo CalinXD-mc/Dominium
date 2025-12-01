@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:deepslate_tiles"
+    },
+    "E": {
+      "item": "minecraft:end_crystal"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "pattern": [
+    "DED",
+    "DND",
+    "DED"
+  ],
+  "result": {
+    "item": "dominium:idol"
+  },
+  "show_notification": true
+}

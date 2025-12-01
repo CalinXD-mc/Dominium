@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "dominium:soul_sandstone"
+    }
+  },
+  "pattern": [
+    "SS ",
+    "SS ",
+    "   "
+  ],
+  "result": {
+    "item": "dominium:smooth_soul_sandstone"
+  },
+  "show_notification": true
+}

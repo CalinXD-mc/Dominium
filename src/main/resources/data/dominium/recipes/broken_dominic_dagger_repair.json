@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "dominium:broken_dominic_dagger"
+    },
+    "2": {
+      "item": "minecraft:netherite_sword"
+    }
+  },
+  "pattern": [
+    "   ",
+    " 1 ",
+    "2  "
+  ],
+  "result": {
+    "item": "dominium:fixed_dominic_dagger"
+  },
+  "show_notification": true
+}

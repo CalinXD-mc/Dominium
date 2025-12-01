@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "dominium:block/smooth_soul_sandstone"
+  }
+}

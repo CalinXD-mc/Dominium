@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_broken_dominic_dagger": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:broken_dominic_dagger"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:ancient_bone_alloy_from_smelting_broken_dominic_dagger"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_broken_dominic_dagger",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:ancient_bone_alloy_from_smelting_broken_dominic_dagger"
+    ]
+  },
+  "sends_telemetry_event": false
+}

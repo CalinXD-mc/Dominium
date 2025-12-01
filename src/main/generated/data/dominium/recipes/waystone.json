@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:deepslate_tiles"
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    },
+    "L": {
+      "item": "minecraft:lodestone"
+    }
+  },
+  "pattern": [
+    "DDD",
+    "DED",
+    "DLD"
+  ],
+  "result": {
+    "item": "dominium:waystone"
+  },
+  "show_notification": true
+}

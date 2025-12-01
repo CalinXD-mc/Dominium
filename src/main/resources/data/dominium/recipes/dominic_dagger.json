@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "dominium:ancient_bone_alloy"
+    },
+    "2": {
+      "item": "minecraft:netherite_sword"
+    },
+    "3": {
+      "item": "dominium:ancient_bone_alloy_chunk"
+    }
+  },
+  "pattern": [
+    "  3",
+    " 1 ",
+    "2  "
+  ],
+  "result": {
+    "item": "dominium:dominic_dagger"
+  },
+  "show_notification": true
+}

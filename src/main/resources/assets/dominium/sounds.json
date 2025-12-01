@@ -1,0 +1,26 @@
+{
+  "block.waystone.totem_activate": {
+    "sounds": [
+      "dominium:block/waystone/totem_activate"
+    ],
+    "subtitle": "subtitles.waystone.totem_activate"
+  },
+  "block.waystone.activate": {
+    "sounds": [
+      "dominium:block/waystone/activate"
+    ],
+    "subtitle": "subtitles.waystone.activate"
+  },
+  "item.dice.roll": {
+    "sounds": [
+      "dominium:dice"
+    ],
+    "subtitle": "subtitles.item.dice.roll"
+  },
+  "event.dominium.dominium_boom": {
+    "sounds": [
+      "dominium:block/waystone/dominium_specum_boom"
+    ],
+    "subtitle": "subtitles.event.dominium_boom"
+  }
+}

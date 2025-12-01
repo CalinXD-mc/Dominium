@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:blackstone"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "BEB",
+    "BBB"
+  ],
+  "result": {
+    "item": "dominium:wanderer_tablet"
+  },
+  "show_notification": true
+}

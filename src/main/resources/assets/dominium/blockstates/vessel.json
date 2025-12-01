@@ -1,0 +1,12 @@
+{
+	"variants": {
+		"lit=true,facing=north": { "model": "dominium:block/vessel/vessel_on" },
+		"lit=true,facing=south": { "model": "dominium:block/vessel/vessel_on", "y": 180 },
+		"lit=true,facing=west": { "model": "dominium:block/vessel/vessel_on", "y": 270 },
+		"lit=true,facing=east": { "model": "dominium:block/vessel/vessel_on", "y": 90 },
+		"lit=false,facing=north": { "model": "dominium:block/vessel/vessel_off" },
+		"lit=false,facing=south": { "model": "dominium:block/vessel/vessel_off", "y": 180 },
+		"lit=false,facing=west": { "model": "dominium:block/vessel/vessel_off", "y": 270 },
+		"lit=false,facing=east": { "model": "dominium:block/vessel/vessel_off", "y": 90 }
+	}
+}

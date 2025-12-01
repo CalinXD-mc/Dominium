@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 1600,
+  "experience": 0.7,
+  "group": "bone_pile_from_bone_dust",
+  "ingredient": {
+    "item": "dominium:broken_dominic_dagger"
+  },
+  "result": "dominium:ancient_bone_alloy"
+}
