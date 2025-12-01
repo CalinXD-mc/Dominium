@@ -71,7 +71,7 @@ public class ModItems {
     public static final Item CONVENANT_OF_THE_PROVIDENT_SIGNED = registerItem("convenant_of_the_provident_signed",
             new ProvedientConvenantItem(new FabricItemSettings().maxCount(1), ModRarities.DOMINIC));
 
-    public static final Item ONYX_VERDICT = registerItem("onyx_verdict",
+    public static final Item GILDED_ONYX = registerItem("gilded_onyx",
             new CustomRaritySwordItem(new FabricItemSettings().maxCount(1), 10, -3.0f, ModToolMaterials.DOMINIC ,ModRarities.DOMINIC));
 
     public static final Item ITEM_MARKER = registerItem("item_marker",

@@ -1,4 +1,4 @@
-package dev.cxd.dominium.mixin;
+package dev.cxd.dominium.mixin.client;
 
 import dev.cxd.dominium.Dominium;
 import net.minecraft.client.color.block.BlockColors;
@@ -27,5 +27,6 @@ public abstract class ModelLoaderMixin {
         this.addModel(new ModelIdentifier(Dominium.MOD_ID, "dominic_orb_handheld", "inventory"));
         this.addModel(new ModelIdentifier(Dominium.MOD_ID, "soul_orb_handheld", "inventory"));
         this.addModel(new ModelIdentifier(Dominium.MOD_ID, "soultrap_spetum_handheld", "inventory"));
+        this.addModel(new ModelIdentifier(Dominium.MOD_ID, "gilded_onyx_handheld", "inventory"));
     }
 }

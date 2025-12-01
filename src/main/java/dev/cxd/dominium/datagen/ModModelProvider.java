@@ -39,11 +39,6 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.SOULBOUND_CONTRACT, Models.GENERATED);
         itemModelGenerator.register(ModItems.SOULBOUND_CONTRACT_SIGNED, Models.GENERATED);
 
-//        itemModelGenerator.register(ModItems.BONE_DUST, Models.GENERATED);
-//        itemModelGenerator.register(ModItems.BONE_PILE, Models.GENERATED);
-//        itemModelGenerator.register(ModItems.HUMAN_BONE, Models.HANDHELD);
-//        itemModelGenerator.register(ModItems.WITHERED_BONE, Models.HANDHELD);
-
         itemModelGenerator.register(ModItems.WANDERER_TABLET, Models.GENERATED);
         itemModelGenerator.register(ModItems.SIGNED_WANDERER_TABLET, Models.GENERATED);
 
@@ -56,14 +51,10 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.BROKEN_DOMINIC_DAGGER_PIECE, Models.GENERATED);
         itemModelGenerator.register(ModItems.CONVENANT_OF_THE_PROVIDENT_SIGNED, Models.GENERATED);
 
-//        itemModelGenerator.register(ModItems.ANCIENT_SCRAP, Models.GENERATED);
-//        itemModelGenerator.register(ModItems.ANCIENT_NETHERITE, Models.GENERATED);
-//        itemModelGenerator.register(ModItems.NETHER_GOLD, Models.GENERATED);
         itemModelGenerator.register(ModItems.ANCIENT_BONE_ALLOY, Models.GENERATED);
         itemModelGenerator.register(ModItems.ANCIENT_BONE_ALLOY_CHUNK, Models.GENERATED);
 
-//        itemModelGenerator.register(ModItems.LUCKY_DICE, Models.GENERATED);
-//        itemModelGenerator.register(ModItems.SINFUL_DICE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.GILDED_ONYX, Models.GENERATED);
     }
 
 //    protected Identifier registerCubeColumnModel(BlockStateModelGenerator blockStateModelGenerator, Block block, String side, String bottom, String top) {

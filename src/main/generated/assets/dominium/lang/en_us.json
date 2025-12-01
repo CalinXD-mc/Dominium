@@ -34,10 +34,9 @@
   "item.dominium.dominic_effigy": "Dominic Effigy",
   "item.dominium.dominic_orb": "Dominic Orb",
   "item.dominium.fixed_dominic_dagger": "Fixed Dominic Dagger",
+  "item.dominium.gilded_onyx": "Gilded Onyx",
   "item.dominium.human_bone": "Player Bone",
-  "item.dominium.lucky_dice": "Lucky Dice",
   "item.dominium.nether_gold": "Nether's Gold",
-  "item.dominium.sinful_dice": "Sinful Dice",
   "item.dominium.soul_orb": "Soul Orb",
   "item.dominium.soultrap_spetum": "Soultrap Spetum",
   "item.dominium.wanderer_tablet": "Wanderer's Tablet",
@@ -45,5 +44,5 @@
   "item.dominium.withered_bone": "Withered Bone",
   "itemGroup.dominium.dominium": "Dominium",
   "subtitles.event.dominium_boom": "Forfeit...",
-  "subtitles.item.dice.roll": "LET'S GO GAMBLING WOHOOOOOO LET'S GOOOOO!!!!!"
+  "subtitles.soul_glass.soul_glass_pling": "Soul Glass Plings"
 }

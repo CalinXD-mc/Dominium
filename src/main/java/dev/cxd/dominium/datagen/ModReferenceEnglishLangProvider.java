@@ -61,8 +61,7 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("item.dominium.fixed_dominic_dagger", "Fixed Dominic Dagger");
         translationBuilder.add("item.dominium.convenant_of_the_provident_signed", "Convenant Of The Provident");
 
-        translationBuilder.add("item.dominium.lucky_dice", "Lucky Dice");
-        translationBuilder.add("item.dominium.sinful_dice", "Sinful Dice");
+        translationBuilder.add("item.dominium.gilded_onyx", "Gilded Onyx");
 
         //Damage Types
         translationBuilder.add("death.attack.disobedience", "%1$s's life was punished by the contract");

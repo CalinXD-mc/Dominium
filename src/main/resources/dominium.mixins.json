@@ -3,9 +3,6 @@
 	"package": "dev.cxd.dominium.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"ItemRendererAccessor",
-		"ItemRendererMixin",
-		"ModelLoaderMixin",
 		"PlayerStepMixin",
 		"EntityRenderDispatcherMixin",
 		"PlayerManagerMixin",
@@ -15,7 +12,10 @@
 	"client": [
 		"client.PlayerRendererMixin",
 		"client.LivingEntityRendererMixin",
-		"client.WorldBorderShaderActivatorMixin"
+		"client.WorldBorderShaderActivatorMixin",
+        "client.ItemRendererMixin",
+        "client.ModelLoaderMixin",
+        "client.ItemRendererAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1

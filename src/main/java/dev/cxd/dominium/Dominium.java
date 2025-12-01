@@ -60,6 +60,6 @@ public class Dominium implements ModInitializer {
         CommandRegistrationCallback.EVENT.register(GhostCommand::register);
         CommandRegistrationCallback.EVENT.register(MarkerCommand::register);
 
-        LOGGER.info("Initializing Mod \"Dominium\"");
+        LOGGER.info("Initializing Dominium");
 	}
 }

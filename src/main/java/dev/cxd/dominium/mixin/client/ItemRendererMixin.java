@@ -1,4 +1,4 @@
-package dev.cxd.dominium.mixin;
+package dev.cxd.dominium.mixin.client;
 
 import dev.cxd.dominium.Dominium;
 import dev.cxd.dominium.init.ModItems;
@@ -25,6 +25,9 @@ public abstract class ItemRendererMixin {
         }
         if (stack.isOf(ModItems.SOULTRAP_SPETUM) && renderMode != ModelTransformationMode.GUI && renderMode != ModelTransformationMode.GROUND) {
             return ((ItemRendererAccessor) this).item$getModels().getModelManager().getModel(new ModelIdentifier(Dominium.MOD_ID, "soultrap_spetum_handheld", "inventory"));
+        }
+        if (stack.isOf(ModItems.GILDED_ONYX) && renderMode != ModelTransformationMode.GUI && renderMode != ModelTransformationMode.GROUND) {
+            return ((ItemRendererAccessor) this).item$getModels().getModelManager().getModel(new ModelIdentifier(Dominium.MOD_ID, "gilded_onyx_handheld", "inventory"));
         }
         return value;
     }

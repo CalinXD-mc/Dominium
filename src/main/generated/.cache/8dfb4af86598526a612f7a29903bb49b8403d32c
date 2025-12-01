@@ -1,11 +1,12 @@
-// 1.20.1	2025-11-16T19:40:06.9525704	Dominium/Model Definitions
+// 1.20.1	2025-12-01T20:55:32.4231655	Dominium/Model Definitions
 a3bed73c84173b1c05426272e3aba50582d37959 assets\dominium\models\item\contract.json
 46f1863dac7b5cc52c0e934da5b0bb3e2660802d assets\dominium\models\block\smooth_soul_sandstone.json
 4dfc105cc467343ad95769f2ed78562becccea65 assets\dominium\models\block\smooth_soul_sandstone_slab.json
 f6d3eb9a4de2f27d0f64a22c141aa70af85b0a01 assets\dominium\blockstates\suspicious_bone_block.json
-0215c1b51c33a204965c67b8a2278882089ea2c3 assets\dominium\blockstates\smooth_soul_sandstone_wall.json
 c516e94a79789171f6715058e8b1c53101e95fa1 assets\dominium\blockstates\soul_sandstone.json
+0215c1b51c33a204965c67b8a2278882089ea2c3 assets\dominium\blockstates\smooth_soul_sandstone_wall.json
 a6a8513a701981761aed94730bdd3c9a8a5b76c9 assets\dominium\models\item\soul_orb.json
+fde47984ceceb8e59b63ebaacbb182b5e5dcfc95 assets\dominium\models\item\gilded_onyx.json
 cd3d5cd9db09123fb1347819e311bc682fcc9b1f assets\dominium\models\item\ancient_bone_alloy_chunk.json
 937e06726585d3f6011cf224e65d5ee37b1b8bca assets\dominium\models\block\smooth_soul_sandstone_stairs_inner.json
 2a2ecd9ded41ae982014eb856105b54c6c260592 assets\dominium\models\item\broken_dominic_dagger.json

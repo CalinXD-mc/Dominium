@@ -1,4 +1,4 @@
-package dev.cxd.dominium.mixin;
+package dev.cxd.dominium.mixin.client;
 
 import net.minecraft.client.render.item.ItemModels;
 import net.minecraft.client.render.item.ItemRenderer;
