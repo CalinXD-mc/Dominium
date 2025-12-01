@@ -43,17 +43,14 @@ public class WaystoneBlock extends Block {
         Hand hand = activeHand; // use the passed-in hand
         ItemStack held = player.getStackInHand(hand);
 
-        // Only works if holding a ContractSigned or WandererTabletSigned
         if (!(held.getItem() instanceof ContractSigned || held.getItem() instanceof WandererTabletSigned || held.getItem() instanceof SoulboundContractSigned))
             return ActionResult.PASS;
 
-        // Get UUID from contract
         String uuidStr = ModComponents.getVesselUuid(held);
         if (uuidStr == null || uuidStr.isEmpty()) return ActionResult.FAIL;
 
         UUID uuid = UUID.fromString(uuidStr);
 
-        // Server-side only
         if (world instanceof ServerWorld serverWorld) {
 
             MinecraftServer server = serverWorld.getServer();
@@ -71,14 +68,12 @@ public class WaystoneBlock extends Block {
             }
 
             if (held.getItem() instanceof WandererTabletSigned) {
-                // Check sneaking
                 if (!targetPlayer.isSneaking()) {
                     player.sendMessage(Text.literal(targetPlayer.getName().getString() + " must be sneaking to be teleported!").formatted(Formatting.RED), true);
                     targetPlayer.sendMessage(Text.literal("Someone tried to Teleport you but, You must be sneaking to be teleported!").formatted(Formatting.RED), true);
                     return ActionResult.FAIL;
                 }
 
-                // Check XP levels
                 if (targetPlayer.experienceLevel < 10) {
                     player.sendMessage(Text.literal(targetPlayer.getName().getString() + " does not have enough XP levels!").formatted(Formatting.RED), true);
                     targetPlayer.sendMessage(Text.literal("You do not have enough XP levels!").formatted(Formatting.RED), true);
@@ -90,11 +85,9 @@ public class WaystoneBlock extends Block {
             player.getWorld().playSound(null, BlockPos.ofFloored(player.getPos()),
                     ModSounds.WAYSTONE_ACTIVATE, SoundCategory.PLAYERS, 1.0f, 1.0f);
 
-            // Play sounds at target
             targetPlayer.getWorld().playSound(null, BlockPos.ofFloored(player.getPos()),
                     ModSounds.WAYSTONE_ACTIVATE, SoundCategory.PLAYERS, 1.0f, 1.0f);
 
-            // Initial particles
             serverWorld.spawnParticles(ParticleTypes.SOUL_FIRE_FLAME,
                     pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
                     20, 0.3, 0.5, 0.3, 0.01);
@@ -107,19 +100,15 @@ public class WaystoneBlock extends Block {
                     targetPlayer.getX(), targetPlayer.getY() - 0.45, targetPlayer.getZ(),
                     1, 0.0, 0.0, 0.0, 0.0);
 
-            // Status effects before teleport
             targetPlayer.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 100, 4));
             targetPlayer.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 7));
 
-            // Delay teleport
             DelayedTaskScheduler.schedule(server, 100, () -> {
                 server.execute(() -> {
-                    // Teleport target player
                     targetPlayer.teleport(serverWorld,
                             pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
                             targetPlayer.getYaw(), targetPlayer.getPitch());
 
-                    // Particles after teleport
                     serverWorld.spawnParticles(ParticleTypes.SOUL_FIRE_FLAME,
                             pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
                             20, 0.3, 0.5, 0.3, 0.01);
@@ -128,7 +117,6 @@ public class WaystoneBlock extends Block {
                             targetPlayer.getX(), targetPlayer.getY() + 1, targetPlayer.getZ(),
                             20, 0.3, 0.5, 0.3, 0.01);
 
-                    // Play sounds again
                     player.getWorld().playSound(null, BlockPos.ofFloored(player.getPos()),
                             ModSounds.WAYSTONE_ACTIVATE, SoundCategory.PLAYERS, 1.0f, 1.0f);
                     targetPlayer.getWorld().playSound(null, BlockPos.ofFloored(player.getPos()),
@@ -137,7 +125,7 @@ public class WaystoneBlock extends Block {
             });
         }
 
-        return ActionResult.SUCCESS; // handled interaction
+        return ActionResult.SUCCESS;
     }
 
 

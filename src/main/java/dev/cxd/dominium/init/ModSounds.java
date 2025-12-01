@@ -12,6 +12,7 @@ public class ModSounds {
     public static final SoundEvent WAYSTONE_REPAIR = registerSoundEvent("block.waystone.activate");
 
     public static final SoundEvent DICE_ROLL = registerSoundEvent("item.dice.roll");
+    public static final SoundEvent SOUL_GLASS_PLING = registerSoundEvent("subtitles.soul_glass.soul_glass_pling");
 
     public static final SoundEvent DOMINIC_BOOM = registerSoundEvent("event.dominium.dominium_boom");
 

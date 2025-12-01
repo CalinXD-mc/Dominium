@@ -73,15 +73,15 @@ public class ModItems {
     public static final Item CONVENANT_OF_THE_PROVIDENT_SIGNED = registerItem("convenant_of_the_provident_signed",
             new ProvedientConvenantItem(new FabricItemSettings().maxCount(1), ModRarities.DOMINIC));
 
-//    public static final Item CXD_MARK = registerItem("cxd_mark_misc",
-//            new MarkerItem(new Item.Settings().maxCount(1), "CalinXD"));
+    public static final Item ITEM_MARKER = registerItem("item_marker",
+            new MarkerItem(new Item.Settings().maxCount(1), " "));
 //    public static final Item SF_MARK = registerItem("sf_mark_misc",
 //            new MarkerItem(new Item.Settings().maxCount(1), "Shardfell"));
 //    public static final Item CE_MARK = registerItem("ce_mark_misc",
 //            new MarkerItem(new Item.Settings().maxCount(1), "<CONTENT ERASED>"));
 
-    public static final Item PARTICLE_SPAWNER = registerItem("particle_spawner",
-            new LodestoneDI.ParticleSpawnerItem(new Item.Settings().maxCount(1)));
+//    public static final Item PARTICLE_SPAWNER = registerItem("particle_spawner",
+//            new LodestoneDI.ParticleSpawnerItem(new Item.Settings().maxCount(1)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(Dominium.MOD_ID, name), item);

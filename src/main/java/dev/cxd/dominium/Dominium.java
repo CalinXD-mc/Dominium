@@ -1,6 +1,7 @@
 package dev.cxd.dominium;
 
 import dev.cxd.dominium.command.GhostCommand;
+import dev.cxd.dominium.command.MarkerCommand;
 import dev.cxd.dominium.config.ModConfig;
 import dev.cxd.dominium.entity.EternalDivinityChainsEntity;
 import dev.cxd.dominium.init.*;
@@ -22,12 +23,6 @@ import java.util.UUID;
 
 public class Dominium implements ModInitializer {
 
-	/*
-	todo before adding anything else
-		-do custom events for dominic ingot crafting
-		-add functionality to vessel (debuff players with custom effect)
-		-vessel
-	*/
 
 	public static final String MOD_ID = "dominium";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
@@ -56,7 +51,6 @@ public class Dominium implements ModInitializer {
 		AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
 		ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 
-        //GHOST_UUIDS.add(UUID.fromString("659cddf4-950f-3c06-aa2b-a5087cee1c55"));
 		SOUL_CANDLE_RANGE = config.SoulCandleRange.SOUL_CANDLE_RADIUS;
 
 		FabricDefaultAttributeRegistry.register(ModEntities.ETERNAL_DIVINITY_CHAINS, EternalDivinityChainsEntity.createAttributes());
@@ -64,6 +58,7 @@ public class Dominium implements ModInitializer {
 		ServerTickEvents.END_SERVER_TICK.register(DelayedTaskScheduler::tick);
 
         CommandRegistrationCallback.EVENT.register(GhostCommand::register);
+        CommandRegistrationCallback.EVENT.register(MarkerCommand::register);
 
         LOGGER.info("Initializing Mod \"Dominium\"");
 	}

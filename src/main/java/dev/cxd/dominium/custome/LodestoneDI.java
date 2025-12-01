@@ -48,21 +48,3 @@ public class LodestoneDI {
         }
     }
 }
-
-//                Vec3d originalPosition = Vec3d.ofCenter(blockPos);
-//
-//                Color startColor = new Color(248, 209, 109);
-//                Color endColor = new Color(211, 149, 77);
-//
-//                // Use the data-only packet class
-//                ParticleSpawnPacketData packetData = new ParticleSpawnPacketData(
-//                        originalPosition, startColor.getRGB(), endColor.getRGB(), "spetum_kill_particle"
-//                );
-//
-//                PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-//                packetData.toBytes(buf);
-//
-//                ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
-//                ServerPlayNetworking.send(serverPlayer, ModPackets.PARTICLE_SPAWN_ID, buf);
-//
-//                return ActionResult.SUCCESS;

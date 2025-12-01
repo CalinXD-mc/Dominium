@@ -76,7 +76,7 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
 
         //Sounds
         translationBuilder.add("subtitles.event.dominium_boom","Forfeit...");
-        translationBuilder.add("subtitles.item.dice.roll","LET'S GO GAMBLING WOHOOOOOO LET'S GOOOOO!!!!!");
+        translationBuilder.add("subtitles.soul_glass.soul_glass_pling","Soul Glass Plings");
 //        translationBuilder.add("subtitles.event.dominium_boom","Forfeit...");
 //        translationBuilder.add("subtitles.event.dominium_boom","Forfeit...");
 

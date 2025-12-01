@@ -3,7 +3,11 @@ package dev.cxd.dominium.component;
 import dev.onyxstudios.cca.api.v3.component.Component;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.NbtLong;
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
@@ -13,7 +17,6 @@ import java.util.*;
 public class ChunkBlockCacheComponent implements IChunkBlockCacheComponent, Component {
     private final World world;
 
-    // Map<ChunkPos, Map<Block, Set<BlockPos>>>
     private final Map<ChunkPos, Map<Block, Set<BlockPos>>> map = new HashMap<>();
 
     public ChunkBlockCacheComponent(World world) {
@@ -58,12 +61,94 @@ public class ChunkBlockCacheComponent implements IChunkBlockCacheComponent, Comp
     }
 
     @Override
-    public void readFromNbt(NbtCompound nbtCompound) {
+    public void readFromNbt(NbtCompound nbt) {
+        map.clear();
 
+        // Read the chunks list
+        NbtList chunksList = nbt.getList("Chunks", NbtElement.COMPOUND_TYPE);
+
+        for (int i = 0; i < chunksList.size(); i++) {
+            NbtCompound chunkData = chunksList.getCompound(i);
+
+            // Read chunk position
+            int chunkX = chunkData.getInt("ChunkX");
+            int chunkZ = chunkData.getInt("ChunkZ");
+            ChunkPos chunkPos = new ChunkPos(chunkX, chunkZ);
+
+            // Read blocks in this chunk
+            NbtList blocksList = chunkData.getList("Blocks", NbtElement.COMPOUND_TYPE);
+            Map<Block, Set<BlockPos>> chunkMap = new HashMap<>();
+
+            for (int j = 0; j < blocksList.size(); j++) {
+                NbtCompound blockData = blocksList.getCompound(j);
+
+                // Read block type
+                String blockId = blockData.getString("BlockId");
+                Identifier identifier = new Identifier(blockId);
+                Block block = Registries.BLOCK.get(identifier);
+
+                // Read positions for this block
+                NbtList positionsList = blockData.getList("Positions", NbtElement.LONG_TYPE);
+                Set<BlockPos> positions = new HashSet<>();
+
+                for (int k = 0; k < positionsList.size(); k++) {
+                    long posLong = (long) positionsList.getInt(k);
+                    BlockPos pos = BlockPos.fromLong(posLong);
+                    positions.add(pos);
+                }
+
+                if (!positions.isEmpty()) {
+                    chunkMap.put(block, positions);
+                }
+            }
+
+            if (!chunkMap.isEmpty()) {
+                map.put(chunkPos, chunkMap);
+            }
+        }
     }
 
     @Override
-    public void writeToNbt(NbtCompound nbtCompound) {
+    public void writeToNbt(NbtCompound nbt) {
+        NbtList chunksList = new NbtList();
 
+        // Iterate through all chunks
+        for (Map.Entry<ChunkPos, Map<Block, Set<BlockPos>>> chunkEntry : map.entrySet()) {
+            ChunkPos chunkPos = chunkEntry.getKey();
+            Map<Block, Set<BlockPos>> chunkMap = chunkEntry.getValue();
+
+            NbtCompound chunkData = new NbtCompound();
+            chunkData.putInt("ChunkX", chunkPos.x);
+            chunkData.putInt("ChunkZ", chunkPos.z);
+
+            NbtList blocksList = new NbtList();
+
+            // Iterate through all block types in this chunk
+            for (Map.Entry<Block, Set<BlockPos>> blockEntry : chunkMap.entrySet()) {
+                Block block = blockEntry.getKey();
+                Set<BlockPos> positions = blockEntry.getValue();
+
+                if (positions.isEmpty()) continue;
+
+                NbtCompound blockData = new NbtCompound();
+                Identifier blockId = Registries.BLOCK.getId(block);
+                blockData.putString("BlockId", blockId.toString());
+
+                NbtList positionsList = new NbtList();
+
+                // Store each position as a long
+                for (BlockPos pos : positions) {
+                    positionsList.add(NbtLong.of(pos.asLong()));
+                }
+
+                blockData.put("Positions", positionsList);
+                blocksList.add(blockData);
+            }
+
+            chunkData.put("Blocks", blocksList);
+            chunksList.add(chunkData);
+        }
+
+        nbt.put("Chunks", chunksList);
     }
 }

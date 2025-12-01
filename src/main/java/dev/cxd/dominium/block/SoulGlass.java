@@ -1,5 +1,6 @@
 package dev.cxd.dominium.block;
 
+import dev.cxd.dominium.init.ModSounds;
 import net.minecraft.block.GlassBlock;
 
 import net.minecraft.block.Block;
@@ -7,6 +8,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -37,9 +39,22 @@ public class SoulGlass extends GlassBlock {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos,
+                              PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
             world.setBlockState(pos, state.cycle(ON), 3);
+
+            if (world instanceof ServerWorld serverWorld) {
+                serverWorld.playSound(
+                        null,
+                        pos,
+                        ModSounds.SOUL_GLASS_PLING,
+                        SoundCategory.BLOCKS,
+                        1.0f,
+                        1.0f
+                );
+            }
+
             schedulePropagation(world, pos);
         }
         return ActionResult.SUCCESS;
@@ -49,8 +64,9 @@ public class SoulGlass extends GlassBlock {
         for (Direction dir : Direction.values()) {
             BlockPos neighborPos = pos.offset(dir);
             BlockState neighborState = world.getBlockState(neighborPos);
-            if (neighborState.isOf(this) && neighborState.get(ON) != world.getBlockState(pos).get(ON)) {
-                world.scheduleBlockTick(neighborPos, this, 1); // schedule tick in 4 ticks (~0.2s)
+            if (neighborState.isOf(this) &&
+                    neighborState.get(ON) != world.getBlockState(pos).get(ON)) {
+                world.scheduleBlockTick(neighborPos, this, 1);
             }
         }
     }
@@ -61,10 +77,20 @@ public class SoulGlass extends GlassBlock {
     }
 
     @Override
-    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+    public void scheduledTick(BlockState state, ServerWorld world,
+                              BlockPos pos, Random random) {
         boolean newState = !state.get(ON);
         world.setBlockState(pos, state.with(ON, newState), 3);
+
+        world.playSound(
+                null,
+                pos,
+                ModSounds.SOUL_GLASS_PLING,
+                SoundCategory.BLOCKS,
+                1.0f,
+                1.0f
+        );
+
         schedulePropagation(world, pos);
-        super.scheduledTick(state, world, pos, random);
     }
 }

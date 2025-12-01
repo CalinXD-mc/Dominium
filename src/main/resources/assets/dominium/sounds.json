@@ -17,6 +17,12 @@
     ],
     "subtitle": "subtitles.item.dice.roll"
   },
+  "block.soul_glass.soul_glass_pling": {
+    "sounds": [
+      "dominium:block/soul_glass/soul_glass_pling"
+    ],
+    "subtitle": "subtitles.soul_glass.soul_glass_pling"
+  },
   "event.dominium.dominium_boom": {
     "sounds": [
       "dominium:block/waystone/dominium_specum_boom"
