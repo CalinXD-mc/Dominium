@@ -3,7 +3,7 @@ package dev.cxd.dominium.item.signable;
 
 import dev.cxd.dominium.init.ModComponents;
 import dev.cxd.dominium.init.ModItems;
-import dev.cxd.dominium.utils.CustomRarityItem;
+import dev.cxd.dominium.item.CustomRarityItem;
 import dev.cxd.dominium.utils.ModRarities;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;

@@ -1,10 +1,9 @@
 package dev.cxd.dominium.init;
 
 import dev.cxd.dominium.Dominium;
-import dev.cxd.dominium.custome.LodestoneDI;
 import dev.cxd.dominium.item.*;
 import dev.cxd.dominium.item.signable.*;
-import dev.cxd.dominium.utils.CustomRarityItem;
+import dev.cxd.dominium.item.CustomRarityItem;
 import dev.cxd.dominium.utils.ModRarities;
 import dev.cxd.dominium.utils.ModToolMaterials;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -12,7 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
 
 public class ModItems {
 
@@ -72,6 +70,9 @@ public class ModItems {
             new FixedDominicDaggerItem(ModToolMaterials.DOMINIC, 2, -1.2F ,new FabricItemSettings().maxCount(1), ModRarities.FIXED_DOMINIC));
     public static final Item CONVENANT_OF_THE_PROVIDENT_SIGNED = registerItem("convenant_of_the_provident_signed",
             new ProvedientConvenantItem(new FabricItemSettings().maxCount(1), ModRarities.DOMINIC));
+
+    public static final Item ONYX_VERDICT = registerItem("onyx_verdict",
+            new CustomRaritySwordItem(new FabricItemSettings().maxCount(1), 10, -3.0f, ModToolMaterials.DOMINIC ,ModRarities.DOMINIC));
 
     public static final Item ITEM_MARKER = registerItem("item_marker",
             new MarkerItem(new Item.Settings().maxCount(1), " "));

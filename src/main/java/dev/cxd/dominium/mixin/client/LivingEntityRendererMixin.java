@@ -1,4 +1,4 @@
-package dev.cxd.dominium.mixin;
+package dev.cxd.dominium.mixin.client;
 
 import dev.cxd.dominium.Dominium;
 import dev.cxd.dominium.init.ModItems;

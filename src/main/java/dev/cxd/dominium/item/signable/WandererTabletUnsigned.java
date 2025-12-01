@@ -2,7 +2,7 @@ package dev.cxd.dominium.item.signable;
 
 import dev.cxd.dominium.init.ModComponents;
 import dev.cxd.dominium.init.ModItems;
-import dev.cxd.dominium.utils.CustomRarityItem;
+import dev.cxd.dominium.item.CustomRarityItem;
 import dev.cxd.dominium.utils.ModRarities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

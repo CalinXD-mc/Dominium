@@ -1,6 +1,5 @@
 package dev.cxd.dominium.item;
 
-import dev.cxd.dominium.utils.CustomRarityItem;
 import dev.cxd.dominium.utils.MarkableItem;
 import dev.cxd.dominium.utils.ModRarities;
 import net.minecraft.client.item.TooltipContext;

@@ -1,5 +1,6 @@
-package dev.cxd.dominium.utils;
+package dev.cxd.dominium.item;
 
+import dev.cxd.dominium.utils.ModRarities;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Style;

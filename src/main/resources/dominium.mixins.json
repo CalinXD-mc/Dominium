@@ -13,9 +13,9 @@
 		"LivingEntityMixin"
 	],
 	"client": [
-		"PlayerRendererMixin",
-		"LivingEntityRendererMixin",
-		"WorldBorderShaderActivatorMixin"
+		"client.PlayerRendererMixin",
+		"client.LivingEntityRendererMixin",
+		"client.WorldBorderShaderActivatorMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
