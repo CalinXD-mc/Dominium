@@ -14,29 +14,10 @@ import net.minecraft.util.Identifier;
 
 public class ModItems {
 
-//    public static final Item HUMAN_BONE = registerItem("human_bone",
-//            new Item(new Item.Settings().rarity(Rarity.COMMON).maxCount(64)));
-//    public static final Item BONE_PILE = registerItem("bone_pile",
-//            new Item(new Item.Settings().rarity(Rarity.COMMON).maxCount(64)));
-//    public static final Item BONE_DUST = registerItem("bone_dust",
-//            new Item(new Item.Settings().rarity(Rarity.COMMON).maxCount(64).fireproof()));
-//    public static final Item WITHERED_BONE = registerItem("withered_bone",
-//            new Item(new Item.Settings().rarity(Rarity.COMMON).maxCount(64).fireproof()));
-//    public static final Item ANCIENT_SCRAP = registerItem("ancient_scrap",
-//            new Item(new Item.Settings().rarity(Rarity.COMMON).maxCount(64).fireproof()));
-//    public static final Item ANCIENT_NETHERITE = registerItem("ancient_netherite",
-//            new Item(new Item.Settings().rarity(Rarity.COMMON).maxCount(64).fireproof()));
-//    public static final Item NETHER_GOLD = registerItem("nether_gold",
-//            new Item(new Item.Settings().rarity(Rarity.COMMON).maxCount(64).fireproof()));
     public static final Item ANCIENT_BONE_ALLOY = registerItem("ancient_bone_alloy",
             new CustomRarityItem(new Item.Settings().maxCount(64).fireproof(), ModRarities.DOMINIC));
     public static final Item ANCIENT_BONE_ALLOY_CHUNK = registerItem("ancient_bone_alloy_chunk",
             new CustomRarityItem(new Item.Settings().maxCount(64).fireproof(), ModRarities.DOMINIC));
-
-//    public static final Item LUCKY_DICE = registerItem("lucky_dice",
-//            new LuckyDiceItem(new Item.Settings().rarity(Rarity.UNCOMMON).maxCount(1)));
-//    public static final Item SINFUL_DICE = registerItem("sinful_dice",
-//            new SinfulDiceItem(new Item.Settings().rarity(Rarity.RARE).maxCount(1)));
 
     public static final Item CONTRACT = registerItem("contract",
             new ContractUnsignedItem(new Item.Settings().maxCount(1), ModRarities.CONTRACT));
@@ -72,14 +53,13 @@ public class ModItems {
             new ProvedientConvenantItem(new FabricItemSettings().maxCount(1), ModRarities.DOMINIC));
 
     public static final Item GILDED_ONYX = registerItem("gilded_onyx",
-            new CustomRaritySwordItem(new FabricItemSettings().maxCount(1), 10, -3.0f, ModToolMaterials.DOMINIC ,ModRarities.DOMINIC));
+            new GildedOnyxItem(new FabricItemSettings().maxCount(1), 10, -3.0f, ModToolMaterials.DOMINIC ,ModRarities.DOMINIC));
+
+    public static final Item ETERNAL_DIVINITY = registerItem("eternal_divinity",
+            new CustomRarityItem(new FabricItemSettings().maxCount(1).fireproof(), ModRarities.DOMINIC));
 
     public static final Item ITEM_MARKER = registerItem("item_marker",
             new MarkerItem(new Item.Settings().maxCount(1), " "));
-//    public static final Item SF_MARK = registerItem("sf_mark_misc",
-//            new MarkerItem(new Item.Settings().maxCount(1), "Shardfell"));
-//    public static final Item CE_MARK = registerItem("ce_mark_misc",
-//            new MarkerItem(new Item.Settings().maxCount(1), "<CONTENT ERASED>"));
 
 //    public static final Item PARTICLE_SPAWNER = registerItem("particle_spawner",
 //            new LodestoneDI.ParticleSpawnerItem(new Item.Settings().maxCount(1)));

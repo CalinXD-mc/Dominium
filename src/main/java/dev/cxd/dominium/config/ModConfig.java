@@ -1,28 +1,33 @@
 package dev.cxd.dominium.config;
 
-import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.annotation.Config;
-import me.shedaniel.autoconfig.annotation.ConfigEntry;
+import com.google.common.collect.Lists;
+import eu.midnightdust.lib.config.MidnightConfig;
+import net.minecraft.util.Identifier;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.UUID;
 
-@Config(name = "dominium")
-public class ModConfig implements ConfigData {
+public class ModConfig extends MidnightConfig {
+    public static final String GENERAL = "general";
 
-    @ConfigEntry.Gui.CollapsibleObject
-    public SomethingUUIDRelated SomeUUIDStuff = new SomethingUUIDRelated();
+    @Comment(category = GENERAL, centered = true) public static Comment general;      // Centered comments are the same as normal ones - just centered!
 
-    @ConfigEntry.Gui.CollapsibleObject
-    public SoulCandleRange SoulCandleRange = new SoulCandleRange();
+    @Entry(category = GENERAL, name = "Show Dominic Items in The Item Tab?")
+    public static boolean showDominicItemsInTab = true;
 
-    public static class SomethingUUIDRelated {
-        public UUID aRegularUUID = UUID.fromString("1b44461a-f605-4b29-a7a9-04e649d1981c");
+    @Entry(category = GENERAL, name = "Should Dominic Energy Be Obtained in Survival?")
+    public static boolean dominicEnergyInSurvival = false;
 
-    }
+    @Comment(category = GENERAL, centered = true) public static Comment soul_candle;      // Centered comments are the same as normal ones - just centered!
 
+    @Entry(category = GENERAL, name = "Soul Candle Radius", min = 1, max = 256)
+    public static int SOUL_CANDLE_RADIUS = 64;
 
-    public static class SoulCandleRange {
-        public int SOUL_CANDLE_RADIUS = 64;
-    }
-
+    @Comment(category = GENERAL, centered = true) public static Comment experimental;      // Centered comments are the same as normal ones - just centered!
+    @Entry(category = GENERAL, name = "Show Experimental Items in The Item Tab? (Not Recommended)")
+    public static boolean showExperimentalItemsInTab = false;
 }
+

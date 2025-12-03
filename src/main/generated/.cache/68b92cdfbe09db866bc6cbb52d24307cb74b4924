@@ -1,7 +1,7 @@
-// 1.20.1	2025-12-01T20:55:32.4203702	Dominium/Tags for minecraft:block
+// 1.20.1	2025-12-03T20:42:29.4403344	Dominium/Tags for minecraft:block
 995d30ec831273f79c32bc96b22ab50492b2e259 data\minecraft\tags\blocks\needs_stone_tool.json
 d8fe3f752326475e4afb4e8f8afcea015d76ee4e data\minecraft\tags\blocks\mineable\pickaxe.json
-d2ae5cf5c9b6db70d7b3e2f48fc629b43e4f7751 data\minecraft\tags\blocks\slabs.json
 d9e2955906f59177f085c50dd9fbcacca4114f72 data\minecraft\tags\blocks\walls.json
+d2ae5cf5c9b6db70d7b3e2f48fc629b43e4f7751 data\minecraft\tags\blocks\slabs.json
 3ed20e7058b2e3fdd914f66df242d7dd3c9f654d data\minecraft\tags\blocks\needs_diamond_tool.json
 fbb869302f8a4c26df13075798ecbdf37fc792e1 data\minecraft\tags\blocks\stairs.json

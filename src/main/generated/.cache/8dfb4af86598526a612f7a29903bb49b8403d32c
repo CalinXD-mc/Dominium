@@ -1,4 +1,4 @@
-// 1.20.1	2025-12-01T20:55:32.4231655	Dominium/Model Definitions
+// 1.20.1	2025-12-03T20:42:29.4452774	Dominium/Model Definitions
 a3bed73c84173b1c05426272e3aba50582d37959 assets\dominium\models\item\contract.json
 46f1863dac7b5cc52c0e934da5b0bb3e2660802d assets\dominium\models\block\smooth_soul_sandstone.json
 4dfc105cc467343ad95769f2ed78562becccea65 assets\dominium\models\block\smooth_soul_sandstone_slab.json
@@ -24,11 +24,13 @@ c85acd5dcb25c453342eaf9fef57b696ad903046 assets\dominium\models\block\smooth_sou
 963293151e63a46b1cd147328d832f5c49955ace assets\dominium\models\item\contract_soulbound.json
 af09fac72bcf264269726f1d3ce3ff31a0a77268 assets\dominium\blockstates\smooth_soul_sandstone_slab.json
 f9288c28f462214d38654f9b05c3b15514676777 assets\dominium\models\item\convenant_of_the_provident_signed.json
+ead7d16729e90068fac38ec1579f9dc6ad8bb586 assets\dominium\models\item\item_marker.json
 54b896c292b3cceffc15d1546f0ede85156b5485 assets\dominium\models\block\smooth_soul_sandstone_stairs.json
 9adc5e19932e50ba0b601682fc04ca1e636ac582 assets\dominium\models\block\smooth_soul_sandstone_stairs_outer.json
+1729fdad76a0d38bb83f0d8a5cbb7192c7fd04e2 assets\dominium\models\item\eternal_divinity.json
 a4edc4585708a65bbad2d2038baf7c44787790c7 assets\dominium\models\item\contract_signed_soulbound.json
-afa1e22612653fd4084815348c19fab554ab6fa3 assets\dominium\models\item\suspicious_bone_block.json
 e3cdaca8ddde4d6db5c62b0aafd69572cbe8bf07 assets\dominium\models\item\dominic_effigy.json
+afa1e22612653fd4084815348c19fab554ab6fa3 assets\dominium\models\item\suspicious_bone_block.json
 f12af3c72ea0f9535bdd47d75a39c55c4137ed41 assets\dominium\models\item\wanderer_tablet_signed.json
 e9be00161fbfa03a1c3cf7d92522847898ca376f assets\dominium\models\block\smooth_soul_sandstone_wall_side_tall.json
 2783f5bad233b4ef5062dc84f43bd1d2b19bf386 assets\dominium\models\item\contract_signed.json

@@ -1,0 +1,1 @@
+This is the public repository of my Mod Dominium, that isn't on modirinth yet.

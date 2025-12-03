@@ -1,6 +1,7 @@
 package dev.cxd.dominium.init;
 
 import dev.cxd.dominium.Dominium;
+import dev.cxd.dominium.config.ModConfig;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -44,23 +45,38 @@ public class ModItemGroups {
 
                 entries.add(ModItems.SOUL_ORB);
 
-                entries.add(ModItems.DOMINIC_EFFIGY);
+                if (ModConfig.showDominicItemsInTab) entries.add(ModItems.DOMINIC_ORB);
 
-                entries.add(ModItems.DOMINIC_ORB);
+                if (ModConfig.showDominicItemsInTab) entries.add(ModItems.DOMINIC_EFFIGY);
 
-                entries.add(ModItems.DOMINIC_DAGGER);
-                entries.add(ModItems.FIXED_DOMINIC_DAGGER);
-                entries.add(ModItems.BROKEN_DOMINIC_DAGGER_PIECE);
+                if (ModConfig.showDominicItemsInTab) entries.add(ModItems.ETERNAL_DIVINITY);
 
-                entries.add(ModItems.SOULTRAP_SPETUM);
+                if (ModConfig.showDominicItemsInTab) entries.add(ModItems.DOMINIC_DAGGER);
+                if (ModConfig.showDominicItemsInTab) entries.add(ModItems.FIXED_DOMINIC_DAGGER);
+                if (ModConfig.showDominicItemsInTab) entries.add(ModItems.BROKEN_DOMINIC_DAGGER_PIECE);
 
-//                entries.add(ModItems.LUCKY_DICE);
-//                entries.add(ModItems.SINFUL_DICE);
+                if (ModConfig.showDominicItemsInTab) entries.add(ModItems.SOULTRAP_SPETUM);
+
+                if (ModConfig.showDominicItemsInTab) entries.add(ModItems.GILDED_ONYX);
             })
             .build();
 
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, Identifier.of(Dominium.MOD_ID, "dominium_group"), DOMINIUM_GROUP);
+        if (ModConfig.showExperimentalItemsInTab) {
+            ItemGroup EXPERIMENTAL_DOMINIUM_GROUP = FabricItemGroup.builder()
+                    .icon(() -> new ItemStack(ModItems.CONTRACT))
+                    .displayName(Text.translatable("itemGroup.dominium.dominium_experimental"))
+                    .entries((context, entries) -> {
+                        entries.add(ModItems.ITEM_MARKER);
+                    })
+                    .build();
+
+            // Register the group only if config is true
+            Registry.register(Registries.ITEM_GROUP,
+                    new Identifier("dominium", "dominium_experimental"),
+                    EXPERIMENTAL_DOMINIUM_GROUP);
+        }
     }
 
 }

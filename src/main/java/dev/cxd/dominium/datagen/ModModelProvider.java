@@ -55,6 +55,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.ANCIENT_BONE_ALLOY_CHUNK, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.GILDED_ONYX, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ETERNAL_DIVINITY, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ITEM_MARKER, Models.GENERATED);
     }
 
 //    protected Identifier registerCubeColumnModel(BlockStateModelGenerator blockStateModelGenerator, Block block, String side, String bottom, String top) {

@@ -4,7 +4,6 @@
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
 		"PlayerStepMixin",
-		"EntityRenderDispatcherMixin",
 		"PlayerManagerMixin",
 		"MobBlockerMixin",
 		"LivingEntityMixin"
@@ -15,7 +14,8 @@
 		"client.WorldBorderShaderActivatorMixin",
         "client.ItemRendererMixin",
         "client.ModelLoaderMixin",
-        "client.ItemRendererAccessor"
+        "client.ItemRendererAccessor",
+        "client.EntityRenderDispatcherMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

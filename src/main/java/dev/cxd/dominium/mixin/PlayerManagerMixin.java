@@ -16,7 +16,7 @@ public abstract class PlayerManagerMixin {
             at = @At("HEAD"),
             cancellable = true
     )
-    private void ghost$cancelBroadcast(Text message, boolean overlay, CallbackInfo ci) {
+    private void cancelBroadcast(Text message, boolean overlay, CallbackInfo ci) {
         PlayerManager manager = (PlayerManager) (Object) this;
         String text = message.getString();
 

@@ -248,7 +248,9 @@ public class EternalDivinityChainsEntity extends MobEntity {
                                 assert stackInHand.getNbt() != null;
                                 brokenDagger.setNbt(stackInHand.getNbt().copy());
                             }
-                            player.setStackInHand(hand, brokenDagger);
+                            if (player.getMainHandStack().isOf(ModItems.DOMINIC_DAGGER)) {
+                                player.setStackInHand(hand, brokenDagger);
+                            }
 
                             this.discard();
 

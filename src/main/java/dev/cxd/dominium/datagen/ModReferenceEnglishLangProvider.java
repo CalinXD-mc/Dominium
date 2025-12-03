@@ -63,6 +63,8 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
 
         translationBuilder.add("item.dominium.gilded_onyx", "Gilded Onyx");
 
+        translationBuilder.add("item.dominium.eternal_divinity", "Eternal Divinity");
+
         //Damage Types
         translationBuilder.add("death.attack.disobedience", "%1$s's life was punished by the contract");
         translationBuilder.add("death.attack.disobedience.player", "%1$s's life was punished by the contract");
@@ -81,5 +83,12 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
 
         //misc
         translationBuilder.add("itemGroup.dominium.dominium", "Dominium");
+        translationBuilder.add("itemGroup.dominium.dominium_experimental", "Dominium (Experimental)");
+
+        //config
+        translationBuilder.add("dominium.midnightconfig.title", "Dominium");
+        translationBuilder.add("dominium.midnightconfig.general", "General");
+        translationBuilder.add("dominium.midnightconfig.soul_candle", "Soul Candle");
+        translationBuilder.add("dominium.midnightconfig.experimental", "Experimental");
     }
 }

@@ -2,6 +2,7 @@ package dev.cxd.dominium.mixin;
 
 import dev.cxd.dominium.entity.EternalDivinityChainsEntity;
 import dev.cxd.dominium.init.ModEntities;
+import dev.cxd.dominium.init.ModItems;
 import dev.cxd.dominium.init.ModStatusEffects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -27,6 +28,8 @@ public class LivingEntityMixin {
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     private void dominiumDoNotDieStuff(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         LivingEntity self = (LivingEntity) (Object) this;
+        assert source.getAttacker() != null;
+        LivingEntity sourceAttacker = (LivingEntity) source.getAttacker();
 
         // OUTSIDE BORDER IMMORTALITY LOGIC
         if (self instanceof ServerPlayerEntity player) {
@@ -52,6 +55,7 @@ public class LivingEntityMixin {
             // Handle "Damned" death prevention
             if (damned != null && amount >= player.getHealth() && !source.isOf(DamageTypes.GENERIC_KILL)) {
 
+                //add soul strain
                 player.addStatusEffect(new StatusEffectInstance((StatusEffect) ModStatusEffects.SOUL_STRAIN, 180 * 20, damned.getAmplifier(), false, false, true));
 
                 // Prevent death
@@ -93,6 +97,31 @@ public class LivingEntityMixin {
 
             if (self.hasStatusEffect(ModStatusEffects.REGRET) && !source.isOf(DamageTypes.GENERIC_KILL)) {
                 cir.setReturnValue(false);
+            }
+        }
+
+        if (self instanceof ServerPlayerEntity victim && sourceAttacker instanceof  ServerPlayerEntity attacker) {
+            if (attacker.getMainHandStack().isOf(ModItems.GILDED_ONYX) && amount >= victim.getHealth()) {
+                //add soul strain
+                victim.addStatusEffect(new StatusEffectInstance((StatusEffect) ModStatusEffects.SOUL_STRAIN, 180 * 20, 0, false, false, true));
+
+                // Prevent death
+                victim.setHealth(1.0F);
+                cir.setReturnValue(false);
+
+                // Spawn EternalDivinityChainsEntity
+                ServerWorld world = (ServerWorld) victim.getWorld();
+                EternalDivinityChainsEntity chain = ModEntities.ETERNAL_DIVINITY_CHAINS.create(world);
+                if (chain != null) {
+                    chain.setBoundPlayer(victim.getUuid());
+                    chain.refreshPositionAndAngles(victim.getX(), victim.getY(), victim.getZ(), 0, 0);
+                    world.spawnEntity(chain);
+                }
+
+                for (ServerPlayerEntity p : world.getPlayers()) {
+                    world.playSound(null, p.getX(), p.getY(), p.getZ(),
+                            SoundEvents.ENTITY_WITHER_SPAWN, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                }
             }
         }
     }

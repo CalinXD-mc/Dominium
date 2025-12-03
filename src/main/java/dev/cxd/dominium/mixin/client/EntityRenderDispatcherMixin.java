@@ -1,4 +1,4 @@
-package dev.cxd.dominium.mixin;
+package dev.cxd.dominium.mixin.client;
 
 import dev.cxd.dominium.Dominium;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -11,8 +11,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.UUID;
 
 @Mixin(EntityRenderDispatcher.class)
 public class EntityRenderDispatcherMixin {

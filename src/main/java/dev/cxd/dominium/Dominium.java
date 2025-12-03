@@ -6,8 +6,7 @@ import dev.cxd.dominium.config.ModConfig;
 import dev.cxd.dominium.entity.EternalDivinityChainsEntity;
 import dev.cxd.dominium.init.*;
 import dev.cxd.dominium.utils.DelayedTaskScheduler;
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
+import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -22,7 +21,6 @@ import java.util.Set;
 import java.util.UUID;
 
 public class Dominium implements ModInitializer {
-
 
 	public static final String MOD_ID = "dominium";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
@@ -48,10 +46,9 @@ public class Dominium implements ModInitializer {
 		ModItemGroups.initialize();
 		ModStatusEffects.initialize();
 
-		AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
-		ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
+		MidnightConfig.init(MOD_ID, ModConfig.class);
 
-		SOUL_CANDLE_RANGE = config.SoulCandleRange.SOUL_CANDLE_RADIUS;
+		SOUL_CANDLE_RANGE = ModConfig.SOUL_CANDLE_RADIUS;
 
 		FabricDefaultAttributeRegistry.register(ModEntities.ETERNAL_DIVINITY_CHAINS, EternalDivinityChainsEntity.createAttributes());
 

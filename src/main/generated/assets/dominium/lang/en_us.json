@@ -16,6 +16,10 @@
   "death.attack.disobedience.player": "%1$s's life was punished by the contract",
   "death.attack.dominic_blast": "%1$s was caught in the divine intervention",
   "death.attack.dominic_blast.player": "%1$s was caught in the divine intervention whilst fighting %2$s",
+  "dominium.midnightconfig.experimental": "Experimental",
+  "dominium.midnightconfig.general": "General",
+  "dominium.midnightconfig.soul_candle": "Soul Candle",
+  "dominium.midnightconfig.title": "Dominium",
   "effect.dominium.damned": "Damned",
   "effect.dominium.soul_strain": "Soul Strain",
   "item.dominium.ancient_bone_alloy": "Ancient Bone Alloy Ingot",
@@ -33,6 +37,7 @@
   "item.dominium.dominic_dagger": "Dominic Dagger",
   "item.dominium.dominic_effigy": "Dominic Effigy",
   "item.dominium.dominic_orb": "Dominic Orb",
+  "item.dominium.eternal_divinity": "Eternal Divinity",
   "item.dominium.fixed_dominic_dagger": "Fixed Dominic Dagger",
   "item.dominium.gilded_onyx": "Gilded Onyx",
   "item.dominium.human_bone": "Player Bone",
@@ -43,6 +48,7 @@
   "item.dominium.wanderer_tablet_signed": "Wanderer's Tablet",
   "item.dominium.withered_bone": "Withered Bone",
   "itemGroup.dominium.dominium": "Dominium",
+  "itemGroup.dominium.dominium_experimental": "Dominium (Experimental)",
   "subtitles.event.dominium_boom": "Forfeit...",
   "subtitles.soul_glass.soul_glass_pling": "Soul Glass Plings"
 }
