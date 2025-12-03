@@ -71,7 +71,7 @@ public class DominicDaggerItem extends SwordItem implements MarkableItem, CanBan
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         String mark = getMark(stack);
         if (!mark.isEmpty()) {
-            tooltip.add(Text.literal("Forged by " + mark + ".").formatted(Formatting.GOLD));
+            tooltip.add(Text.literal(mark).formatted(Formatting.GOLD));
         }
         super.appendTooltip(stack, world, tooltip, context);
     }

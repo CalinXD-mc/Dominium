@@ -30,7 +30,7 @@ public class DominicEffigyItem extends CustomRarityItem implements MarkableItem 
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         String mark = getMark(stack);
         if (!mark.isEmpty()) {
-            tooltip.add(Text.literal("Given by " + mark + ".").formatted(Formatting.GOLD));
+            tooltip.add(Text.literal(mark).formatted(Formatting.GOLD));
         }
         super.appendTooltip(stack, world, tooltip, context);
     }
