@@ -1,12 +1,13 @@
 package dev.cxd.dominium.init;
 
 import dev.cxd.dominium.block.entity.IdolBlockEntity;
+import dev.cxd.dominium.config.ModConfig;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
@@ -62,6 +63,27 @@ public class ModEvents {
                     ));
                 }
             }
+        });
+        UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
+            if(ModConfig.shouldSpectatorsInteractWithBlocks) {
+                if (player.isSpectator()) {
+                    BlockPos pos = hitResult.getBlockPos();
+                    BlockState state = world.getBlockState(pos);
+                    Block block = state.getBlock();
+
+                    if (block instanceof ButtonBlock ||
+                            block instanceof DoorBlock ||
+                            block instanceof TrapdoorBlock ||
+                            block instanceof FenceGateBlock ||
+                            block instanceof LeverBlock ||
+                            block instanceof NoteBlock) {
+
+                        ActionResult result = state.onUse(world, player, hand, hitResult);
+                        return result.isAccepted() ? ActionResult.SUCCESS : ActionResult.PASS;
+                    }
+                }
+            }
+            return ActionResult.PASS;
         });
     }
 }

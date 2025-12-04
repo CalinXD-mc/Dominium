@@ -2,6 +2,7 @@ package dev.cxd.dominium.init;
 
 import dev.cxd.dominium.Dominium;
 import dev.cxd.dominium.item.*;
+import dev.cxd.dominium.item.experimental.MarkerItem;
 import dev.cxd.dominium.item.signable.*;
 import dev.cxd.dominium.item.CustomRarityItem;
 import dev.cxd.dominium.utils.ModRarities;

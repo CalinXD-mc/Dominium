@@ -1,4 +1,4 @@
-package dev.cxd.dominium.item;
+package dev.cxd.dominium.item.experimental;
 
 import dev.cxd.dominium.utils.MarkableItem;
 import net.minecraft.entity.LivingEntity;

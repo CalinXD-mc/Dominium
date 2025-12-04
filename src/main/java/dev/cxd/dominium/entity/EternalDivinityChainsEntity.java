@@ -1,6 +1,8 @@
 package dev.cxd.dominium.entity;
 
+import com.mojang.authlib.GameProfile;
 import dev.cxd.dominium.client.lodestone_dark_magic_stuff.ParticleSpawnPacketData;
+import dev.cxd.dominium.config.ModConfig;
 import dev.cxd.dominium.init.*;
 import dev.cxd.dominium.utils.CanBanPeopleItem;
 import io.netty.buffer.Unpooled;
@@ -18,6 +20,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.BanEntry;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -189,8 +194,8 @@ public class EternalDivinityChainsEntity extends MobEntity {
                     if (!stack.isEmpty() && stack.getItem() instanceof CanBanPeopleItem) {
                         if (bound.hasStatusEffect(ModStatusEffects.SOUL_STRAIN)) {
                             if (bound instanceof ServerPlayerEntity serverBound) {
-                                serverBound.changeGameMode(GameMode.SPECTATOR);
                                 serverBound.removeStatusEffect(ModStatusEffects.SOUL_STRAIN);
+                                banOrSpectator(serverBound);
                             }
 
                             World world = player.getWorld();
@@ -212,7 +217,7 @@ public class EternalDivinityChainsEntity extends MobEntity {
                             }
 
                             if (bound instanceof ServerPlayerEntity serverBound) {
-                                serverBound.changeGameMode(GameMode.SPECTATOR);
+//                                serverBound.changeGameMode(GameMode.SPECTATOR);
                                 serverBound.removeStatusEffect(ModStatusEffects.SOUL_STRAIN);
 
                                 Text message = Text.literal(serverBound.getName().getString() + "'s existence was forfeited").formatted(Formatting.WHITE);
@@ -223,6 +228,7 @@ public class EternalDivinityChainsEntity extends MobEntity {
                                 for (PlayerEntity p : serverBound.getWorld().getPlayers()) {
                                     p.playSound(ModSounds.DOMINIC_BOOM, 1.0F, 0.5F);
                                 }
+                                banOrSpectator(serverBound);
                             }
 
                             player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.REGRET, 20 * 5, 0, false, false, true));
@@ -264,8 +270,26 @@ public class EternalDivinityChainsEntity extends MobEntity {
         return super.interactMob(player, hand);
     }
 
+    public static void banOrSpectator(ServerPlayerEntity player) {
+        if (!ModConfig.doDominicItemsBanPlayers) {
+            player.changeGameMode(GameMode.SPECTATOR);
+            return;
+        }
 
+        MinecraftServer server = player.getServer();
+        if (server == null) return;
 
+        String name = player.getGameProfile().getName();
+        // Optional reason text
+        String reason = "Your existence was forfeited";
+
+        // Execute vanilla ban command
+        ServerCommandSource source = server.getCommandSource();
+        server.getCommandManager().executeWithPrefix(source, "ban " + name + " " + reason);
+
+        // Kick immediately (the ban command may also kick, but this ensures it)
+        player.networkHandler.disconnect(Text.literal("You are banned!"));
+    }
 
     @Override
     public boolean isInvulnerableTo(DamageSource source) {
