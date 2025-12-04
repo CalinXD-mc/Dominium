@@ -1,4 +1,4 @@
-package dev.cxd.dominium.item;
+package dev.cxd.dominium.item.experimental;
 
 import dev.cxd.dominium.init.ModSounds;
 import net.minecraft.client.item.TooltipContext;
@@ -18,19 +18,19 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class LuckyDiceItem extends Item {
+public class SinfulDiceItem extends Item {
 
-    //Cost: 4
-    //Max Profit: 10
-    //1st try: 10
-    //2nd try: 8
-    //3rd try: 6
-    //4th try: 4
-    //5th try: 2
+    //Cost: 40
+    //Max Profit: 20
+    //1st try: 20
+    //2nd try: 16
+    //3rd try: 12
+    //4th try: 8
+    //5th try: 4
     //6th try: 0 (no profit)
     //7th try: loss
 
-    public LuckyDiceItem(Settings settings) {
+    public SinfulDiceItem(Settings settings) {
         super(settings);
     }
 
@@ -40,13 +40,13 @@ public class LuckyDiceItem extends Item {
 
         if (!world.isClient) {
             // Check for 2 diamonds
-            if (user.getInventory().count(Items.DIAMOND) < 2) {
-                user.sendMessage(Text.literal("You need 2 diamonds to roll the dice!")
+            if (user.getInventory().count(Items.DIAMOND) < 4) {
+                user.sendMessage(Text.literal("You need 4 diamonds to roll the dice!")
                         .formatted(Formatting.RED), false);
                 return TypedActionResult.fail(stack);
             }
 
-            removeDiamonds(user, 2);
+            removeDiamonds(user, 4);
 
             int roll = weightedRoll(world);
 
@@ -61,17 +61,17 @@ public class LuckyDiceItem extends Item {
                 case 3 -> message = Text.literal("🎲 3!").formatted(Formatting.RED);
                 case 4 -> {
                     message = Text.literal("🎲 4! Bonus +2❤").formatted(Formatting.GREEN);
-                    effect = new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 20 * 60, 0);
+                    effect = new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 20 * 120, 0);
                 }
                 case 5 -> {
-                    message = Text.literal("🎲 5! Bonus +4❤").formatted(Formatting.GREEN);
-                    effect = new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 20 * 120, 1);
+                    message = Text.literal("🎲 5! Bonus +6❤").formatted(Formatting.GREEN);
+                    effect = new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 20 * 240, 2);
                 }
                 case 6 -> {
-                    message = Text.literal("🎲 6! Nice! Bonus +6❤")
+                    message = Text.literal("🎲 6! Nice! Bonus +10❤")
                             .formatted(Formatting.DARK_GREEN);
-                    effect = new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 20 * 180, 2);
-                    user.giveItemStack(new ItemStack(Items.DIAMOND, 16));
+                    effect = new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 20 * 360, 4);
+                    user.giveItemStack(new ItemStack(Items.DIAMOND, 64));
                     stack.decrement(1);
                 }
                 default -> message = Text.literal("Error?").formatted(Formatting.GRAY);
@@ -119,6 +119,6 @@ public class LuckyDiceItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.literal("Spend 2 Diamonds for a chance to win 16!").formatted(Formatting.GRAY, Formatting.ITALIC));
+        tooltip.add(Text.literal("Spend 4 Diamonds for a chance to win 64!").formatted(Formatting.GRAY, Formatting.ITALIC));
     }
 }
