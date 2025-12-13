@@ -27,15 +27,6 @@ public class ModItemGroups {
                 entries.add(ModBlocks.SOUL_CANDLE);
                 entries.add(ModBlocks.SOUL_GLASS);
 
-                entries.add(ModBlocks.SUSPICIOUS_BONE_BLOCK);
-                entries.add(Items.BONE);
-//                entries.add(ModItems.WITHERED_BONE);
-//                entries.add(ModItems.HUMAN_BONE);
-//                entries.add(ModItems.BONE_PILE);
-//                entries.add(ModItems.BONE_DUST);
-
-                entries.add(ModBlocks.ANCIENTER_DEBRIS);
-
                 entries.add(ModBlocks.WAYSTONE);
                 entries.add(ModBlocks.IDOL);
                 //entries.add(ModBlocks.VESSEL);
@@ -55,6 +46,14 @@ public class ModItemGroups {
                 if (ModConfig.showDominicItemsInTab) entries.add(ModItems.DOMINIC_EFFIGY);
 
                 if (ModConfig.showDominicItemsInTab) entries.add(ModItems.ETERNAL_DIVINITY);
+
+                if (ModConfig.showDominicItemsInTab) entries.add(ModItems.BROKEN_ETERNAL_DIVINITY);
+
+                if (ModConfig.showDominicItemsInTab) entries.add(ModItems.ETERNAL_DIVINITY_PIECE1);
+
+                if (ModConfig.showDominicItemsInTab) entries.add(ModItems.ETERNAL_DIVINITY_PIECE2);
+
+                if (ModConfig.showDominicItemsInTab) entries.add(ModItems.ETERNAL_DIVINITY_PIECE3);
 
                 if (ModConfig.showDominicItemsInTab) entries.add(ModItems.DOMINIC_DAGGER);
 

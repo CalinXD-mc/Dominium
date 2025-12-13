@@ -1,13 +1,11 @@
 package dev.cxd.dominium.mixin;
 
-import dev.cxd.dominium.client.lodestone_dark_magic_stuff.ParticleSpawnPacketData;
-import dev.cxd.dominium.custome.packets.ParticleSpawnPacket;
+import dev.cxd.dominium.config.ModConfig;
 import dev.cxd.dominium.entity.EternalDivinityChainsEntity;
 import dev.cxd.dominium.init.*;
-import dev.cxd.dominium.item.EternalDivinityItem;
+import dev.cxd.dominium.item.ban_items.BrokenEternalDivinityItem;
+import dev.cxd.dominium.item.ban_items.EternalDivinityItem;
 import dev.cxd.dominium.utils.DelayedTaskScheduler;
-import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageTypes;
@@ -15,8 +13,8 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -33,8 +31,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.awt.*;
 
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
@@ -208,6 +204,56 @@ public class LivingEntityMixin {
                             }
                         });
                         EternalDivinityItem.setDurability(stack, durability - 1);
+                    }
+                    break;
+                }
+            }
+
+            for (ItemStack stack : attacker.getInventory().main) {
+                if (stack.isOf(ModItems.BROKEN_ETERNAL_DIVINITY)) {
+                    victim.addStatusEffect(new StatusEffectInstance((StatusEffect) ModStatusEffects.SOUL_STRAIN, 8 * 20, 0, false, false, true));
+
+                    if (amount >= victim.getHealth()) {
+                        victim.setHealth(1.0F);
+                        cir.setReturnValue(false);
+
+                        ServerWorld serverWorld = (ServerWorld) victim.getWorld();
+                        MinecraftServer server = victim.getServer();
+
+                        BlockPos groundPos = serverWorld.getTopPosition(Heightmap.Type.MOTION_BLOCKING, victim.getBlockPos());
+                        victim.teleport(groundPos.getX() + 0.5, groundPos.getY(), groundPos.getZ() + 0.5);
+                        victim.setVelocity(Vec3d.ZERO);
+                        victim.velocityModified = true;
+
+                        serverWorld.spawnParticles(ModParticles.DOMINIC_SYMBOL,
+                                victim.getX(), victim.getY(), victim.getZ(),
+                                1, 0, 0, 0, 0);
+
+                        DelayedTaskScheduler.schedule(server, 40, () -> {
+                            victim.addVelocity(0, 50d, 5d);
+                            victim.velocityModified = true;
+
+                            World world = victim.getWorld();
+
+                            attacker.addStatusEffect(new StatusEffectInstance(ModStatusEffects.REGRET, 100, 0, true, false, true));
+
+                            BrokenEternalDivinityItem.spawnParticles(victim);
+
+                            for (PlayerEntity p : world.getPlayers()) {
+                                world.playSound(null, p.getX(), p.getY(), p.getZ(),
+                                        SoundEvents.ENTITY_WITHER_SPAWN, SoundCategory.PLAYERS, 1.0F, 0.75F);
+                            }
+
+                            DelayedTaskScheduler.schedule(server, 100, () -> {
+                                server.execute(() -> {
+                                    victim.setVelocity(0D, 0D, 0D);
+                                    victim.velocityModified = true;
+                                    victim.teleport(ModConfig.brokenEternalDivinityCoordonates, 1500D, ModConfig.brokenEternalDivinityCoordonates);
+                                });
+                            });
+
+                            if (ModConfig.shouldBrokenEternalDivinityDestroyItself) stack.decrement(1);
+                        });
                     }
                     break;
                 }

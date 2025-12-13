@@ -60,8 +60,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern(" A ")
                 .input('D', Items.DEEPSLATE_TILES)
                 .input('E', Items.ENDER_EYE)
-                .input('A', ModBlocks.ANCIENTER_DEBRIS)
-                .criterion(hasItem(ModBlocks.ANCIENTER_DEBRIS), conditionsFromItem(ModBlocks.ANCIENTER_DEBRIS))
+                .input('A', ModItems.SOUL_ORB)
+                .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
                 .offerTo(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.CONTRACT)

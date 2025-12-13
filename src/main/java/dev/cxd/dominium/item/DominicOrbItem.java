@@ -1,5 +1,6 @@
 package dev.cxd.dominium.item;
 
+import dev.cxd.dominium.config.ModConfig;
 import dev.cxd.dominium.utils.ModRarities;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
@@ -18,8 +19,14 @@ public class DominicOrbItem extends CustomRarityItem {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        if (MinecraftClient.getInstance().options.advancedItemTooltips) {
-            tooltip.add(Text.literal("Obtained by Something a Something with Something.").formatted(Formatting.GRAY).formatted(Formatting.OBFUSCATED));
+        if (ModConfig.dominicOrbsInSurvival) {
+            if (MinecraftClient.getInstance().options.advancedItemTooltips) {
+                tooltip.add(Text.literal("Obtained by killing Withers.").formatted(Formatting.GRAY).formatted(Formatting.OBFUSCATED));
+            }
+        } else {
+            if (MinecraftClient.getInstance().options.advancedItemTooltips) {
+                tooltip.add(Text.literal("Obtained by Something a Something with Something.").formatted(Formatting.GRAY).formatted(Formatting.OBFUSCATED));
+            }
         }
         super.appendTooltip(stack, world, tooltip, context);
     }

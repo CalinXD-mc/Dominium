@@ -1,10 +1,9 @@
-package dev.cxd.dominium.item;
+package dev.cxd.dominium.item.ban_items;
 
-import dev.cxd.dominium.client.lodestone_dark_magic_stuff.ParticleSpawnPacketData;
 import dev.cxd.dominium.custome.packets.ParticleSpawnPacket;
-import dev.cxd.dominium.entity.EternalDivinityChainsEntity;
 import dev.cxd.dominium.init.ModItems;
 import dev.cxd.dominium.init.ModPackets;
+import dev.cxd.dominium.item.CustomRarityItem;
 import dev.cxd.dominium.utils.CanBanPeopleItem;
 import dev.cxd.dominium.utils.MarkableItem;
 import dev.cxd.dominium.utils.ModRarities;
@@ -22,7 +21,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;

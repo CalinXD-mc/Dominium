@@ -14,7 +14,6 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
-        addDrop(ModBlocks.ANCIENTER_DEBRIS);
         addDrop(ModBlocks.SOUL_SANDSTONE);
         addDrop(ModBlocks.SMOOTH_SOUL_SANDSTONE);
         addDrop(ModBlocks.SMOOTH_SOUL_SANDSTONE_STAIRS);

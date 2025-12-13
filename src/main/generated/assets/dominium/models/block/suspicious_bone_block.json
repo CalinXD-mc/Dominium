@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "dominium:block/suspicious_bone_block_top",
-    "side": "dominium:block/suspicious_bone_block"
-  }
-}

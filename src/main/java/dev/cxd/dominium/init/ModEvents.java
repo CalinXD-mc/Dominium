@@ -76,6 +76,7 @@ public class ModEvents {
                             block instanceof TrapdoorBlock ||
                             block instanceof FenceGateBlock ||
                             block instanceof LeverBlock ||
+                            block instanceof BellBlock ||
                             block instanceof NoteBlock) {
 
                         ActionResult result = state.onUse(world, player, hand, hitResult);

@@ -16,13 +16,19 @@ public class DelayedTaskScheduler {
         List<ScheduledTask> serverTasks = tasks.get(server);
         if (serverTasks == null) return;
 
+        List<ScheduledTask> tasksToExecute = new ArrayList<>();
+
         Iterator<ScheduledTask> iterator = serverTasks.iterator();
         while (iterator.hasNext()) {
             ScheduledTask t = iterator.next();
             if (--t.ticksRemaining <= 0) {
-                t.task.run();
+                tasksToExecute.add(t);
                 iterator.remove();
             }
+        }
+
+        for (ScheduledTask t : tasksToExecute) {
+            t.task.run();
         }
 
         if (serverTasks.isEmpty()) {
@@ -40,4 +46,3 @@ public class DelayedTaskScheduler {
         }
     }
 }
-

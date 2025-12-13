@@ -23,13 +23,9 @@ public class ModModelProvider extends FabricModelProvider {
 //        );
 
         blockStateModelGenerator.registerSingleton(ModBlocks.SOUL_SANDSTONE, TexturedModel.CUBE_BOTTOM_TOP);
-        blockStateModelGenerator.registerSingleton(ModBlocks.ANCIENTER_DEBRIS, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
-
         smoothSoulSandstonePool.stairs(ModBlocks.SMOOTH_SOUL_SANDSTONE_STAIRS);
         smoothSoulSandstonePool.slab(ModBlocks.SMOOTH_SOUL_SANDSTONE_SLAB);
         smoothSoulSandstonePool.wall(ModBlocks.SMOOTH_SOUL_SANDSTONE_WALL);
-
-        blockStateModelGenerator.registerSingleton(ModBlocks.SUSPICIOUS_BONE_BLOCK, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
     }
 
     @Override
@@ -55,6 +51,10 @@ public class ModModelProvider extends FabricModelProvider {
 
         itemModelGenerator.register(ModItems.GILDED_ONYX, Models.GENERATED);
         itemModelGenerator.register(ModItems.ETERNAL_DIVINITY, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ETERNAL_DIVINITY_PIECE1, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ETERNAL_DIVINITY_PIECE2, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ETERNAL_DIVINITY_PIECE3, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BROKEN_ETERNAL_DIVINITY, Models.GENERATED);
         itemModelGenerator.register(ModItems.ITEM_MARKER, Models.GENERATED);
     }
 

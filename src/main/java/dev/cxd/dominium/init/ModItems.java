@@ -2,6 +2,7 @@ package dev.cxd.dominium.init;
 
 import dev.cxd.dominium.Dominium;
 import dev.cxd.dominium.item.*;
+import dev.cxd.dominium.item.ban_items.*;
 import dev.cxd.dominium.item.experimental.MarkerItem;
 import dev.cxd.dominium.item.signable.*;
 import dev.cxd.dominium.item.CustomRarityItem;
@@ -54,6 +55,16 @@ public class ModItems {
 
     public static final Item ETERNAL_DIVINITY = registerItem("eternal_divinity",
             new EternalDivinityItem(new FabricItemSettings().maxCount(1).fireproof(), ModRarities.DOMINIC));
+
+    public static final Item ETERNAL_DIVINITY_PIECE1 = registerItem("broken_piece_1",
+            new CustomRarityItem(new FabricItemSettings().maxCount(1).fireproof(), ModRarities.DOMINIC));
+    public static final Item ETERNAL_DIVINITY_PIECE2 = registerItem("broken_piece_2",
+            new CustomRarityItem(new FabricItemSettings().maxCount(1).fireproof(), ModRarities.DOMINIC));
+    public static final Item ETERNAL_DIVINITY_PIECE3 = registerItem("broken_piece_3",
+            new CustomRarityItem(new FabricItemSettings().maxCount(1).fireproof(), ModRarities.DOMINIC));
+
+    public static final Item BROKEN_ETERNAL_DIVINITY = registerItem("broken_eternal_divinity",
+            new BrokenEternalDivinityItem(new FabricItemSettings().maxCount(1).fireproof(), ModRarities.DOMINIC));
 
     public static final Item ITEM_MARKER = registerItem("item_marker",
             new MarkerItem(new Item.Settings().maxCount(1), " "));

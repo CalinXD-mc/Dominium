@@ -1,4 +1,4 @@
-package dev.cxd.dominium.item;
+package dev.cxd.dominium.item.ban_items;
 
 import dev.cxd.dominium.utils.CanBanPeopleItem;
 import dev.cxd.dominium.utils.MarkableItem;

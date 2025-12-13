@@ -16,13 +16,11 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
-                .add(ModBlocks.ANCIENTER_DEBRIS)
                 .add(ModBlocks.SOUL_SANDSTONE)
                 .add(ModBlocks.SMOOTH_SOUL_SANDSTONE)
                 .add(ModBlocks.SMOOTH_SOUL_SANDSTONE_STAIRS)
                 .add(ModBlocks.SMOOTH_SOUL_SANDSTONE_SLAB)
                 .add(ModBlocks.SMOOTH_SOUL_SANDSTONE_WALL)
-                .add(ModBlocks.SUSPICIOUS_BONE_BLOCK)
                 .add(ModBlocks.SOUL_GLASS)
                 .add(ModBlocks.WAYSTONE)
                 .add(ModBlocks.IDOL)
@@ -32,9 +30,6 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.WAYSTONE)
                 .add(ModBlocks.IDOL)
                 .add(ModBlocks.VESSEL);
-
-        getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL)
-                .add(ModBlocks.ANCIENTER_DEBRIS);
 
         getOrCreateTagBuilder(BlockTags.STAIRS)
                 .add(ModBlocks.SMOOTH_SOUL_SANDSTONE_STAIRS);

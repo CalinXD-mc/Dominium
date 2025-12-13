@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_ancienter_debris": {
+    "has_bedrock": {
       "conditions": {
         "items": [
           {
             "items": [
-              "dominium:ancienter_debris"
+              "minecraft:bedrock"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_ancienter_debris",
+      "has_bedrock",
       "has_the_recipe"
     ]
   ],

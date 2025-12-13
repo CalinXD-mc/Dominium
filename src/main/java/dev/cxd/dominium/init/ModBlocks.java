@@ -17,18 +17,6 @@ import net.minecraft.util.Identifier;
 
 public class ModBlocks {
 
-    public static final Block ANCIENTER_DEBRIS = registerBlock("ancienter_debris", new Block(FabricBlockSettings.copyOf(Blocks.ANCIENT_DEBRIS)));
-
-    public static final Block SUSPICIOUS_BONE_BLOCK = registerBlock("suspicious_bone_block",
-            new SuspiciousBoneBlock(AbstractBlock.Settings.create()
-                    .mapColor(MapColor.BROWN)
-                    .sounds(BlockSoundGroup.STONE)
-                    .strength(2.0F, 2.0F)
-                    .requiresTool()
-                    .dropsNothing()
-                    .breakInstantly()
-            ));
-
     public static final Block SOUL_SANDSTONE = registerBlock("soul_sandstone",
             new Block(AbstractBlock.Settings.create()
                     .mapColor(MapColor.BROWN)

@@ -40,6 +40,9 @@ public class ParticleSpawnClientHandler {
                 case "eternal_divinity_3":
                     ParticleSpawnPacket.spawnCustomParticle(client.world, pos, startColor, endColor, "eternal_divinity_3");
                     break;
+                case "rotated_beam_south_45":
+                    ParticleSpawnPacket.spawnCustomParticle(client.world, pos, startColor, endColor, "rotated_beam_south_45");
+                    break;
             }
         });
     }

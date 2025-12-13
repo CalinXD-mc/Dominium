@@ -64,6 +64,10 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("item.dominium.gilded_onyx", "Gilded Onyx");
 
         translationBuilder.add("item.dominium.eternal_divinity", "Eternal Divinity");
+        translationBuilder.add("item.dominium.broken_piece_1", "A Piece of the Eternal Divinity");
+        translationBuilder.add("item.dominium.broken_piece_2", "A Piece of the Eternal Divinity");
+        translationBuilder.add("item.dominium.broken_piece_3", "A Piece of the Eternal Divinity");
+        translationBuilder.add("item.dominium.broken_eternal_divinity", "Broken Eternal Divinity");
 
         //Damage Types
         translationBuilder.add("death.attack.disobedience", "%1$s's life was punished by the contract");
@@ -90,5 +94,6 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("dominium.midnightconfig.general", "General");
         translationBuilder.add("dominium.midnightconfig.soul_candle", "Soul Candle");
         translationBuilder.add("dominium.midnightconfig.experimental", "Experimental");
+        translationBuilder.add("dominium.midnightconfig.broken_eternal_divinity", "Broken Eternal Divinity");
     }
 }

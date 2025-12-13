@@ -1,4 +1,4 @@
-// 1.20.1	2025-12-13T18:08:53.4667515	Dominium/Recipes
+// 1.20.1	2025-12-13T21:48:13.6824359	Dominium/Recipes
 8c5a0eff8deadaf28e650c8bc91ccb31a145e5e8 data\dominium\recipes\soul_sandstone.json
 5ee34fec3b05bbcf402a9d7deff259fffd620160 data\dominium\advancements\recipes\misc\ancient_bone_alloy_chunk.json
 105b8d47dbdda208bb2b008a7f6108c1d2b15eaf data\dominium\recipes\smooth_soul_sandstone_stairs.json
@@ -25,8 +25,8 @@ b1767bda28abadcbb6d24d8c473ba85add8d9cbc data\dominium\recipes\contract_soulboun
 c39297e5be53311e38cfb9b45a00968eacda429a data\dominium\advancements\recipes\misc\dominic_dagger.json
 d0eb7448e5f91a9b65d69fd8e62840cbd8f29012 data\dominium\recipes\dominic_effigy.json
 a0ebc119fda643bb371d146854c115f897f8219a data\dominium\advancements\recipes\misc\ancient_bone_alloy.json
-e249f820ff97f923f4b3c7f84afea6774b8f9922 data\dominium\recipes\vessel.json
-eddbea1f7bf260582db4b8f7aaaa7cc089c4e54e data\dominium\advancements\recipes\misc\vessel.json
+e945404e100335800035b1041759e28f25f41cd6 data\dominium\recipes\vessel.json
+e9b6965426bb177815956fa913b0ff8b93ae1a72 data\dominium\advancements\recipes\misc\vessel.json
 38ae4f4baea3d027234f5ccb10dcea4b875ef182 data\dominium\advancements\recipes\misc\smooth_soul_sandstone_wall.json
 5b8faf449e11326c5cb05a2a68ea5e61ccc8d820 data\dominium\recipes\dominic_dagger.json
 0940392ea8b511f28868f306e8bce7fb0fc7e9e2 data\dominium\advancements\recipes\misc\idol.json

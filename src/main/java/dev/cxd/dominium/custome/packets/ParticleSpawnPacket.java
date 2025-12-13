@@ -210,6 +210,59 @@ public class ParticleSpawnPacket {
                         .setForceSpawn(true)
                         .spawn(world, pos.x, pos.y + 1, pos.z);
             }
+            case "rotated_beam_south_45" -> {
+                float[] spinSpeeds = {0.2f, 0.4f, 0.6f, 0.8f, 1.0f};
+                float baseTime = (world.getTime() * 0.2f) % 6.28f;
+
+                for (int i = 0; i < spinSpeeds.length; i++) {
+                    float speed = spinSpeeds[i];
+                    float offset = baseTime + (i * 0.5f);
+
+                    WorldParticleBuilder.create(LodestoneParticleRegistry.SPARKLE_PARTICLE)
+                            .setScaleData(GenericParticleData.create(3f, 30f, 60f).build())
+                            .setTransparencyData(GenericParticleData.create(1f, 0.2f, 0f) // alpha at start, middle, end
+                                    .setEasing(Easing.EXPO_OUT)
+                                    .build())
+                            .setColorData(ColorParticleData.create(startColor, endColor)
+                                    .setCoefficient(1.4f)
+                                    .setEasing(Easing.CUBIC_IN)
+                                    .build())
+                            .setLifetime(80)
+                            .setSpinData(SpinParticleData.create(speed, speed + 0.2f, speed + 0.4f) // spin speed range
+                                    .setSpinOffset(offset)
+                                    .setEasing(Easing.QUARTIC_IN)
+                                    .build())
+                            .addMotion(0, 0, 0)
+                            .enableNoClip()
+                            .setForceSpawn(true)
+                            .spawn(world, pos.x, pos.y + 1, pos.z);
+                }
+
+                double angleRadians = Math.toRadians(67.5F);
+                Vec3d direction = new Vec3d(0, Math.sin(angleRadians), Math.cos(angleRadians));
+
+                float beamLength = 80f;
+                float spacing = 0.2f;
+
+                for (float distance = 0; distance <= beamLength; distance += spacing) {
+                    Vec3d particlePos = pos.add(direction.multiply(distance));
+
+                    WorldParticleBuilder.create(LodestoneParticleRegistry.SMOKE_PARTICLE)
+                            .setScaleData(GenericParticleData.create(0.2f, 3f, 2f).build())
+                            .setTransparencyData(GenericParticleData.create(0.8f, 0.4f, 0f)
+                                    .setEasing(Easing.EXPO_OUT)
+                                    .build())
+                            .setColorData(ColorParticleData.create(startColor, endColor)
+                                    .setCoefficient(1.2f)
+                                    .setEasing(Easing.LINEAR)
+                                    .build())
+                            .setLifetime(80)
+                            .addMotion(0, 0, 0)
+                            .enableNoClip()
+                            .setForceSpawn(true)
+                            .spawn(world, particlePos.x, particlePos.y, particlePos.z);
+                }
+            }
         }
     }
 }

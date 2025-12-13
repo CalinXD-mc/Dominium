@@ -6,7 +6,8 @@
 		"PlayerStepMixin",
 		"PlayerManagerMixin",
 		"MobBlockerMixin",
-		"LivingEntityMixin"
+		"LivingEntityMixin",
+		"configurable.WitherEntityMixin"
 	],
 	"client": [
 		"client.PlayerRendererMixin",
