@@ -3,17 +3,19 @@
   "category": "misc",
   "key": {
     "1": {
-      "item": "dominium:ancient_bone_alloy"
+      "item": "dominium:contract"
+    },
+    "2": {
+      "item": "dominium:dominic_orb"
     }
   },
   "pattern": [
-    "1  ",
-    "   ",
-    "   "
+    " 2 ",
+    "212",
+    " 2 "
   ],
   "result": {
-    "count": 4,
-    "item": "dominium:ancient_bone_alloy_chunk"
+    "item": "dominium:contract_soulbound"
   },
   "show_notification": true
 }

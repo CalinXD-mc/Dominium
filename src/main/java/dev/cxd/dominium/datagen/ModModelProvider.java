@@ -48,7 +48,6 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.DOMINIC_EFFIGY, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.SOULTRAP_SPETUM, Models.GENERATED);
-        itemModelGenerator.register(ModItems.BROKEN_DOMINIC_DAGGER_PIECE, Models.GENERATED);
         itemModelGenerator.register(ModItems.CONVENANT_OF_THE_PROVIDENT_SIGNED, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.ANCIENT_BONE_ALLOY, Models.GENERATED);

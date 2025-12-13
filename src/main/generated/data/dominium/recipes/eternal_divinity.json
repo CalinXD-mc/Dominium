@@ -6,19 +6,16 @@
       "item": "dominium:ancient_bone_alloy"
     },
     "2": {
-      "item": "minecraft:netherite_sword"
-    },
-    "3": {
       "item": "dominium:ancient_bone_alloy_chunk"
     }
   },
   "pattern": [
-    "  3",
-    " 1 ",
-    "2  "
+    "22 ",
+    "21 ",
+    "  2"
   ],
   "result": {
-    "item": "dominium:dominic_dagger"
+    "item": "dominium:eternal_divinity"
   },
   "show_notification": true
 }

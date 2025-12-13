@@ -43,7 +43,7 @@ public class EternalDivinityChainsEntity extends MobEntity {
     public final AnimationState spawnAnimationState = new AnimationState();
 
     private UUID boundPlayer;
-    private int lifetimeTicks = 20 * 60 * 3; // 3 minutes
+    private int lifetimeTicks; // 3 minutes
 
     public EternalDivinityChainsEntity(EntityType<? extends MobEntity> entityType, World world) {
         super(entityType, world);
@@ -122,7 +122,23 @@ public class EternalDivinityChainsEntity extends MobEntity {
         // Freeze in place relative to player
         setVelocity(Vec3d.ZERO);
 
-        // Lifetime countdown
+        // Sync lifetime with Soul Strain duration
+        if (!getWorld().isClient()) {
+            StatusEffectInstance soulStrain = bound.getStatusEffect(ModStatusEffects.SOUL_STRAIN);
+
+            if (soulStrain != null) {
+                lifetimeTicks = soulStrain.getDuration();
+            } else {
+                // No soul strain effect = despawn
+                bound.velocityModified = true;
+                bound.setVelocity(0, 0, 0);
+                bound.stopRiding();
+                discard();
+                return;
+            }
+        }
+
+        // Lifetime countdown (now synced with Soul Strain)
         lifetimeTicks--;
         if (lifetimeTicks <= 0) {
             if (!getWorld().isClient()) {
@@ -233,29 +249,27 @@ public class EternalDivinityChainsEntity extends MobEntity {
 
                             player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.REGRET, 20 * 5, 0, false, false, true));
 
-
-                            if (!world.isClient()) {
-                                for (int i = 1; i <= 10; i++) {
-                                    float radius = i * 5.0f;
-                                    world.createExplosion(
-                                            null,
-                                            this.getX(),
-                                            this.getY(),
-                                            this.getZ(),
-                                            radius,
-                                            World.ExplosionSourceType.BLOCK
-                                    );
-                                }
-                            }
-
                             ItemStack stackInHand = player.getStackInHand(hand);
-                            ItemStack brokenDagger = new ItemStack(ModItems.BROKEN_DOMINIC_DAGGER_PIECE);
-                            if (stackInHand.hasNbt()) {
-                                assert stackInHand.getNbt() != null;
-                                brokenDagger.setNbt(stackInHand.getNbt().copy());
-                            }
-                            if (player.getMainHandStack().isOf(ModItems.DOMINIC_DAGGER)) {
-                                player.setStackInHand(hand, brokenDagger);
+
+                            if (stackInHand.isOf(ModItems.DOMINIC_DAGGER)) {
+                                if (!world.isClient()) {
+                                    double radius = 8.0D;
+                                    int noOfExplosions = 24;
+
+                                    for (int i = 0; i < noOfExplosions; i++) {
+                                        double angle = (Math.PI * 2 / 8) * i;
+                                        double x = this.getX() + Math.cos(angle) * radius;
+                                        double z = this.getZ() + Math.sin(angle) * radius;
+                                        double y = this.getY();
+
+                                        world.createExplosion(
+                                                null,
+                                                x, y, z,
+                                                12.0f,
+                                                World.ExplosionSourceType.BLOCK
+                                        );
+                                    }
+                                }
                             }
 
                             this.discard();

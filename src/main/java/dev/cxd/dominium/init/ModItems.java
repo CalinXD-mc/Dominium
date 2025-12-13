@@ -46,10 +46,6 @@ public class ModItems {
             new SoultrapSpetumItem(ModToolMaterials.DOMINIC, 9, -2.9F ,new FabricItemSettings().maxCount(1), ModRarities.DOMINIC));
     public static final Item DOMINIC_DAGGER = registerItem("dominic_dagger",
             new DominicDaggerItem(ModToolMaterials.DOMINIC, 4, -1.0F ,new FabricItemSettings().maxCount(1), ModRarities.DOMINIC));
-    public static final Item BROKEN_DOMINIC_DAGGER_PIECE = registerItem("broken_dominic_dagger",
-            new CustomRarityItem(new FabricItemSettings().maxCount(1), ModRarities.FIXED_DOMINIC));
-    public static final Item FIXED_DOMINIC_DAGGER = registerItem("fixed_dominic_dagger",
-            new FixedDominicDaggerItem(ModToolMaterials.DOMINIC, 2, -1.2F ,new FabricItemSettings().maxCount(1), ModRarities.FIXED_DOMINIC));
     public static final Item CONVENANT_OF_THE_PROVIDENT_SIGNED = registerItem("convenant_of_the_provident_signed",
             new ProvedientConvenantItem(new FabricItemSettings().maxCount(1), ModRarities.DOMINIC));
 
@@ -64,6 +60,10 @@ public class ModItems {
 
 //    public static final Item PARTICLE_SPAWNER = registerItem("particle_spawner",
 //            new LodestoneDI.ParticleSpawnerItem(new Item.Settings().maxCount(1)));
+//    public static final Item BROKEN_DOMINIC_DAGGER_PIECE = registerItem("broken_dominic_dagger",
+//            new CustomRarityItem(new FabricItemSettings().maxCount(1), ModRarities.FIXED_DOMINIC));
+//    public static final Item FIXED_DOMINIC_DAGGER = registerItem("fixed_dominic_dagger",
+//            new FixedDominicDaggerItem(ModToolMaterials.DOMINIC, 2, -1.2F ,new FabricItemSettings().maxCount(1), ModRarities.FIXED_DOMINIC));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(Dominium.MOD_ID, name), item);

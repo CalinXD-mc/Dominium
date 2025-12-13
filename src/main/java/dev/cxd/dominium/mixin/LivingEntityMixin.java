@@ -13,6 +13,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleTypes;
@@ -75,7 +76,6 @@ public class LivingEntityMixin {
                 player.setHealth(1.0F);
                 cir.setReturnValue(false);
 
-                // Spawn EternalDivinityChainsEntity
                 ServerWorld world = (ServerWorld) player.getWorld();
                 EternalDivinityChainsEntity chain = ModEntities.ETERNAL_DIVINITY_CHAINS.create(world);
                 if (chain != null) {
@@ -84,9 +84,7 @@ public class LivingEntityMixin {
                     world.spawnEntity(chain);
                 }
 
-                // Visual / audio feedback
                 world.spawnParticles(ParticleTypes.SOUL, player.getX(), player.getY() + 1, player.getZ(), 30, 0.5, 0.5, 0.5, 0.01);
-                player.sendMessage(Text.literal("Judgement.").formatted(Formatting.GOLD), true);
 
                 for (ServerPlayerEntity p : world.getPlayers()) {
                     world.playSound(null, p.getX(), p.getY(), p.getZ(),
@@ -141,6 +139,8 @@ public class LivingEntityMixin {
                 if (stack.isOf(ModItems.ETERNAL_DIVINITY)) {
                     int durability = EternalDivinityItem.getDurability(stack);
 
+                    victim.addStatusEffect(new StatusEffectInstance((StatusEffect) ModStatusEffects.SOUL_STRAIN, 8 * 20, 0, false, false, true));
+
                     if (amount >= victim.getHealth()) {
                         victim.setHealth(1.0F);
                         cir.setReturnValue(false);
@@ -159,11 +159,33 @@ public class LivingEntityMixin {
                         DelayedTaskScheduler.schedule(victim.getServer(), 40, () -> {
                             victim.changeGameMode(GameMode.SPECTATOR);
 
+                            World world = victim.getWorld();
+
                             attacker.addStatusEffect(new StatusEffectInstance(ModStatusEffects.REGRET, 100, 0, true, false, true));
 
                             EternalDivinityItem.spawnParticles(stack, victim, attacker);
 
+                            if (durability != 1) {
+                                Text message = Text.literal(victim.getName().getString() + "'s existence was suspended")
+                                        .formatted(Formatting.WHITE);
+                                for (PlayerEntity p : world.getPlayers()) {
+                                    p.sendMessage(message, false);
+                                }
+                            }
+
+                            for (PlayerEntity p : world.getPlayers()) {
+                                world.playSound(null, p.getX(), p.getY(), p.getZ(),
+                                        SoundEvents.ENTITY_WITHER_SPAWN, SoundCategory.PLAYERS, 1.0F, 0.75F);
+                            }
+
                             if (durability == 1) {
+
+                                Text message = Text.literal(victim.getName().getString() + "'s existence was forfeited")
+                                        .formatted(Formatting.WHITE);
+                                for (PlayerEntity p : world.getPlayers()) {
+                                    p.sendMessage(message, false);
+                                }
+
                                 Vec3d pos = victim.getPos();
 
                                 double radius = 8.0D;
@@ -185,7 +207,6 @@ public class LivingEntityMixin {
                                 }
                             }
                         });
-
                         EternalDivinityItem.setDurability(stack, durability - 1);
                     }
                     break;

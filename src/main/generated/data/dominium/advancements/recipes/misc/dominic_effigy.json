@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_broken_dominic_dagger": {
+    "has_bedrock": {
       "conditions": {
         "items": [
           {
             "items": [
-              "dominium:broken_dominic_dagger"
+              "minecraft:bedrock"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:ancient_bone_alloy_from_smelting_broken_dominic_dagger"
+        "recipe": "dominium:dominic_effigy"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_broken_dominic_dagger",
+      "has_bedrock",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:ancient_bone_alloy_from_smelting_broken_dominic_dagger"
+      "dominium:dominic_effigy"
     ]
   },
   "sends_telemetry_event": false

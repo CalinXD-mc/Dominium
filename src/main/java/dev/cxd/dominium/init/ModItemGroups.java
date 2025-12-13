@@ -41,19 +41,22 @@ public class ModItemGroups {
                 //entries.add(ModBlocks.VESSEL);
 
                 entries.add(ModItems.CONTRACT);
+                if (ModConfig.showDominicItemsInTab) entries.add(ModItems.SOULBOUND_CONTRACT);
                 entries.add(ModItems.WANDERER_TABLET);
 
                 entries.add(ModItems.SOUL_ORB);
 
                 if (ModConfig.showDominicItemsInTab) entries.add(ModItems.DOMINIC_ORB);
 
+                if (ModConfig.showDominicItemsInTab) entries.add(ModItems.ANCIENT_BONE_ALLOY);
+
+                if (ModConfig.showDominicItemsInTab) entries.add(ModItems.ANCIENT_BONE_ALLOY_CHUNK);
+
                 if (ModConfig.showDominicItemsInTab) entries.add(ModItems.DOMINIC_EFFIGY);
 
                 if (ModConfig.showDominicItemsInTab) entries.add(ModItems.ETERNAL_DIVINITY);
 
                 if (ModConfig.showDominicItemsInTab) entries.add(ModItems.DOMINIC_DAGGER);
-                if (ModConfig.showDominicItemsInTab) entries.add(ModItems.FIXED_DOMINIC_DAGGER);
-                if (ModConfig.showDominicItemsInTab) entries.add(ModItems.BROKEN_DOMINIC_DAGGER_PIECE);
 
                 if (ModConfig.showDominicItemsInTab) entries.add(ModItems.SOULTRAP_SPETUM);
 

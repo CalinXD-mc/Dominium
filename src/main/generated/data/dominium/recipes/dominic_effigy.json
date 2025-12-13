@@ -3,17 +3,19 @@
   "category": "misc",
   "key": {
     "1": {
-      "item": "dominium:ancient_bone_alloy"
+      "item": "minecraft:stone"
+    },
+    "2": {
+      "item": "dominium:dominic_orb"
     }
   },
   "pattern": [
-    "1  ",
-    "   ",
-    "   "
+    "111",
+    "121",
+    " 1 "
   ],
   "result": {
-    "count": 4,
-    "item": "dominium:ancient_bone_alloy_chunk"
+    "item": "dominium:dominic_effigy"
   },
   "show_notification": true
 }

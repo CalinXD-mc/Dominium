@@ -18,8 +18,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(ItemTags.SWORDS)
                 .add(ModItems.DOMINIC_DAGGER.asItem())
+                .add(ModItems.GILDED_ONYX.asItem())
                 .add(ModItems.SOULTRAP_SPETUM.asItem());
-        getOrCreateTagBuilder(ModTags.Items.SMELTABLE_TO_ANCIENT_BONE_ALLOY)
-                .add(ModItems.BROKEN_DOMINIC_DAGGER_PIECE);
     }
 }

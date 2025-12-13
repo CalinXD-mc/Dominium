@@ -70,8 +70,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern("   ")
                 .input('B', Items.BOOK)
                 .input('D', Items.DEEPSLATE_TILES)
-                .input('R', Items.RED_DYE)
+                .input('R', ModItems.SOUL_ORB)
                 .criterion(hasItem(Items.BOOK), conditionsFromItem(Items.BOOK))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.SOULBOUND_CONTRACT)
+                .pattern(" 2 ")
+                .pattern("212")
+                .pattern(" 2 ")
+                .input('1', ModItems.CONTRACT)
+                .input('2', ModItems.DOMINIC_ORB)
+                .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
                 .offerTo(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.SOUL_CANDLE, 8)
@@ -123,50 +132,20 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModBlocks.SMOOTH_SOUL_SANDSTONE), conditionsFromItem(ModBlocks.SMOOTH_SOUL_SANDSTONE))
                 .offerTo(exporter);
 
-//        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.LUCKY_DICE)
-//                .pattern(" D ")
-//                .pattern("DGD")
-//                .pattern(" D ")
-//                .input('D', Items.DIAMOND)
-//                .input('G', Items.GOLD_BLOCK)
-//                .criterion(hasItem(Items.DIAMOND), conditionsFromItem(Items.DIAMOND))
-//                .offerTo(exporter);
-//
-//        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.SINFUL_DICE)
-//                .pattern(" D ")
-//                .pattern("DGD")
-//                .pattern(" D ")
-//                .input('D', Items.DIAMOND_BLOCK)
-//                .input('G', ModItems.LUCKY_DICE)
-//                .criterion(hasItem(ModItems.LUCKY_DICE), conditionsFromItem(ModItems.LUCKY_DICE))
-//                .offerTo(exporter);
-
-//        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.BONE_PILE)
-//                .pattern("123")
+//        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ANCIENT_BONE_ALLOY_CHUNK)
+//                .pattern("21 ")
 //                .pattern("   ")
 //                .pattern("   ")
-//                .input('1', Items.BONE)
-//                .input('2', ModItems.WITHERED_BONE)
-//                .input('3', ModItems.HUMAN_BONE)
-//                .criterion(hasItem(Items.BONE), conditionsFromItem(Items.BONE))
-//                .offerTo(exporter);
-
-//        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ANCIENT_NETHERITE)
-//                .pattern("122")
-//                .pattern("333")
-//                .pattern("333")
-//                .input('1', Items.NETHERITE_INGOT)
-//                .input('2', Items.GOLD_INGOT)
-//                .input('3', ModItems.ANCIENT_SCRAP)
+//                .input('1', ModItems.DOMINIC_ORB)
+//                .input('2', Items.NETHERITE_INGOT)
 //                .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
 //                .offerTo(exporter);
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ANCIENT_BONE_ALLOY_CHUNK)
-                .pattern("21 ")
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ANCIENT_BONE_ALLOY_CHUNK, 4)
+                .pattern("1  ")
                 .pattern("   ")
                 .pattern("   ")
-                .input('1', ModItems.DOMINIC_ORB)
-                .input('2', Items.NETHERITE_INGOT)
+                .input('1', ModItems.ANCIENT_BONE_ALLOY)
                 .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
                 .offerTo(exporter);
 
@@ -178,20 +157,53 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
                 .offerTo(exporter);
 
-//        offerSmelting(exporter, List.of(ModItems.BONE_PILE), RecipeCategory.MISC, ModItems.BONE_DUST,
-//                0.7f, 160, "bone_pile_from_bone_dust");
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ETERNAL_DIVINITY)
+                .pattern("22 ")
+                .pattern("21 ")
+                .pattern("  2")
+                .input('1', ModItems.ANCIENT_BONE_ALLOY)
+                .input('2', ModItems.ANCIENT_BONE_ALLOY_CHUNK)
+                .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.GILDED_ONYX)
+                .pattern(" 2 ")
+                .pattern("323")
+                .pattern(" 1 ")
+                .input('1', ModItems.ETERNAL_DIVINITY)
+                .input('2', Items.OBSIDIAN)
+                .input('3', ModItems.ANCIENT_BONE_ALLOY_CHUNK)
+                .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.DOMINIC_DAGGER)
+                .pattern(" 1 ")
+                .pattern(" 1 ")
+                .pattern(" 2 ")
+                .input('1', ModItems.ANCIENT_BONE_ALLOY)
+                .input('2', ModItems.ANCIENT_BONE_ALLOY_CHUNK)
+                .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.SOULTRAP_SPETUM)
+                .pattern(" 21")
+                .pattern(" 12")
+                .pattern("2  ")
+                .input('1', ModItems.ANCIENT_BONE_ALLOY)
+                .input('2', ModItems.ANCIENT_BONE_ALLOY_CHUNK)
+                .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.DOMINIC_EFFIGY)
+                .pattern("111")
+                .pattern("121")
+                .pattern(" 1 ")
+                .input('1', Items.STONE)
+                .input('2', ModItems.DOMINIC_ORB)
+                .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
+                .offerTo(exporter);
 
         offerSmelting(exporter, List.of(Items.SOUL_SAND), RecipeCategory.MISC, ModBlocks.SOUL_GLASS,
                 0.7f, 160, "bone_pile_from_bone_dust");
-
-//        offerSmelting(exporter, List.of(ModBlocks.ANCIENTER_DEBRIS), RecipeCategory.MISC, ModItems.ANCIENT_SCRAP,
-//                0.7f, 1600, "bone_pile_from_bone_dust");
-
-        offerSmelting(exporter, List.of(ModItems.BROKEN_DOMINIC_DAGGER_PIECE), RecipeCategory.MISC, ModItems.ANCIENT_BONE_ALLOY,
-                0.7f, 1600, "bone_pile_from_bone_dust");
-
-//        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(Items.IRON_INGOT), RecipeCategory.MISC, ModBlocks.IRON_WALKWAY, 8);
-//        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(Items.IRON_INGOT), RecipeCategory.MISC, ModBlocks.IRON_WALKWAY_STAIRS, 4);
-
     }
 }

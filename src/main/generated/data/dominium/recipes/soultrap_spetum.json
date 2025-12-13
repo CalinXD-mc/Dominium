@@ -4,16 +4,18 @@
   "key": {
     "1": {
       "item": "dominium:ancient_bone_alloy"
+    },
+    "2": {
+      "item": "dominium:ancient_bone_alloy_chunk"
     }
   },
   "pattern": [
-    "1  ",
-    "   ",
-    "   "
+    " 21",
+    " 12",
+    "2  "
   ],
   "result": {
-    "count": 4,
-    "item": "dominium:ancient_bone_alloy_chunk"
+    "item": "dominium:soultrap_spetum"
   },
   "show_notification": true
 }

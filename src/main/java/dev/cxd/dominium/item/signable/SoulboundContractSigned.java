@@ -1,20 +1,24 @@
 package dev.cxd.dominium.item.signable;
 
-import dev.cxd.dominium.init.ModComponents;
-import dev.cxd.dominium.init.ModDamageTypes;
-import dev.cxd.dominium.init.ModItems;
-import dev.cxd.dominium.init.ModStatusEffects;
+import dev.cxd.dominium.entity.EternalDivinityChainsEntity;
+import dev.cxd.dominium.init.*;
 import dev.cxd.dominium.item.CustomRarityItem;
 import dev.cxd.dominium.utils.ModRarities;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -35,14 +39,30 @@ public class SoulboundContractSigned extends CustomRarityItem {
         ItemStack stack = user.getStackInHand(hand);
         ItemStack offhand = user.getOffHandStack();
 
-        if (offhand.isEmpty()) return TypedActionResult.pass(stack);
-
-        // get target player UUID
+        // Get target player UUID
         UUID targetUUID = UUID.fromString(ModComponents.getVesselUuid(stack));
         if (targetUUID == null) return TypedActionResult.pass(stack);
 
         PlayerEntity target = world.getPlayerByUuid(targetUUID);
         if (target == null) return TypedActionResult.pass(stack);
+
+        if (user.isSneaking()) {
+            double distance = user.squaredDistanceTo(target);
+            if (distance <= 10 * 10) { // 10 block radius
+                if (target.hasStatusEffect(ModStatusEffects.SOUL_STRAIN)) {
+                    target.removeStatusEffect(ModStatusEffects.SOUL_STRAIN);
+
+                    return TypedActionResult.success(stack, world.isClient());
+                }
+            } else {
+                if (!world.isClient()) {
+                    user.sendMessage(Text.literal("Target is too far away to unchain it (must be within 10 blocks)").formatted(Formatting.RED), true);
+                }
+                return TypedActionResult.fail(stack);
+            }
+        }
+
+        if (offhand.isEmpty()) return TypedActionResult.pass(stack);
 
         if (offhand.isOf(Items.NETHERITE_SWORD)) {
             DamageSource damageSource = new DamageSource(
@@ -50,19 +70,38 @@ public class SoulboundContractSigned extends CustomRarityItem {
                             .get(RegistryKeys.DAMAGE_TYPE)
                             .entryOf(ModDamageTypes.DISOBEDIENCE_DAMAGE));
             target.damage(damageSource, 4.0F);
+
+            user.sendMessage(Text.literal("Dealt 4 damage to " + target.getName().getString()).formatted(Formatting.GOLD), true);
         } else if (offhand.isOf(Items.ENDER_PEARL)) {
             user.teleport(target.getX(), target.getY(), target.getZ());
+
+            user.sendMessage(Text.literal("Teleported to " + target.getName().getString()).formatted(Formatting.GOLD), true);
         } else if (offhand.isOf(Items.BLAZE_POWDER)) {
             target.setOnFireFor(5);
-        } else if (offhand.isOf(ModItems.DOMINIC_ORB)) {
-            if (target.getActiveStatusEffects() == ModStatusEffects.DAMNED) {
-                target.removeStatusEffect(ModStatusEffects.DAMNED);
-            } else if (target.getActiveStatusEffects() != ModStatusEffects.DAMNED) {
-                target.addStatusEffect(new StatusEffectInstance(ModStatusEffects.DAMNED, 20 * 60, 0));
-            }
+
+            user.sendMessage(Text.literal("Set " + target.getName().getString() + " on Fire").formatted(Formatting.GOLD), true);
         } else if (offhand.isOf(Items.IRON_BLOCK)) {
-            target.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 20 * 20, 10));
-            target.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 20 * 20, 250, false, false));
+            target.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 20 * 30, 10));
+            target.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 20 * 30, 250, false, true));
+
+            user.sendMessage(Text.literal("Stunned " + target.getName().getString()).formatted(Formatting.GOLD), false);
+        } else if (offhand.isOf(ModItems.ANCIENT_BONE_ALLOY) || offhand.isOf(ModItems.ANCIENT_BONE_ALLOY_CHUNK)) {
+            if (!world.isClient()) {
+                target.addStatusEffect(new StatusEffectInstance((StatusEffect) ModStatusEffects.SOUL_STRAIN, 20 * 30, 0, false, false, true));
+
+                ServerWorld serverWorld = (ServerWorld) world;
+                EternalDivinityChainsEntity chain = ModEntities.ETERNAL_DIVINITY_CHAINS.create(serverWorld);
+
+                if (chain != null) {
+                    chain.setBoundPlayer(target.getUuid());
+                    chain.refreshPositionAndAngles(target.getX(), target.getY(), target.getZ(), 0, 0);
+                    serverWorld.spawnEntity(chain);
+                }
+
+                serverWorld.spawnParticles(ParticleTypes.SOUL, target.getX(), target.getY() + 1, target.getZ(), 30, 0.5, 0.5, 0.5, 0.01);
+
+                user.sendMessage(Text.literal("Trapped " + target.getName().getString() + " in chains for 30 seconds").formatted(Formatting.GOLD), true);
+            }
         }
 
         return TypedActionResult.success(stack, world.isClient());
@@ -92,7 +131,10 @@ public class SoulboundContractSigned extends CustomRarityItem {
                 tooltip.add(Text.literal("Right Click with a Iron Block in your offhand to deal Stun to the Signer.").formatted(Formatting.DARK_AQUA));
             }
             if (debugOne != null && !debugOne.isEmpty() && MinecraftClient.getInstance().options.advancedItemTooltips) {
-                tooltip.add(Text.literal("Right Click with a [SOMETHING] in your offhand to [Word] the Signer in [You're Not Getting This From The Code].").formatted(Formatting.DARK_AQUA).formatted(Formatting.OBFUSCATED));
+                tooltip.add(Text.literal("Right Click with an Ancient Bone Alloy Ingot or Chunk in your offhand to trap the Signer in chains for 30 seconds.").formatted(Formatting.DARK_AQUA));
+            }
+            if (debugOne != null && !debugOne.isEmpty() && MinecraftClient.getInstance().options.advancedItemTooltips) {
+                tooltip.add(Text.literal("Crouch without an offhand item to remove Soul Strain (within 10 blocks).").formatted(Formatting.GREEN));
             }
             if (debugOne != null && !debugOne.isEmpty() && MinecraftClient.getInstance().options.advancedItemTooltips) {
                 tooltip.add(Text.literal("Debug UUID: " + debugOne).formatted(Formatting.DARK_GRAY));

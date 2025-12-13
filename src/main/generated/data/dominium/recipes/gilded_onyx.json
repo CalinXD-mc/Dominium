@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "dominium:eternal_divinity"
+    },
+    "2": {
+      "item": "minecraft:obsidian"
+    },
+    "3": {
+      "item": "dominium:ancient_bone_alloy_chunk"
+    }
+  },
+  "pattern": [
+    " 2 ",
+    "323",
+    " 1 "
+  ],
+  "result": {
+    "item": "dominium:gilded_onyx"
+  },
+  "show_notification": true
+}
