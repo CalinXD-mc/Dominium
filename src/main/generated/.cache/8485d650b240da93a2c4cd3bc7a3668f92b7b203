@@ -1,4 +1,4 @@
-// 1.20.1	2025-12-13T21:48:13.6824359	Dominium/Recipes
+// 1.20.1	2025-12-13T22:39:30.7054486	Dominium/Recipes
 8c5a0eff8deadaf28e650c8bc91ccb31a145e5e8 data\dominium\recipes\soul_sandstone.json
 5ee34fec3b05bbcf402a9d7deff259fffd620160 data\dominium\advancements\recipes\misc\ancient_bone_alloy_chunk.json
 105b8d47dbdda208bb2b008a7f6108c1d2b15eaf data\dominium\recipes\smooth_soul_sandstone_stairs.json
@@ -7,6 +7,7 @@
 bd2453532bd3e62d8e00bbe0b27d6363dd8f4593 data\dominium\recipes\contract.json
 276b96c60546cd3e352ad31eb170d54ba3673a45 data\dominium\advancements\recipes\misc\soultrap_spetum.json
 916d66fb02878d4b8616cec50837c22742bf8a2d data\dominium\recipes\smooth_soul_sandstone.json
+7881d0e62684b4c53fb20633b08b086c5509469e data\dominium\advancements\recipes\misc\broken_eternal_divinity.json
 4b511593e27fd06af5935369ab9a64a43c9c9e49 data\dominium\advancements\recipes\misc\dominic_effigy.json
 e9c77ee8063cdbb554f1e85edd63a065ac2e6031 data\dominium\advancements\recipes\misc\contract_soulbound.json
 cdedbe65190d25bb06032b6f387c53b6e344707b data\dominium\advancements\recipes\misc\gilded_onyx.json
@@ -33,6 +34,7 @@ e9b6965426bb177815956fa913b0ff8b93ae1a72 data\dominium\advancements\recipes\misc
 5430e03d5e53c167ddb3acac447248aad9d9ffdb data\dominium\recipes\soul_candle.json
 d250090a8d7935c662c4698ddd662ec73c3dedc3 data\dominium\advancements\recipes\misc\soul_candle.json
 d88f573eb9dd5902b1c5510e8646e7f05f119ed2 data\dominium\advancements\recipes\misc\smooth_soul_sandstone_slab.json
+3ca7700233ae09156b39ba11506c26c9a93187f6 data\dominium\recipes\broken_eternal_divinity.json
 31131bed96b39205c66f0729660c3c2165a183c4 data\dominium\advancements\recipes\misc\soul_sandstone.json
 51a14606fbce22c4eaf5ee2fe94da6a1c6c17080 data\dominium\recipes\soul_glass_from_smelting_soul_sand.json
 65c4982e4e58dfaa1ef16b262237f17ee71501ac data\dominium\recipes\soultrap_spetum.json

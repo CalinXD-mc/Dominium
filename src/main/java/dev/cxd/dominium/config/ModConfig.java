@@ -17,8 +17,6 @@ public class ModConfig extends MidnightConfig {
 
     @Entry(category = GENERAL, name = "Should Dominic Orbs Be Obtainable in Survival by Killing Withers?")
     public static boolean dominicOrbsInSurvival = false;
-    @Entry(category = GENERAL, name = "Should Dominic Items actually ban players instead of putting them in spectator?")
-    public static boolean doDominicItemsBanPlayers = false;
     @Entry(category = GENERAL, name = "Should Spectators be able to interact with Doors, Trapdoors, Fence Gates, Levers, Buttons and Note Blocks?")
     public static boolean shouldSpectatorsInteractWithBlocks = true;
     @Entry(category = GENERAL, name = "Show Dominic Items in The Item Tab?")

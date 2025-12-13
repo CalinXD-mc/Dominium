@@ -285,24 +285,7 @@ public class EternalDivinityChainsEntity extends MobEntity {
     }
 
     public static void banOrSpectator(ServerPlayerEntity player) {
-        if (!ModConfig.doDominicItemsBanPlayers) {
-            player.changeGameMode(GameMode.SPECTATOR);
-            return;
-        }
-
-        MinecraftServer server = player.getServer();
-        if (server == null) return;
-
-        String name = player.getGameProfile().getName();
-        // Optional reason text
-        String reason = "Your existence was forfeited";
-
-        // Execute vanilla ban command
-        ServerCommandSource source = server.getCommandSource();
-        server.getCommandManager().executeWithPrefix(source, "ban " + name + " " + reason);
-
-        // Kick immediately (the ban command may also kick, but this ensures it)
-        player.networkHandler.disconnect(Text.literal("You are banned!"));
+        player.changeGameMode(GameMode.SPECTATOR);
     }
 
     @Override

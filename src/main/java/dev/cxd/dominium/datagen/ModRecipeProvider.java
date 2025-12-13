@@ -166,6 +166,16 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
                 .offerTo(exporter);
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.BROKEN_ETERNAL_DIVINITY)
+                .pattern(" 2 ")
+                .pattern("3  ")
+                .pattern("  1")
+                .input('1', ModItems.ETERNAL_DIVINITY_PIECE1)
+                .input('2', ModItems.ETERNAL_DIVINITY_PIECE2)
+                .input('3', ModItems.ETERNAL_DIVINITY_PIECE3)
+                .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
+                .offerTo(exporter);
+
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.GILDED_ONYX)
                 .pattern(" 2 ")
                 .pattern("323")
