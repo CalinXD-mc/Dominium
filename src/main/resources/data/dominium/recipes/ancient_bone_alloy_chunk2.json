@@ -3,19 +3,19 @@
   "category": "misc",
   "key": {
     "1": {
-      "item": "dominium:broken_dominic_dagger"
+      "item": "dominium:dominic_orb"
     },
     "2": {
-      "item": "minecraft:netherite_sword"
+      "item": "minecraft:netherite_ingot"
     }
   },
   "pattern": [
+    "21 ",
     "   ",
-    " 1 ",
-    "2  "
+    "   "
   ],
   "result": {
-    "item": "dominium:fixed_dominic_dagger"
+    "item": "dominium:ancient_bone_alloy_chunk"
   },
   "show_notification": true
 }
