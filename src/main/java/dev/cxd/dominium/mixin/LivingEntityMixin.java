@@ -1,14 +1,20 @@
 package dev.cxd.dominium.mixin;
 
+import dev.cxd.dominium.client.lodestone_dark_magic_stuff.ParticleSpawnPacketData;
+import dev.cxd.dominium.custome.packets.ParticleSpawnPacket;
 import dev.cxd.dominium.entity.EternalDivinityChainsEntity;
-import dev.cxd.dominium.init.ModEntities;
-import dev.cxd.dominium.init.ModItems;
-import dev.cxd.dominium.init.ModStatusEffects;
+import dev.cxd.dominium.init.*;
+import dev.cxd.dominium.item.EternalDivinityItem;
+import dev.cxd.dominium.utils.DelayedTaskScheduler;
+import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -16,11 +22,18 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.GameMode;
+import net.minecraft.world.Heightmap;
+import net.minecraft.world.World;
 import net.minecraft.world.border.WorldBorder;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.awt.*;
 
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
@@ -123,6 +136,62 @@ public class LivingEntityMixin {
                             SoundEvents.ENTITY_WITHER_SPAWN, SoundCategory.PLAYERS, 1.0F, 1.0F);
                 }
             }
+
+            for (ItemStack stack : attacker.getInventory().main) {
+                if (stack.isOf(ModItems.ETERNAL_DIVINITY)) {
+                    int durability = EternalDivinityItem.getDurability(stack);
+
+                    if (amount >= victim.getHealth()) {
+                        victim.setHealth(1.0F);
+                        cir.setReturnValue(false);
+
+                        ServerWorld serverWorld = (ServerWorld) victim.getWorld();
+
+                        BlockPos groundPos = serverWorld.getTopPosition(Heightmap.Type.MOTION_BLOCKING, victim.getBlockPos());
+                        victim.teleport(groundPos.getX() + 0.5, groundPos.getY(), groundPos.getZ() + 0.5);
+                        victim.setVelocity(Vec3d.ZERO);
+                        victim.velocityModified = true;
+
+                        serverWorld.spawnParticles(ModParticles.DOMINIC_SYMBOL,
+                                victim.getX(), victim.getY(), victim.getZ(),
+                                1, 0, 0, 0, 0);
+
+                        DelayedTaskScheduler.schedule(victim.getServer(), 40, () -> {
+                            victim.changeGameMode(GameMode.SPECTATOR);
+
+                            attacker.addStatusEffect(new StatusEffectInstance(ModStatusEffects.REGRET, 100, 0, true, false, true));
+
+                            EternalDivinityItem.spawnParticles(stack, victim, attacker);
+
+                            if (durability == 1) {
+                                Vec3d pos = victim.getPos();
+
+                                double radius = 8.0D;
+                                int noOfExplosions = 24;
+
+                                for (int i = 0; i < noOfExplosions; i++) {
+                                    double angle = (Math.PI * 2 / 8) * i;
+                                    double x = pos.x + Math.cos(angle) * radius;
+                                    double z = pos.z + Math.sin(angle) * radius;
+                                    double y = pos.y;
+
+                                    serverWorld.createExplosion(
+                                            null,
+                                            x, y, z,
+                                            12.0f,
+                                            true,
+                                            World.ExplosionSourceType.TNT
+                                    );
+                                }
+                            }
+                        });
+
+                        EternalDivinityItem.setDurability(stack, durability - 1);
+                    }
+                    break;
+                }
+            }
+
         }
     }
 }

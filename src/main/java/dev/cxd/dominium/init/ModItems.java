@@ -57,7 +57,7 @@ public class ModItems {
             new GildedOnyxItem(new FabricItemSettings().maxCount(1), 10, -3.0f, ModToolMaterials.DOMINIC ,ModRarities.DOMINIC));
 
     public static final Item ETERNAL_DIVINITY = registerItem("eternal_divinity",
-            new CustomRarityItem(new FabricItemSettings().maxCount(1).fireproof(), ModRarities.DOMINIC));
+            new EternalDivinityItem(new FabricItemSettings().maxCount(1).fireproof(), ModRarities.DOMINIC));
 
     public static final Item ITEM_MARKER = registerItem("item_marker",
             new MarkerItem(new Item.Settings().maxCount(1), " "));

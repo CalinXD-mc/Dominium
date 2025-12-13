@@ -31,6 +31,15 @@ public class ParticleSpawnClientHandler {
                 case "dominium_dagger_fixed_particles":
                     ParticleSpawnPacket.spawnCustomParticle(client.world, pos, startColor, endColor, "spetum_kill_particle");
                     break;
+                case "eternal_divinity_1":
+                    ParticleSpawnPacket.spawnCustomParticle(client.world, pos, startColor, endColor, "eternal_divinity_1");
+                    break;
+                case "eternal_divinity_2":
+                    ParticleSpawnPacket.spawnCustomParticle(client.world, pos, startColor, endColor, "eternal_divinity_2");
+                    break;
+                case "eternal_divinity_3":
+                    ParticleSpawnPacket.spawnCustomParticle(client.world, pos, startColor, endColor, "eternal_divinity_3");
+                    break;
             }
         });
     }

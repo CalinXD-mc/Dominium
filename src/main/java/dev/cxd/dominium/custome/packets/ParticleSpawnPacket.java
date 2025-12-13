@@ -86,7 +86,7 @@ public class ParticleSpawnPacket {
                             .setForceSpawn(true)
                             .spawn(world, pos.x, pos.y + 1, pos.z);
                 }
-                float beamHeight = 80f;
+                float beamHeight = 240f;
                 float spacing = 0.5f;
 
                 for (float y = -1; y <= beamHeight; y += spacing) {
@@ -108,18 +108,75 @@ public class ParticleSpawnPacket {
 
                 ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance
                         (100, pos, 477f, 777f, Easing.SINE_IN_OUT).setIntensity(3f, 7.5f, 0f));
+            }
+            case "eternal_divinity_1" -> {
+                float beamHeight = 40f;
+                float spacing = 0.5f;
 
-//                WorldParticleBuilder.create(LodestoneParticleRegistry.STAR_PARTICLE)
-//                        .setScaleData(GenericParticleData.create(0.25f, 1.0f, 0.5f).build())
-//                        .setTransparencyData(GenericParticleData.create(10f, 100f).setEasing(Easing.EXPO_OUT).build())
-//                        .setColorData(ColorParticleData.create(startColor, endColor).setCoefficient(1.4f).setEasing(Easing.CUBIC_IN).build())
-//                        .setLifetime(30)
-//                        .setFullBrightLighting()
-//                        .setRandomMotion(0.03f, 0.03f, 0.03f)
-//                        .enableNoClip()
-//                        .setForceSpawn(true)
-//                        .createCircle(world, pos.x, pos.y, pos.z, 5d, 20d, 20d)
-//                        .spawn(world, pos.x, pos.y + 1, pos.z);
+                for (float y = -1; y <= beamHeight; y += spacing) {
+                    WorldParticleBuilder.create(LodestoneParticleRegistry.THIN_EXTRUDING_SPARK_PARTICLE)
+                            .setScaleData(GenericParticleData.create(0.2f, 8f, 8f).build())
+                            .setTransparencyData(GenericParticleData.create(0.8f, 0.4f, 0f)
+                                    .setEasing(Easing.EXPO_OUT)
+                                    .build())
+                            .setColorData(ColorParticleData.create(startColor, endColor)
+                                    .setCoefficient(1.2f)
+                                    .setEasing(Easing.LINEAR)
+                                    .build())
+                            .setLifetime(80)
+                            .addMotion(0, 0, 0)
+                            .enableNoClip()
+                            .setForceSpawn(true)
+                            .spawn(world, pos.x, pos.y + y, pos.z);
+                }
+            }
+            case "eternal_divinity_2" -> {
+                float beamHeight = 80f;
+                float spacing = 0.45f;
+
+                for (float y = -1; y <= beamHeight; y += spacing) {
+                    WorldParticleBuilder.create(LodestoneParticleRegistry.THIN_EXTRUDING_SPARK_PARTICLE)
+                            .setScaleData(GenericParticleData.create(0.2f, 8f, 8f).build())
+                            .setTransparencyData(GenericParticleData.create(0.8f, 0.4f, 0f)
+                                    .setEasing(Easing.EXPO_OUT)
+                                    .build())
+                            .setColorData(ColorParticleData.create(startColor, endColor)
+                                    .setCoefficient(1.2f)
+                                    .setEasing(Easing.LINEAR)
+                                    .build())
+                            .setLifetime(80)
+                            .addMotion(0, 0, 0)
+                            .enableNoClip()
+                            .setForceSpawn(true)
+                            .spawn(world, pos.x, pos.y + y, pos.z);
+                }
+
+                ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance
+                        (20, pos, 477f, 50f, Easing.SINE_IN_OUT).setIntensity(1f, 2.5f, 0f));
+            }
+            case "eternal_divinity_3" -> {
+                float beamHeight = 120f;
+                float spacing = 0.4f;
+
+                for (float y = -1; y <= beamHeight; y += spacing) {
+                    WorldParticleBuilder.create(LodestoneParticleRegistry.THIN_EXTRUDING_SPARK_PARTICLE)
+                            .setScaleData(GenericParticleData.create(0.2f, 8f, 8f).build())
+                            .setTransparencyData(GenericParticleData.create(0.8f, 0.4f, 0f)
+                                    .setEasing(Easing.EXPO_OUT)
+                                    .build())
+                            .setColorData(ColorParticleData.create(startColor, endColor)
+                                    .setCoefficient(1.2f)
+                                    .setEasing(Easing.LINEAR)
+                                    .build())
+                            .setLifetime(80)
+                            .addMotion(0, 0, 0)
+                            .enableNoClip()
+                            .setForceSpawn(true)
+                            .spawn(world, pos.x, pos.y + y, pos.z);
+                }
+
+                ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance
+                        (100, pos, 477f, 250f, Easing.SINE_IN_OUT).setIntensity(2f, 5.0f, 0f));
             }
             case "spetum_jump_particle" -> WorldParticleBuilder.create(LodestoneParticleRegistry.THIN_EXTRUDING_SPARK_PARTICLE)
                     .setScaleData(GenericParticleData.create(2f, 2f, 2f).build())

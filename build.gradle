@@ -32,8 +32,8 @@ repositories {
 		}
 	}
 	mavenCentral()
-	maven { url "https://maven.shedaniel.me/"}
-	maven { url "https://maven.terraformersmc.com/releases/"}
+	maven { url = "https://maven.shedaniel.me/"}
+	maven { url = "https://maven.terraformersmc.com/releases/"}
     maven { url = "https://maven.midnightdust.eu/releases"}
     maven { url = "https://maven.terraformersmc.com/"}
 }

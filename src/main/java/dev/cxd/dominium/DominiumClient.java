@@ -7,6 +7,7 @@ import dev.cxd.dominium.init.ModBlocks;
 import dev.cxd.dominium.init.ModEntities;
 import dev.cxd.dominium.init.ModParticles;
 import dev.cxd.dominium.particle.ChantDirectionalLockedParticle;
+import dev.cxd.dominium.particle.DominicSymbolParticle;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -28,5 +29,6 @@ public class DominiumClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(EternalDivinityChainsModel.ETERNAL_DIVINITY_CHAINS, EternalDivinityChainsModel::getTexturedModelData);
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.CHANT, ChantDirectionalLockedParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.DOMINIC_SYMBOL, DominicSymbolParticle.Factory::new);
     }
 }
