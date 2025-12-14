@@ -1,6 +1,6 @@
 package dev.cxd.dominium.item.ban_items;
 
-import dev.cxd.dominium.custome.packets.ParticleSpawnPacket;
+import dev.cxd.dominium.client.lodestone_dark_magic_stuff.ParticleSpawnPacketData;
 import dev.cxd.dominium.init.ModItems;
 import dev.cxd.dominium.init.ModPackets;
 import dev.cxd.dominium.item.CustomRarityItem;
@@ -10,20 +10,15 @@ import dev.cxd.dominium.utils.ModRarities;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -33,18 +28,16 @@ import java.util.List;
 
 public class BrokenEternalDivinityItem extends CustomRarityItem implements MarkableItem, CanBanPeopleItem {
 
-    // /give @p minecraft:suspicious_gravel{BlockEntityTag:{item:{id:"dominium:broken_piece_1",Count:1b}}}
-
     public BrokenEternalDivinityItem(Settings settings, ModRarities rarity) {
         super(settings, rarity);
     }
 
-    @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        assert context.getPlayer() != null;
-        spawnParticles(context.getPlayer());
-        return super.useOnBlock(context);
-    }
+//    @Override
+//    public ActionResult useOnBlock(ItemUsageContext context) {
+//        assert context.getPlayer() != null;
+//        spawnParticles(context.getPlayer());
+//        return super.useOnBlock(context);
+//    }
 
     public static void spawnParticles(LivingEntity victim) {
         Color startColor = new Color(248, 209, 109);
@@ -52,7 +45,7 @@ public class BrokenEternalDivinityItem extends CustomRarityItem implements Marka
         Vec3d pos = victim.getPos();
 
         if (!victim.getWorld().isClient && victim.getWorld() instanceof ServerWorld serverWorld) {
-            ParticleSpawnPacket packetData = new ParticleSpawnPacket(
+            ParticleSpawnPacketData packetData = new ParticleSpawnPacketData(
                     pos, startColor.getRGB(), endColor.getRGB(), "rotated_beam_south_45"
             );
 

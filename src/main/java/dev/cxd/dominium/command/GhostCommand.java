@@ -4,6 +4,8 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import dev.cxd.dominium.Dominium;
+import dev.cxd.dominium.custome.packets.GhostSyncPacket;
+import dev.cxd.dominium.utils.GhostManager;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.CommandManager;
@@ -42,6 +44,10 @@ public class GhostCommand {
         }
 
         Dominium.GHOST_UUIDS.add(playerUuid);
+        GhostManager.saveGhosts(Dominium.GHOST_UUIDS);
+
+        GhostSyncPacket.sendToAll(context.getSource().getServer().getPlayerManager().getPlayerList());
+
         context.getSource().sendFeedback(() -> Text.literal("Added " + player.getName().getString() + " as a ghost. UUID: " + playerUuid), true);
         return 1;
     }
@@ -56,8 +62,23 @@ public class GhostCommand {
         }
 
         Dominium.GHOST_UUIDS.remove(playerUuid);
+        GhostManager.saveGhosts(Dominium.GHOST_UUIDS);
+
+        GhostSyncPacket.sendToAll(context.getSource().getServer().getPlayerManager().getPlayerList());
+
         context.getSource().sendFeedback(() -> Text.literal("Removed " + player.getName().getString() + " from ghosts. UUID: " + playerUuid), true);
         return 1;
+    }
+
+    private static int clearGhosts(CommandContext<ServerCommandSource> context) {
+        int count = Dominium.GHOST_UUIDS.size();
+        Dominium.GHOST_UUIDS.clear();
+        GhostManager.saveGhosts(Dominium.GHOST_UUIDS);
+
+        GhostSyncPacket.sendToAll(context.getSource().getServer().getPlayerManager().getPlayerList());
+
+        context.getSource().sendFeedback(() -> Text.literal("Cleared " + count + " ghost player(s)."), true);
+        return count;
     }
 
     private static int listGhosts(CommandContext<ServerCommandSource> context) {
@@ -75,12 +96,5 @@ public class GhostCommand {
         }
 
         return Dominium.GHOST_UUIDS.size();
-    }
-
-    private static int clearGhosts(CommandContext<ServerCommandSource> context) {
-        int count = Dominium.GHOST_UUIDS.size();
-        Dominium.GHOST_UUIDS.clear();
-        context.getSource().sendFeedback(() -> Text.literal("Cleared " + count + " ghost player(s)."), true);
-        return count;
     }
 }

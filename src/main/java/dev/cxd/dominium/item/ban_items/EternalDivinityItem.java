@@ -1,5 +1,6 @@
 package dev.cxd.dominium.item.ban_items;
 
+import dev.cxd.dominium.client.lodestone_dark_magic_stuff.ParticleSpawnPacketData;
 import dev.cxd.dominium.custome.packets.ParticleSpawnPacket;
 import dev.cxd.dominium.init.ModItems;
 import dev.cxd.dominium.init.ModPackets;
@@ -76,7 +77,7 @@ public class EternalDivinityItem extends CustomRarityItem implements MarkableIte
             };
 
             if (particleType != null) {
-                ParticleSpawnPacket packetData = new ParticleSpawnPacket(
+                ParticleSpawnPacketData packetData = new ParticleSpawnPacketData(
                         pos, startColor.getRGB(), endColor.getRGB(), particleType
                 );
 

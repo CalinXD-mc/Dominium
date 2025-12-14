@@ -3,6 +3,7 @@ package dev.cxd.dominium;
 import dev.cxd.dominium.client.entity.eternal_divinity_chains.EternalDivinityChainsModel;
 import dev.cxd.dominium.client.entity.eternal_divinity_chains.EternalDivinityChainsRenderer;
 import dev.cxd.dominium.client.lodestone_dark_magic_stuff.ModClientPackets;
+import dev.cxd.dominium.custome.packets.GhostSyncPacket;
 import dev.cxd.dominium.init.ModBlocks;
 import dev.cxd.dominium.init.ModEntities;
 import dev.cxd.dominium.init.ModParticles;
@@ -12,6 +13,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -30,5 +32,15 @@ public class DominiumClient implements ClientModInitializer {
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.CHANT, ChantDirectionalLockedParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.DOMINIC_SYMBOL, DominicSymbolParticle.Factory::new);
+
+        ClientPlayNetworking.registerGlobalReceiver(Dominium.GHOST_SYNC_PACKET_ID, (client, handler, buf, responseSender) -> {
+            var ghosts = GhostSyncPacket.read(buf);
+
+            client.execute(() -> {
+                Dominium.GHOST_UUIDS.clear();
+                Dominium.GHOST_UUIDS.addAll(ghosts);
+                Dominium.LOGGER.info("Synced {} ghost player(s) from server", ghosts.size());
+            });
+        });
     }
 }
