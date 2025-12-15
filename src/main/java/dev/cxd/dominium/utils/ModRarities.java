@@ -6,7 +6,7 @@ import net.minecraft.text.TextColor;
 
 public enum ModRarities {
     CONTRACT(TextColor.fromRgb(0x5BE3E8)),
-    SOULBOUND_CONTRACT(TextColor.fromRgb(0x2A8A8D)),
+    SOULBOUND_CONTRACT(TextColor.fromRgb(0xD8AE58)),
     DOMINIC(TextColor.fromRgb(0xF8D16D)),
     FIXED_DOMINIC(TextColor.fromRgb(0xF7E2AD)),
     DOMINIC_EFFIGY(TextColor.fromRgb(0xA2A2A2));

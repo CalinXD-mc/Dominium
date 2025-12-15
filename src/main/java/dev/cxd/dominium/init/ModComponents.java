@@ -4,20 +4,20 @@ import dev.cxd.dominium.Dominium;
 import dev.cxd.dominium.component.ChunkBlockCacheComponent;
 import dev.cxd.dominium.component.IChunkBlockCacheComponent;
 import dev.onyxstudios.cca.api.v3.component.ComponentKey;
+import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
 import dev.onyxstudios.cca.api.v3.component.ComponentRegistryV3;
 import dev.onyxstudios.cca.api.v3.world.WorldComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.world.WorldComponentInitializer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
 public class ModComponents implements WorldComponentInitializer {
 
-    // === CCA chunk-block-cache component ===
     private static final ComponentKey<IChunkBlockCacheComponent> CHUNK_BLOCK_CACHE_COMPONENT_KEY =
             ComponentRegistryV3.INSTANCE.getOrCreate(
                     new Identifier(Dominium.MOD_ID, "chunk_block_cache_component"),

@@ -1,14 +1,6 @@
 package dev.cxd.dominium.config;
 
-import com.google.common.collect.Lists;
 import eu.midnightdust.lib.config.MidnightConfig;
-import net.minecraft.util.Identifier;
-
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import java.util.UUID;
 
 public class ModConfig extends MidnightConfig {
     public static final String GENERAL = "general";
@@ -26,6 +18,11 @@ public class ModConfig extends MidnightConfig {
 
     @Entry(category = GENERAL, name = "Soul Candle Radius", min = 1, max = 256)
     public static int SOUL_CANDLE_RADIUS = 64;
+
+    @Comment(category = GENERAL, centered = true) public static Comment eternal_divinity;
+
+    @Entry(category = GENERAL, name = "Eternal Divinity 1st & 2nd Kills Spectator Time. (in Minutes)", min = 1, max = 2880)
+    public static int eternalDivinityBadKillsSpectatorTime = 300;
 
     @Comment(category = GENERAL, centered = true) public static Comment broken_eternal_divinity;
 

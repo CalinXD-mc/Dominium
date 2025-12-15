@@ -78,6 +78,7 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
         //Effects
         translationBuilder.add("effect.dominium.damned", "Damned");
         translationBuilder.add("effect.dominium.soul_strain", "Soul Strain");
+        translationBuilder.add("effect.dominium.ghosted", "Ghosted");
 
         //Sounds
         translationBuilder.add("subtitles.event.dominium_boom","Forfeit...");

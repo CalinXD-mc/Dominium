@@ -1,4 +1,4 @@
-package dev.cxd.dominium.custome.packets;
+package dev.cxd.dominium.packet;
 
 import dev.cxd.dominium.Dominium;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;

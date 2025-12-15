@@ -164,6 +164,7 @@ public class LivingEntityMixin {
                             if (durability != 1) {
                                 Text message = Text.literal(victim.getName().getString() + "'s existence was suspended")
                                         .formatted(Formatting.WHITE);
+                                victim.addStatusEffect(new StatusEffectInstance((StatusEffect) ModStatusEffects.GHOSTED, 60 * 20 * ModConfig.eternalDivinityBadKillsSpectatorTime, 0, false, false, true));
                                 for (PlayerEntity p : world.getPlayers()) {
                                     p.sendMessage(message, false);
                                 }

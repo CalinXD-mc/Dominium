@@ -9,6 +9,5 @@ public class ModClientPackets {
             ParticleSpawnPacketData data = new ParticleSpawnPacketData(buf);
             ParticleSpawnClientHandler.handle(client, data);
         });
-
     }
 }

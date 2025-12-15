@@ -47,7 +47,7 @@ public class SoulboundContractUnsignedItem extends CustomRarityItem {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.literal("Sneak + Right Click to Sign.").formatted(Formatting.DARK_AQUA));
+        tooltip.add(Text.literal("Sneak + Right Click to Sign.").formatted(Formatting.GOLD));
         if (MinecraftClient.getInstance().options.advancedItemTooltips) {
             tooltip.add(Text.literal("").formatted(Formatting.DARK_RED, Formatting.BOLD));
             tooltip.add(Text.literal("WARNING!!!").formatted(Formatting.DARK_RED, Formatting.BOLD));

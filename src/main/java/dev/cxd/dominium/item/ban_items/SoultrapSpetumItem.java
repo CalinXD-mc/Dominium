@@ -56,7 +56,6 @@ public class SoultrapSpetumItem extends SwordItem implements MarkableItem {
             ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
 
             if (player.isOnGround()) {
-                // upward launch
                 Vec3d launch = new Vec3d(0, 1.0, 0);
                 player.addVelocity(launch.x, launch.y, launch.z);
                 player.velocityModified = true;
@@ -82,7 +81,6 @@ public class SoultrapSpetumItem extends SwordItem implements MarkableItem {
                         2.0F
                 );
             } else {
-                // 45° downward slam
                 Vec3d downward45 = new Vec3d(lookDir.x, -Math.tan(45.0F), lookDir.z).normalize().multiply(4.0);
                 player.addVelocity(downward45.x, downward45.y, downward45.z);
                 player.velocityModified = true;
@@ -107,7 +105,7 @@ public class SoultrapSpetumItem extends SwordItem implements MarkableItem {
                             "spetum_slam_particle"
                     );
 
-                    PacketByteBuf bufMult = PacketByteBufs.create(); // fresh buffer each time
+                    PacketByteBuf bufMult = PacketByteBufs.create();
                     packetData.toBytes(bufMult);
 
                     ServerPlayNetworking.send(serverPlayer, ModPackets.PARTICLE_SPAWN_ID, bufMult);
@@ -185,7 +183,6 @@ public class SoultrapSpetumItem extends SwordItem implements MarkableItem {
                 nbt.putBoolean("HitSomething", false);
 
                 if (hitSomething) {
-                    // 1 second A_REGULAR_UUID (20 ticks)
                     player.getItemCooldownManager().set(this, 15);
 
                     Vec3d lookDir = player.getRotationVec(1.0F).normalize();
@@ -195,7 +192,6 @@ public class SoultrapSpetumItem extends SwordItem implements MarkableItem {
                     player.velocityModified = true;
                     player.fallDistance = 0.0F;
                 } else {
-                    // 5 second A_REGULAR_UUID (100 ticks)
                     player.getItemCooldownManager().set(this, 160);
                 }
             }

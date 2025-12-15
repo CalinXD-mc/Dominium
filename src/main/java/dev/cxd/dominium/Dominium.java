@@ -3,13 +3,14 @@ package dev.cxd.dominium;
 import dev.cxd.dominium.command.GhostCommand;
 import dev.cxd.dominium.command.MarkerCommand;
 import dev.cxd.dominium.config.ModConfig;
-import dev.cxd.dominium.custome.packets.GhostSyncPacket;
 import dev.cxd.dominium.entity.EternalDivinityChainsEntity;
 import dev.cxd.dominium.init.*;
+import dev.cxd.dominium.packet.GhostSyncPacket;
 import dev.cxd.dominium.utils.DelayedTaskScheduler;
 import dev.cxd.dominium.utils.GhostManager;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
@@ -36,6 +37,11 @@ public class Dominium implements ModInitializer {
 	public static int SOUL_CANDLE_RANGE;
 
 	public static final Identifier GHOST_SYNC_PACKET_ID = new Identifier(MOD_ID, "ghost_sync");
+	public static final Identifier SOUL_CHAIN_SYNC_PACKET_ID = new Identifier(MOD_ID, "soul_chain_sync");
+
+	public static Identifier id(String path) {
+		return new Identifier(MOD_ID, path);
+	}
 
 	@Override
 	public void onInitialize() {

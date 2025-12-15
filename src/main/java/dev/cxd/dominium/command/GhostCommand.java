@@ -4,7 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import dev.cxd.dominium.Dominium;
-import dev.cxd.dominium.custome.packets.GhostSyncPacket;
+import dev.cxd.dominium.packet.GhostSyncPacket;
 import dev.cxd.dominium.utils.GhostManager;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.EntityArgumentType;

@@ -11,9 +11,11 @@ public class ModParticles {
 
     public static final DefaultParticleType CHANT = FabricParticleTypes.simple();
     public static final DefaultParticleType DOMINIC_SYMBOL = FabricParticleTypes.simple();
+    public static final DefaultParticleType DOMINIC_BALL = FabricParticleTypes.simple();
 
     public static void initialize() {
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(Dominium.MOD_ID, "chant"), CHANT);
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(Dominium.MOD_ID, "dominic_symbol"), DOMINIC_SYMBOL);
+        Registry.register(Registries.PARTICLE_TYPE, Identifier.of(Dominium.MOD_ID, "dominic_ball"), DOMINIC_BALL);
     }
 }

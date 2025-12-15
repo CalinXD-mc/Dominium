@@ -6,6 +6,7 @@ import dev.cxd.dominium.item.CustomRarityItem;
 import dev.cxd.dominium.utils.ModRarities;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -15,14 +16,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,6 +31,20 @@ import java.util.UUID;
 public class SoulboundContractSigned extends CustomRarityItem {
     public SoulboundContractSigned(Settings settings, ModRarities rarity) {
         super(settings, rarity);
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        super.inventoryTick(stack, world, entity, slot, selected);
+        UUID targetUUID = UUID.fromString(ModComponents.getVesselUuid(stack));
+        if (targetUUID == null) return;
+
+        PlayerEntity target = world.getPlayerByUuid(targetUUID);
+        if (target == null) return;
+
+        if (entity.isSneaking() && world instanceof ServerWorld serverWorld && entity instanceof PlayerEntity player) {
+            spawnConnectionParticles(serverWorld, player, target);
+        }
     }
 
     @Override
@@ -48,7 +61,7 @@ public class SoulboundContractSigned extends CustomRarityItem {
 
         if (user.isSneaking()) {
             double distance = user.squaredDistanceTo(target);
-            if (distance <= 10 * 10) { // 10 block radius
+            if (distance <= 20 * 20) {
                 if (target.hasStatusEffect(ModStatusEffects.SOUL_STRAIN)) {
                     target.removeStatusEffect(ModStatusEffects.SOUL_STRAIN);
 
@@ -80,11 +93,6 @@ public class SoulboundContractSigned extends CustomRarityItem {
             target.setOnFireFor(5);
 
             user.sendMessage(Text.literal("Set " + target.getName().getString() + " on Fire").formatted(Formatting.GOLD), true);
-        } else if (offhand.isOf(Items.IRON_BLOCK)) {
-            target.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 20 * 30, 10));
-            target.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 20 * 30, 250, false, true));
-
-            user.sendMessage(Text.literal("Stunned " + target.getName().getString()).formatted(Formatting.GOLD), false);
         } else if (offhand.isOf(ModItems.ANCIENT_BONE_ALLOY) || offhand.isOf(ModItems.ANCIENT_BONE_ALLOY_CHUNK)) {
             if (!world.isClient()) {
                 target.addStatusEffect(new StatusEffectInstance((StatusEffect) ModStatusEffects.SOUL_STRAIN, 20 * 30, 0, false, false, true));
@@ -107,6 +115,40 @@ public class SoulboundContractSigned extends CustomRarityItem {
         return TypedActionResult.success(stack, world.isClient());
     }
 
+    private void spawnConnectionParticles(ServerWorld world, PlayerEntity holder, PlayerEntity signer) {
+        Vec3d holderPos = holder.getPos().add(0, holder.getHeight() / 2, 0);
+        Vec3d signerPos = signer.getPos().add(0, signer.getHeight() / 2, 0);
+
+        double distance = holderPos.distanceTo(signerPos);
+        int particleCount = (int) (distance * 3);
+
+        for (int i = 0; i <= particleCount; i++) {
+            double progress = i / (double) particleCount;
+
+            double x = holderPos.x + (signerPos.x - holderPos.x) * progress;
+            double y = holderPos.y + (signerPos.y - holderPos.y) * progress;
+            double z = holderPos.z + (signerPos.z - holderPos.z) * progress;
+
+            world.spawnParticles(
+                    ModParticles.DOMINIC_BALL,
+                    x, y, z,
+                    1, // count
+                    0.01, 0.01, 0.01, // spread
+                    0.0 // speed
+            );
+
+            if (i % 3 == 0) {
+                world.spawnParticles(
+                        ParticleTypes.ENCHANT,
+                        x, y, z,
+                        1,
+                        0.05, 0.05, 0.05,
+                        0.1
+                );
+            }
+        }
+    }
+
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         String desc = ModComponents.getPlayerNameForSoulOwning(stack);
@@ -116,25 +158,22 @@ public class SoulboundContractSigned extends CustomRarityItem {
             tooltip.add(Text.literal("ERM, /give?").formatted(Formatting.GOLD, Formatting.ITALIC));
         } else {
             if (desc != null && !desc.isEmpty()) {
-                tooltip.add(Text.literal("Holds " + desc + "'s soul").formatted(Formatting.AQUA));
+                tooltip.add(Text.literal("Holds " + desc + "'s soul").formatted(Formatting.YELLOW));
             }
             if (debugOne != null && !debugOne.isEmpty() && MinecraftClient.getInstance().options.advancedItemTooltips) {
-                tooltip.add(Text.literal("Right Click with a Netherite Sword in your offhand to deal Damage to the Signer.").formatted(Formatting.DARK_AQUA));
+                tooltip.add(Text.literal("Right Click with a Netherite Sword in your offhand to deal Damage to the Signer.").formatted(Formatting.GOLD));
             }
             if (debugOne != null && !debugOne.isEmpty() && MinecraftClient.getInstance().options.advancedItemTooltips) {
-                tooltip.add(Text.literal("Right Click with a Ender Pearl in your offhand to teleport to the Signer.").formatted(Formatting.DARK_AQUA));
+                tooltip.add(Text.literal("Right Click with a Ender Pearl in your offhand to teleport to the Signer.").formatted(Formatting.GOLD));
             }
             if (debugOne != null && !debugOne.isEmpty() && MinecraftClient.getInstance().options.advancedItemTooltips) {
-                tooltip.add(Text.literal("Right Click with a Blaze Powder in your offhand to set the Signer on Fire.").formatted(Formatting.DARK_AQUA));
+                tooltip.add(Text.literal("Right Click with a Blaze Powder in your offhand to set the Signer on Fire.").formatted(Formatting.GOLD));
             }
             if (debugOne != null && !debugOne.isEmpty() && MinecraftClient.getInstance().options.advancedItemTooltips) {
-                tooltip.add(Text.literal("Right Click with a Iron Block in your offhand to deal Stun to the Signer.").formatted(Formatting.DARK_AQUA));
+                tooltip.add(Text.literal("Right Click with an Ancient Bone Alloy Ingot or Chunk in your offhand to trap the Signer in chains for 30 seconds.").formatted(Formatting.GOLD));
             }
             if (debugOne != null && !debugOne.isEmpty() && MinecraftClient.getInstance().options.advancedItemTooltips) {
-                tooltip.add(Text.literal("Right Click with an Ancient Bone Alloy Ingot or Chunk in your offhand to trap the Signer in chains for 30 seconds.").formatted(Formatting.DARK_AQUA));
-            }
-            if (debugOne != null && !debugOne.isEmpty() && MinecraftClient.getInstance().options.advancedItemTooltips) {
-                tooltip.add(Text.literal("Crouch without an offhand item to remove Soul Strain (within 10 blocks).").formatted(Formatting.GREEN));
+                tooltip.add(Text.literal("Crouch + Right Click without an offhand item to remove Soul Strain (within 20 blocks).").formatted(Formatting.GOLD));
             }
             if (debugOne != null && !debugOne.isEmpty() && MinecraftClient.getInstance().options.advancedItemTooltips) {
                 tooltip.add(Text.literal("Debug UUID: " + debugOne).formatted(Formatting.DARK_GRAY));
