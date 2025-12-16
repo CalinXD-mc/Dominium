@@ -16,12 +16,16 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -82,6 +86,12 @@ public class Dominium implements ModInitializer {
 
 		CommandRegistrationCallback.EVENT.register(GhostCommand::register);
 		CommandRegistrationCallback.EVENT.register(MarkerCommand::register);
+
+		ResourceManagerHelper.registerBuiltinResourcePack(
+                Objects.requireNonNull(Identifier.of(MOD_ID, "glow_in_the_dark`")),
+				FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(),
+				ResourcePackActivationType.NORMAL
+		);
 
 		LOGGER.info("Initializing Dominium");
 	}
