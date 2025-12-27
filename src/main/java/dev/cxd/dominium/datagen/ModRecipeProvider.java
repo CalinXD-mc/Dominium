@@ -132,15 +132,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModBlocks.SMOOTH_SOUL_SANDSTONE), conditionsFromItem(ModBlocks.SMOOTH_SOUL_SANDSTONE))
                 .offerTo(exporter);
 
-//        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ANCIENT_BONE_ALLOY_CHUNK)
-//                .pattern("21 ")
-//                .pattern("   ")
-//                .pattern("   ")
-//                .input('1', ModItems.DOMINIC_ORB)
-//                .input('2', Items.NETHERITE_INGOT)
-//                .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
-//                .offerTo(exporter);
-
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ANCIENT_BONE_ALLOY_CHUNK, 4)
                 .pattern("1  ")
                 .pattern("   ")

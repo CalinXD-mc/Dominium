@@ -29,17 +29,14 @@ public class LodestoneDI {
                 EternalDivinityChainsEntity chains =
                         new EternalDivinityChainsEntity(ModEntities.ETERNAL_DIVINITY_CHAINS, world);
 
-                // set position first
                 chains.updatePosition(
                         blockPos.getX() + 0.5,
                         blockPos.getY(),
                         blockPos.getZ() + 0.5
                 );
 
-                // spawn into world FIRST
                 world.spawnEntity(chains);
 
-                // then bind player
                 chains.setBoundPlayer(player.getUuid());
 
                 return ActionResult.SUCCESS;

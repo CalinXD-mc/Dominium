@@ -64,30 +64,25 @@ public class ChunkBlockCacheComponent implements IChunkBlockCacheComponent, Comp
     public void readFromNbt(NbtCompound nbt) {
         map.clear();
 
-        // Read the chunks list
         NbtList chunksList = nbt.getList("Chunks", NbtElement.COMPOUND_TYPE);
 
         for (int i = 0; i < chunksList.size(); i++) {
             NbtCompound chunkData = chunksList.getCompound(i);
 
-            // Read chunk position
             int chunkX = chunkData.getInt("ChunkX");
             int chunkZ = chunkData.getInt("ChunkZ");
             ChunkPos chunkPos = new ChunkPos(chunkX, chunkZ);
 
-            // Read blocks in this chunk
             NbtList blocksList = chunkData.getList("Blocks", NbtElement.COMPOUND_TYPE);
             Map<Block, Set<BlockPos>> chunkMap = new HashMap<>();
 
             for (int j = 0; j < blocksList.size(); j++) {
                 NbtCompound blockData = blocksList.getCompound(j);
 
-                // Read block type
                 String blockId = blockData.getString("BlockId");
                 Identifier identifier = new Identifier(blockId);
                 Block block = Registries.BLOCK.get(identifier);
 
-                // Read positions for this block
                 NbtList positionsList = blockData.getList("Positions", NbtElement.LONG_TYPE);
                 Set<BlockPos> positions = new HashSet<>();
 
@@ -112,7 +107,6 @@ public class ChunkBlockCacheComponent implements IChunkBlockCacheComponent, Comp
     public void writeToNbt(NbtCompound nbt) {
         NbtList chunksList = new NbtList();
 
-        // Iterate through all chunks
         for (Map.Entry<ChunkPos, Map<Block, Set<BlockPos>>> chunkEntry : map.entrySet()) {
             ChunkPos chunkPos = chunkEntry.getKey();
             Map<Block, Set<BlockPos>> chunkMap = chunkEntry.getValue();
@@ -123,7 +117,6 @@ public class ChunkBlockCacheComponent implements IChunkBlockCacheComponent, Comp
 
             NbtList blocksList = new NbtList();
 
-            // Iterate through all block types in this chunk
             for (Map.Entry<Block, Set<BlockPos>> blockEntry : chunkMap.entrySet()) {
                 Block block = blockEntry.getKey();
                 Set<BlockPos> positions = blockEntry.getValue();
@@ -136,7 +129,6 @@ public class ChunkBlockCacheComponent implements IChunkBlockCacheComponent, Comp
 
                 NbtList positionsList = new NbtList();
 
-                // Store each position as a long
                 for (BlockPos pos : positions) {
                     positionsList.add(NbtLong.of(pos.asLong()));
                 }

@@ -13,6 +13,13 @@ public class ModConfig extends MidnightConfig {
     public static boolean shouldSpectatorsInteractWithBlocks = true;
     @Entry(category = GENERAL, name = "Show Dominic Items in The Item Tab?")
     public static boolean showDominicItemsInTab = true;
+    @Entry(category = GENERAL, name = "Height of the Nether roof (change this if something alters it).", min = 127, max = 1024)
+    public static int NETHER_ROOF_HEIGHT = 128;
+
+    @Comment(category = GENERAL, centered = true) public static Comment idol;
+
+    @Entry(category = GENERAL, name = "Idol Protection Radius", min = 12, max = 256)
+    public static int IDOL_PROTECTION_RADIUS = 96;
 
     @Comment(category = GENERAL, centered = true) public static Comment soul_candle;
 

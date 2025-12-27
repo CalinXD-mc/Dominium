@@ -32,13 +32,6 @@ public class BrokenEternalDivinityItem extends CustomRarityItem implements Marka
         super(settings, rarity);
     }
 
-//    @Override
-//    public ActionResult useOnBlock(ItemUsageContext context) {
-//        assert context.getPlayer() != null;
-//        spawnParticles(context.getPlayer());
-//        return super.useOnBlock(context);
-//    }
-
     public static void spawnParticles(LivingEntity victim) {
         Color startColor = new Color(248, 209, 109);
         Color endColor = new Color(211, 149, 77);

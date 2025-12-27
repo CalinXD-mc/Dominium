@@ -16,16 +16,12 @@ public class ModModelProvider extends FabricModelProvider {
 
         BlockStateModelGenerator.BlockTexturePool smoothSoulSandstonePool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.SMOOTH_SOUL_SANDSTONE);
 
-//        blockStateModelGenerator.blockStateCollector.accept(
-//                BlockStateModelGenerator.createSingletonBlockState(ModBlocks.SOUL_SANDSTONE,
-//                        registerCubeColumnModel(blockStateModelGenerator,
-//                                ModBlocks.SOUL_SANDSTONE, "soul_sandstone", "soul_sandstone_bottom", "soul_sandstone_top"))
-//        );
-
         blockStateModelGenerator.registerSingleton(ModBlocks.SOUL_SANDSTONE, TexturedModel.CUBE_BOTTOM_TOP);
         smoothSoulSandstonePool.stairs(ModBlocks.SMOOTH_SOUL_SANDSTONE_STAIRS);
         smoothSoulSandstonePool.slab(ModBlocks.SMOOTH_SOUL_SANDSTONE_SLAB);
         smoothSoulSandstonePool.wall(ModBlocks.SMOOTH_SOUL_SANDSTONE_WALL);
+        blockStateModelGenerator.registerBrushableBlock(ModBlocks.SUS_DIRT);
+        blockStateModelGenerator.registerBrushableBlock(ModBlocks.SUS_SOUL_SAND);
     }
 
     @Override
@@ -44,6 +40,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.DOMINIC_EFFIGY, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.SOULTRAP_SPETUM, Models.GENERATED);
+        itemModelGenerator.register(ModItems.CONVENANT_OF_THE_PROVIDENT, Models.GENERATED);
         itemModelGenerator.register(ModItems.CONVENANT_OF_THE_PROVIDENT_SIGNED, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.ANCIENT_BONE_ALLOY, Models.GENERATED);
@@ -56,17 +53,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.ETERNAL_DIVINITY_PIECE3, Models.GENERATED);
         itemModelGenerator.register(ModItems.BROKEN_ETERNAL_DIVINITY, Models.GENERATED);
         itemModelGenerator.register(ModItems.ITEM_MARKER, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.ETHEREAL_NECKLACE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.SPIDER_NECKLACE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.UNDEAD_NECKLACE, Models.GENERATED);
     }
-
-//    protected Identifier registerCubeColumnModel(BlockStateModelGenerator blockStateModelGenerator, Block block, String side, String bottom, String top) {
-//        return Models.CUBE_BOTTOM_TOP.upload(
-//                block,
-//                new TextureMap()
-//                        .put(TextureKey.SIDE, new Identifier(Dominium.MOD_ID, "block/" + side))
-//                        .put(TextureKey.BOTTOM, new Identifier(Dominium.MOD_ID, "block/" + bottom))
-//                        .put(TextureKey.TOP, new Identifier(Dominium.MOD_ID, "block/" + top)),
-//                blockStateModelGenerator.modelCollector
-//        );
-//    }
-
 }

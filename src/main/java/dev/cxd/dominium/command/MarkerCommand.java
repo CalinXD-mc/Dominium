@@ -38,7 +38,6 @@ public class MarkerCommand {
 
         String mark = StringArgumentType.getString(context, "mark");
 
-        // Store the mark in NBT
         NbtCompound nbt = heldItem.getOrCreateNbt();
         nbt.putString("Mark", mark);
 

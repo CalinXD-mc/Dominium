@@ -8,9 +8,28 @@
   "fragment": "dominium:greyscale",
   "attributes": [ "Position" ],
   "samplers": [
-    { "name": "DiffuseSampler" }
+    { "name": "DiffuseSampler" },
+    { "name": "DepthSampler" }
   ],
   "uniforms": [
+    {
+      "name": "FogStart",
+      "type": "float",
+      "count": 1,
+      "values": [ 6.0 ]
+    },
+    {
+      "name": "FogEnd",
+      "type": "float",
+      "count": 1,
+      "values": [ 10.0 ]
+    },
+    {
+      "name": "FogColor",
+      "type": "float",
+      "count": 3,
+      "values": [ 0.15, 0.15, 0.15 ]
+    },
     {
       "name": "ProjMat",
       "type": "matrix4x4",
@@ -87,6 +106,24 @@
       "type": "float",
       "count": 1,
       "values": [ 0.0 ]
+    },
+    {
+      "name": "Time",
+      "type": "float",
+      "count": 1,
+      "values": [ 0.0 ]
+    },
+    {
+      "name": "Frequency",
+      "type": "float",
+      "count": 2,
+      "values": [ 64.0, 36.0 ]
+    },
+    {
+      "name": "WobbleAmount",
+      "type": "float",
+      "count": 2,
+      "values": [ 0.0005, 0.0005 ]
     }
   ]
 }

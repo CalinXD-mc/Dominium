@@ -88,14 +88,12 @@ public class EternalDivinityChainsEntity extends MobEntity {
     public void tick() {
         super.tick();
 
-        //animations
         if (this.getWorld().isClient()) {
             this.setupAnimationStates();
         }
 
         if (this.isRemoved()) return;
 
-        //existence checks
         if (boundPlayer == null) {
             if (age > 5) {
                 if (!getWorld().isClient()) {
@@ -116,20 +114,16 @@ public class EternalDivinityChainsEntity extends MobEntity {
             return;
         }
 
-        // Teleport to the player
         this.setPos(bound.getX(), bound.getY(), bound.getZ());
 
-        // Freeze in place relative to player
         setVelocity(Vec3d.ZERO);
 
-        // Sync lifetime with Soul Strain duration
         if (!getWorld().isClient()) {
             StatusEffectInstance soulStrain = bound.getStatusEffect(ModStatusEffects.SOUL_STRAIN);
 
             if (soulStrain != null) {
                 lifetimeTicks = soulStrain.getDuration();
             } else {
-                // No soul strain effect = despawn
                 bound.velocityModified = true;
                 bound.setVelocity(0, 0, 0);
                 bound.stopRiding();
@@ -138,7 +132,6 @@ public class EternalDivinityChainsEntity extends MobEntity {
             }
         }
 
-        // Lifetime countdown (now synced with Soul Strain)
         lifetimeTicks--;
         if (lifetimeTicks <= 0) {
             if (!getWorld().isClient()) {
@@ -163,7 +156,6 @@ public class EternalDivinityChainsEntity extends MobEntity {
             this.spawnAnimationState.start(this.age);
         }
 
-        // Idle animation loop
         if (this.idleAnimationTimeout <= 0) {
             this.idleAnimationTimeout = 20;
             this.idleAnimationState.start(this.age);
@@ -233,7 +225,6 @@ public class EternalDivinityChainsEntity extends MobEntity {
                             }
 
                             if (bound instanceof ServerPlayerEntity serverBound) {
-//                                serverBound.changeGameMode(GameMode.SPECTATOR);
                                 serverBound.removeStatusEffect(ModStatusEffects.SOUL_STRAIN);
 
                                 Text message = Text.literal(serverBound.getName().getString() + "'s existence was forfeited").formatted(Formatting.WHITE);

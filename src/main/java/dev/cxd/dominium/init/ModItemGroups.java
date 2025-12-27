@@ -29,7 +29,6 @@ public class ModItemGroups {
 
                 entries.add(ModBlocks.WAYSTONE);
                 entries.add(ModBlocks.IDOL);
-                //entries.add(ModBlocks.VESSEL);
 
                 entries.add(ModItems.CONTRACT);
                 if (ModConfig.showDominicItemsInTab) entries.add(ModItems.SOULBOUND_CONTRACT);
@@ -44,6 +43,10 @@ public class ModItemGroups {
                 if (ModConfig.showDominicItemsInTab) entries.add(ModItems.ANCIENT_BONE_ALLOY_CHUNK);
 
                 if (ModConfig.showDominicItemsInTab) entries.add(ModItems.DOMINIC_EFFIGY);
+
+                entries.add(ModItems.UNDEAD_NECKLACE);
+                entries.add(ModItems.SPIDER_NECKLACE);
+                entries.add(ModItems.ETHEREAL_NECKLACE);
 
                 if (ModConfig.showDominicItemsInTab) entries.add(ModItems.ETERNAL_DIVINITY);
 
@@ -74,7 +77,6 @@ public class ModItemGroups {
                     })
                     .build();
 
-            // Register the group only if config is true
             Registry.register(Registries.ITEM_GROUP,
                     new Identifier("dominium", "dominium_experimental"),
                     EXPERIMENTAL_DOMINIUM_GROUP);

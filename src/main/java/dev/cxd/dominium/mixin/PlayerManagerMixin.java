@@ -20,14 +20,12 @@ public abstract class PlayerManagerMixin {
         PlayerManager manager = (PlayerManager) (Object) this;
         String text = message.getString();
 
-        // Check all ghost players and suppress their join/leave messages
         for (var ghostUuid : Dominium.GHOST_UUIDS) {
             ServerPlayerEntity ghostPlayer = manager.getPlayer(ghostUuid);
-            if (ghostPlayer == null) continue; // not online, skip
+            if (ghostPlayer == null) continue;
 
             String ghostName = ghostPlayer.getName().getString();
 
-            // Cancel join/leave messages that contain this ghost player's name
             if (text.contains(ghostName + " joined the game") || text.contains(ghostName + " left the game")) {
                 ci.cancel();
                 return;

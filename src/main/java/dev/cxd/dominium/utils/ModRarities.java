@@ -9,7 +9,10 @@ public enum ModRarities {
     SOULBOUND_CONTRACT(TextColor.fromRgb(0xD8AE58)),
     DOMINIC(TextColor.fromRgb(0xF8D16D)),
     FIXED_DOMINIC(TextColor.fromRgb(0xF7E2AD)),
-    DOMINIC_EFFIGY(TextColor.fromRgb(0xA2A2A2));
+    DOMINIC_EFFIGY(TextColor.fromRgb(0xA2A2A2)),
+    UNDEAD(TextColor.fromRgb(0x3F7F47)),
+    ARACHNID(TextColor.fromRgb(0x820000)),
+    ETHEREAL(TextColor.fromRgb(0x7FFFFF));
 
     public final TextColor color;
 

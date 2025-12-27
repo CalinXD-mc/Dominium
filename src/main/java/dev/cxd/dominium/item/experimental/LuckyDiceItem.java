@@ -97,7 +97,7 @@ public class LuckyDiceItem extends Item {
         else if (r < 0.5499) return 3;
         else if (r < 0.7332) return 4;
         else if (r < 0.9165) return 5;
-        else return 6; // 8.35% chance
+        else return 6;
     }
 
     private void removeDiamonds(PlayerEntity player, int count) {

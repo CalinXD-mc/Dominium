@@ -19,14 +19,12 @@ public class ServerPlayerEntityDeathMixin {
     private void dropSoulOrbs(DamageSource damageSource, CallbackInfo ci) {
         ServerPlayerEntity player = (ServerPlayerEntity) (Object) this;
 
-        // Check block below player
         BlockPos posBelow = player.getBlockPos().down();
         boolean onSoulBlock = player.getWorld().getBlockState(posBelow).isOf(Blocks.SOUL_SAND)
                 || player.getWorld().getBlockState(posBelow).isOf(Blocks.SOUL_SOIL);
 
         if (onSoulBlock) {
-            // Drop 2-5 soul orbs
-            int amount = 2 + player.getRandom().nextInt(4); // 2-5
+            int amount = 2 + player.getRandom().nextInt(4);
 
             for (int i = 0; i < amount; i++) {
                 player.dropItem(ModItems.DOMINIC_ORB.getDefaultStack(), false);

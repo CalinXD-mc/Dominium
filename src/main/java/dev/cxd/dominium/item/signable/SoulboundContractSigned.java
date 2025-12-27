@@ -52,7 +52,6 @@ public class SoulboundContractSigned extends CustomRarityItem {
         ItemStack stack = user.getStackInHand(hand);
         ItemStack offhand = user.getOffHandStack();
 
-        // Get target player UUID
         UUID targetUUID = UUID.fromString(ModComponents.getVesselUuid(stack));
         if (targetUUID == null) return TypedActionResult.pass(stack);
 
@@ -132,9 +131,9 @@ public class SoulboundContractSigned extends CustomRarityItem {
             world.spawnParticles(
                     ModParticles.DOMINIC_BALL,
                     x, y, z,
-                    1, // count
+                    1,
                     0.01, 0.01, 0.01, // spread
-                    0.0 // speed
+                    0.0 //speed
             );
 
             if (i % 3 == 0) {

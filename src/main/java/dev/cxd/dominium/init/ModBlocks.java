@@ -1,9 +1,5 @@
 package dev.cxd.dominium.init;
 
-//import dev.cxd.carver_decor.CarversDecor;
-//import dev.cxd.carver_decor.block.*;
-//import dev.cxd.carver_decor.block.IronWalkwayBlock;
-//import dev.cxd.carver_decor.block.misc.RiggedEndPortalBlock;
 import dev.cxd.dominium.Dominium;
 import dev.cxd.dominium.block.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -13,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 
 public class ModBlocks {
@@ -82,6 +79,9 @@ public class ModBlocks {
             .solidBlock(Blocks::never)
             .blockVision(Blocks::never)
     ));
+
+    public static final Block SUS_DIRT = registerBlock("suspicious_dirt", new BrushableBlock(Blocks.DIRT, AbstractBlock.Settings.copy(Blocks.SUSPICIOUS_SAND), SoundEvents.ITEM_BRUSH_BRUSHING_GRAVEL, SoundEvents.ITEM_BRUSH_BRUSHING_GRAVEL_COMPLETE));
+    public static final Block SUS_SOUL_SAND = registerBlock("suspicious_soul_sand", new BrushableBlock(Blocks.SOUL_SAND, AbstractBlock.Settings.copy(Blocks.SUSPICIOUS_SAND), SoundEvents.ITEM_BRUSH_BRUSHING_SAND, SoundEvents.ITEM_BRUSH_BRUSHING_SAND_COMPLETE));
 
     private static Block registerBlockWithoutBlockItem(String name, Block block) {
         return Registry.register(Registries.BLOCK, Identifier.of(Dominium.MOD_ID, name), block);

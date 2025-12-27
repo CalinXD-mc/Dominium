@@ -21,11 +21,11 @@ public class ChantDirectionalLockedParticle extends SpriteBillboardParticle {
     private static final float X_ROTATION = 1.0472F;
     private int delay;
     private final SpriteProvider spriteProvider;
-    private boolean isActive; // Flag to track if the particle is active
+    private boolean isActive;
 
     ChantDirectionalLockedParticle(ClientWorld world, double x, double y, double z, int delay, SpriteProvider spriteProvider) {
         super(world, x, y, z, 0.0, 0.0, 0.0);
-        this.scale = 2.0F; // Initial scale
+        this.scale = 2.0F;
         this.delay = delay;
         this.gravityStrength = 0.0F;
         this.maxAge = 200;
@@ -34,7 +34,7 @@ public class ChantDirectionalLockedParticle extends SpriteBillboardParticle {
         this.velocityZ = 0.0;
         this.spriteProvider = spriteProvider;
         this.setSpriteForAge(spriteProvider);
-        this.isActive = true; // Initially inactive
+        this.isActive = true;
     }
 
     @Override
@@ -45,10 +45,7 @@ public class ChantDirectionalLockedParticle extends SpriteBillboardParticle {
     @Override
     public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
         if (this.delay <= 0) {
-//            Quaternionf quaternionf = new Quaternionf();
-//            quaternionf.rotationX((float) (Math.PI / 2));
-//            quaternionf.rotationYXZ(-3.1415927F, -(float) (Math.PI / 2), 0.0F);
-            this.buildGeometry(vertexConsumer, camera, tickDelta, (quaternion) -> {
+                this.buildGeometry(vertexConsumer, camera, tickDelta, (quaternion) -> {
                 quaternion.mul((new Quaternionf()).rotationX((float) (Math.PI / 2)));
             });
             this.buildGeometry(vertexConsumer, camera, tickDelta, (quaternion) -> {
@@ -101,29 +98,25 @@ public class ChantDirectionalLockedParticle extends SpriteBillboardParticle {
     public void tick() {
         if (this.delay > 0) {
             --this.delay;
-            return; // Skip logic if delay is active
+            return;
         }
 
-        int totalLifetime = 200; // Total lifetime in ticks (10 seconds)
-        int fadeDuration = 40;  // Fade out over 2 seconds (40 ticks)
-        int growthDuration = totalLifetime - fadeDuration; // Growth lasts for 8 seconds (160 ticks)
+        int totalLifetime = 200;
+        int fadeDuration = 40;
+        int growthDuration = totalLifetime - fadeDuration;
 
-        // Calculate elapsed time
         int elapsedTime = this.age;
 
-        if (elapsedTime <= growthDuration) { // First 8 seconds (160 ticks)
-            // Gradually increase the scale (twice as large)
-            this.scale = 4.0F + (float) elapsedTime / growthDuration * 4.0F; // Scale from 4.0F to 8.0F
-        } else if (elapsedTime <= totalLifetime) { // Last 2 seconds (fade duration)
-            // Fade out by reducing alpha
+        if (elapsedTime <= growthDuration) {
+            this.scale = 4.0F + (float) elapsedTime / growthDuration * 4.0F;
+        } else if (elapsedTime <= totalLifetime) {
             float fadeProgress = (float) (elapsedTime - growthDuration) / fadeDuration;
-            this.alpha = 1.0F - fadeProgress; // Alpha decreases from 1.0 to 0.0
+            this.alpha = 1.0F - fadeProgress;
 
-            // Maintain the final size during fading
             this.scale = 8.0F;
         }
 
-        super.tick(); // Call parent tick logic
+        super.tick();
 
         if (this.age++ >= this.maxAge) {
             this.markDead();
@@ -131,7 +124,7 @@ public class ChantDirectionalLockedParticle extends SpriteBillboardParticle {
     }
 
     public void activate() {
-        this.isActive = true; // Enable the particle
+        this.isActive = true;
     }
 
     @Environment(EnvType.CLIENT)
@@ -143,7 +136,7 @@ public class ChantDirectionalLockedParticle extends SpriteBillboardParticle {
         }
 
         public Particle createParticle(DefaultParticleType type, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            ChantDirectionalLockedParticle particle = new ChantDirectionalLockedParticle(world, x, y + 0.5, z, (int) 2.0F, spriteProvider); // 1.0F is scale
+            ChantDirectionalLockedParticle particle = new ChantDirectionalLockedParticle(world, x, y + 0.5, z, (int) 2.0F, spriteProvider);
             particle.setSprite(this.spriteProvider);
             return particle;
         }

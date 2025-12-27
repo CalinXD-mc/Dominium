@@ -15,10 +15,8 @@ public class GhostSyncPacket {
     public static void send(ServerPlayerEntity player) {
         PacketByteBuf buf = PacketByteBufs.create();
 
-        // Write the number of ghost UUIDs
         buf.writeInt(Dominium.GHOST_UUIDS.size());
 
-        // Write each UUID
         for (UUID uuid : Dominium.GHOST_UUIDS) {
             buf.writeUuid(uuid);
         }

@@ -63,12 +63,10 @@ public class DominicSymbolParticle extends SpriteBillboardParticle {
         rotator.accept(quaternionf);
         quaternionf.transform(field_38335);
         Vector3f[] vector3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
-//        float i = this.getSize(tickDelta);
 
         for(int j = 0; j < 4; ++j) {
             Vector3f vector3f = vector3fs[j];
             vector3f.rotate(quaternionf);
-//            vector3f.mul(i);
             vector3f.add(f, g, h);
         }
 

@@ -4,7 +4,7 @@
   ],
   "passes": [
     {
-      "name": "dominium:greyscale",
+      "name": "dominium:nether_roof",
       "intarget": "minecraft:main",
       "outtarget": "swap"
     },

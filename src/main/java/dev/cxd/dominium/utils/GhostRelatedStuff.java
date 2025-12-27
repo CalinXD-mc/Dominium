@@ -9,7 +9,7 @@ import org.joml.Vector3f;
 
 public class GhostRelatedStuff {
     public static boolean calculateGhostEffect(MatrixStack matrixStack, LivingEntity livingEntity) {
-        Matrix4f matrix = matrixStack.peek().getPositionMatrix(); // Correct for Yarn
+        Matrix4f matrix = matrixStack.peek().getPositionMatrix();
         Vector3f position = new Vector3f();
         Vector3f positionEyes = new Vector3f(0f, (float) livingEntity.getEyeHeight(livingEntity.getPose()), 0f);
         position.mulPosition(matrix);

@@ -2,9 +2,12 @@ package dev.cxd.dominium.init;
 
 import dev.cxd.dominium.block.entity.IdolBlockEntity;
 import dev.cxd.dominium.config.ModConfig;
+import dev.cxd.dominium.item.necklaces.EtherealNecklaceItem;
+import dev.emi.trinkets.api.TrinketsApi;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.block.*;
@@ -13,6 +16,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -85,6 +90,28 @@ public class ModEvents {
                 }
             }
             return ActionResult.PASS;
+        });
+
+        ServerTickEvents.END_WORLD_TICK.register(world -> {
+            for (ServerPlayerEntity player : world.getPlayers()) {
+                if (world.getRegistryKey() != World.NETHER
+                        || player.getY() < ModConfig.NETHER_ROOF_HEIGHT
+                        || world.isSkyVisible(player.getBlockPos())) continue;
+
+                boolean wearingEthereal = TrinketsApi.getTrinketComponent(player)
+                        .map(tc -> tc.isEquipped(stack -> stack.getItem() instanceof EtherealNecklaceItem))
+                        .orElse(false);
+
+                if (!wearingEthereal) {
+                    player.addStatusEffect(new StatusEffectInstance(
+                            StatusEffects.DARKNESS,
+                            200,
+                            0,
+                            true,
+                            false
+                    ));
+                }
+            }
         });
     }
 }

@@ -104,7 +104,7 @@ public class EternalDivinityItem extends CustomRarityItem implements MarkableIte
 
     @Override
     public int getItemBarColor(ItemStack stack) {
-        return 0xF4CD69; // orange bar color
+        return 0xF4CD69;
     }
 
     @Override

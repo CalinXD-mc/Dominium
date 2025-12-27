@@ -30,6 +30,9 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("block.dominium.idol", "Idol");
         translationBuilder.add("block.dominium.vessel", "Vessel");
 
+        translationBuilder.add("block.dominium.suspicious_dirt", "Suspicious Dirt");
+        translationBuilder.add("block.dominium.suspicious_soul_sand", "Suspicious Soul Sand");
+
         //Items
         translationBuilder.add("item.dominium.contract", "Contract");
         translationBuilder.add("item.dominium.contract_signed", "Contract");
@@ -69,6 +72,10 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("item.dominium.broken_piece_3", "A Piece of the Eternal Divinity");
         translationBuilder.add("item.dominium.broken_eternal_divinity", "Broken Eternal Divinity");
 
+        translationBuilder.add("item.dominium.necklace_of_the_undead", "Necklace of the Undead");
+        translationBuilder.add("item.dominium.necklace_of_the_arachnid", "Necklace of the Arachnid");
+        translationBuilder.add("item.dominium.necklace_of_the_ethereal", "Necklace of the Ethereal");
+
         //Damage Types
         translationBuilder.add("death.attack.disobedience", "%1$s's life was punished by the contract");
         translationBuilder.add("death.attack.disobedience.player", "%1$s's life was punished by the contract");
@@ -83,8 +90,6 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
         //Sounds
         translationBuilder.add("subtitles.event.dominium_boom","Forfeit...");
         translationBuilder.add("subtitles.soul_glass.soul_glass_pling","Soul Glass Plings");
-//        translationBuilder.add("subtitles.event.dominium_boom","Forfeit...");
-//        translationBuilder.add("subtitles.event.dominium_boom","Forfeit...");
 
         //misc
         translationBuilder.add("itemGroup.dominium.dominium", "Dominium");
@@ -95,6 +100,8 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("dominium.midnightconfig.general", "General");
         translationBuilder.add("dominium.midnightconfig.soul_candle", "Soul Candle");
         translationBuilder.add("dominium.midnightconfig.experimental", "Experimental");
+        translationBuilder.add("dominium.midnightconfig.eternal_divinity", "Eternal Divinity");
         translationBuilder.add("dominium.midnightconfig.broken_eternal_divinity", "Broken Eternal Divinity");
+        translationBuilder.add("dominium.midnightconfig.idol", "Idol");
     }
 }

@@ -1,0 +1,15 @@
+{
+  "name": "dominium:nether_fort",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "projection": "rigid",
+        "location": "dominium:nether_fort",
+        "processors": "minecraft:empty"
+      }
+    }
+  ]
+}

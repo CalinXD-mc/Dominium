@@ -35,7 +35,6 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extend
     private <T extends LivingEntity> void ghost$getPosOnScreen(T livingEntity, float f, float g, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int i, CallbackInfo ci) {
         if (!(livingEntity instanceof PlayerEntity player)) return;
 
-        // Check if this player is a ghost
         if (!Dominium.GHOST_UUIDS.contains(player.getUuid())) return;
 
         if (player.getOffHandStack().getItem() == ModItems.DOMINIC_EFFIGY) return;
