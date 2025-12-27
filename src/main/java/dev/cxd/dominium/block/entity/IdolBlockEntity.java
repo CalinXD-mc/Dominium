@@ -1,6 +1,7 @@
 package dev.cxd.dominium.block.entity;
 
 import dev.cxd.dominium.block.IdolBlock;
+import dev.cxd.dominium.config.ModConfig;
 import dev.cxd.dominium.init.ModBlockEntities;
 import dev.cxd.dominium.init.ModComponents;
 import dev.cxd.dominium.item.signable.ContractSigned;
@@ -35,7 +36,6 @@ public class IdolBlockEntity extends BlockEntity {
 
         if (world.getTime() % 20 != 0) return;
 
-        // Collect UUIDs from owner’s inventory
         Set<UUID> forbiddenUuids = new HashSet<>();
         for (int i = 0; i < owner.getInventory().size(); i++) {
             ItemStack stack = owner.getInventory().getStack(i);
@@ -47,14 +47,13 @@ public class IdolBlockEntity extends BlockEntity {
             }
         }
 
-        // Filter by range (96x96 area around idol)
         forbiddenUuids.removeIf(uuid -> {
             ServerPlayerEntity p = serverWorld.getServer().getPlayerManager().getPlayer(uuid);
             if (p == null) return true; // offline
             double dx = p.getX() - pos.getX();
             double dy = p.getY() - pos.getY();
             double dz = p.getZ() - pos.getZ();
-            return dx * dx + dy * dy + dz * dz > 96 * 96; // squared distance > radius²
+            return dx * dx + dy * dy + dz * dz > ModConfig.IDOL_PROTECTION_RADIUS * ModConfig.IDOL_PROTECTION_RADIUS;
         });
 
         be.currentForbiddenUuids = forbiddenUuids;
