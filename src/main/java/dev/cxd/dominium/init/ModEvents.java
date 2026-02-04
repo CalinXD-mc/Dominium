@@ -4,45 +4,33 @@ import dev.cxd.dominium.Dominium;
 import dev.cxd.dominium.block.entity.IdolBlockEntity;
 import dev.cxd.dominium.command.GhostCommand;
 import dev.cxd.dominium.command.MarkerCommand;
+import dev.cxd.dominium.command.NoEnchantZoneCommand;
 import dev.cxd.dominium.config.ModConfig;
 import dev.cxd.dominium.entity.RooflingEntity;
 import dev.cxd.dominium.item.necklaces.EtherealNecklaceItem;
 import dev.cxd.dominium.packet.GhostSyncPacket;
 import dev.cxd.dominium.utils.DelayedTaskScheduler;
 import dev.cxd.dominium.utils.GhostManager;
+import dev.cxd.dominium.utils.ZoneManager;
 import dev.emi.trinkets.api.TrinketsApi;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
-
-import java.util.UUID;
 
 public class ModEvents {
     public static void initialize() {
@@ -200,5 +188,10 @@ public class ModEvents {
 
         CommandRegistrationCallback.EVENT.register(GhostCommand::register);
         CommandRegistrationCallback.EVENT.register(MarkerCommand::register);
+        CommandRegistrationCallback.EVENT.register(NoEnchantZoneCommand::register);
+
+        ServerTickEvents.END_SERVER_TICK.register(ZoneManager::tick);
+        ServerLifecycleEvents.SERVER_STARTED.register(ZoneManager::initialize);
+        ServerLifecycleEvents.SERVER_STOPPING.register(server -> ZoneManager.shutdown());
     }
 }
