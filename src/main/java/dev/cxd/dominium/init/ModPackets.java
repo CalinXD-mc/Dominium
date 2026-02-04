@@ -2,7 +2,6 @@ package dev.cxd.dominium.init;
 
 import dev.cxd.dominium.Dominium;
 import dev.cxd.dominium.client.lodestone_dark_magic_stuff.ParticleSpawnPacketData;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.util.Identifier;
 

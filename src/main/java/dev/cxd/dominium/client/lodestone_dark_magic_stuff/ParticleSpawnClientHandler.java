@@ -43,6 +43,18 @@ public class ParticleSpawnClientHandler {
                 case "rotated_beam_south_45":
                     ParticleSpawnPacket.spawnCustomParticle(client.world, pos, startColor, endColor, "rotated_beam_south_45");
                     break;
+                case "screen_shake_light":
+                    ParticleSpawnPacket.spawnCustomParticle(client.world, pos, startColor, endColor, "screen_shake_light");
+                    break;
+                case "screen_shake_medium":
+                    ParticleSpawnPacket.spawnCustomParticle(client.world, pos, startColor, endColor, "screen_shake_medium");
+                    break;
+                case "screen_shake_heavy":
+                    ParticleSpawnPacket.spawnCustomParticle(client.world, pos, startColor, endColor, "screen_shake_heavy");
+                    break;
+                case "screen_shake_extreme":
+                    ParticleSpawnPacket.spawnCustomParticle(client.world, pos, startColor, endColor, "screen_shake_extreme");
+                    break;
             }
         });
     }

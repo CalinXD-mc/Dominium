@@ -69,7 +69,7 @@ public class ParticleSpawnPacket {
 
                     WorldParticleBuilder.create(LodestoneParticleRegistry.SPARKLE_PARTICLE)
                             .setScaleData(GenericParticleData.create(3f, 30f, 60f).build())
-                            .setTransparencyData(GenericParticleData.create(1f, 0.2f, 0f) // alpha at start, middle, end
+                            .setTransparencyData(GenericParticleData.create(1f, 0.2f, 0f)
                                     .setEasing(Easing.EXPO_OUT)
                                     .build())
                             .setColorData(ColorParticleData.create(startColor, endColor)
@@ -77,7 +77,7 @@ public class ParticleSpawnPacket {
                                     .setEasing(Easing.CUBIC_IN)
                                     .build())
                             .setLifetime(80)
-                            .setSpinData(SpinParticleData.create(speed, speed + 0.2f, speed + 0.4f) // spin speed range
+                            .setSpinData(SpinParticleData.create(speed, speed + 0.2f, speed + 0.4f)
                                     .setSpinOffset(offset)
                                     .setEasing(Easing.QUARTIC_IN)
                                     .build())
@@ -220,7 +220,7 @@ public class ParticleSpawnPacket {
 
                     WorldParticleBuilder.create(LodestoneParticleRegistry.SPARKLE_PARTICLE)
                             .setScaleData(GenericParticleData.create(3f, 30f, 60f).build())
-                            .setTransparencyData(GenericParticleData.create(1f, 0.2f, 0f) // alpha at start, middle, end
+                            .setTransparencyData(GenericParticleData.create(1f, 0.2f, 0f)
                                     .setEasing(Easing.EXPO_OUT)
                                     .build())
                             .setColorData(ColorParticleData.create(startColor, endColor)
@@ -228,7 +228,7 @@ public class ParticleSpawnPacket {
                                     .setEasing(Easing.CUBIC_IN)
                                     .build())
                             .setLifetime(80)
-                            .setSpinData(SpinParticleData.create(speed, speed + 0.2f, speed + 0.4f) // spin speed range
+                            .setSpinData(SpinParticleData.create(speed, speed + 0.2f, speed + 0.4f)
                                     .setSpinOffset(offset)
                                     .setEasing(Easing.QUARTIC_IN)
                                     .build())
@@ -262,6 +262,22 @@ public class ParticleSpawnPacket {
                             .setForceSpawn(true)
                             .spawn(world, particlePos.x, particlePos.y, particlePos.z);
                 }
+            }
+            case "screen_shake_light" -> {
+                ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance
+                        (40, pos, 200f, 400f, Easing.SINE_IN_OUT).setIntensity(1f, 2f, 0f));
+            }
+            case "screen_shake_medium" -> {
+                ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance
+                        (60, pos, 300f, 500f, Easing.SINE_IN_OUT).setIntensity(2f, 4f, 0f));
+            }
+            case "screen_shake_heavy" -> {
+                ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance
+                        (100, pos, 477f, 777f, Easing.SINE_IN_OUT).setIntensity(3f, 7.5f, 0f));
+            }
+            case "screen_shake_extreme" -> {
+                ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance
+                        (150, pos, 600f, 1000f, Easing.SINE_IN_OUT).setIntensity(5f, 10f, 0f));
             }
         }
     }

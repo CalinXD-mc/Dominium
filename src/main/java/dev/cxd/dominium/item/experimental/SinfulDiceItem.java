@@ -39,7 +39,6 @@ public class SinfulDiceItem extends Item {
         ItemStack stack = user.getStackInHand(hand);
 
         if (!world.isClient) {
-            // Check for 2 diamonds
             if (user.getInventory().count(Items.DIAMOND) < 4) {
                 user.sendMessage(Text.literal("You need 4 diamonds to roll the dice!")
                         .formatted(Formatting.RED), false);

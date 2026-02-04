@@ -40,7 +40,7 @@ public class WaystoneBlock extends Block {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand activeHand, BlockHitResult hit) {
-        Hand hand = activeHand; // use the passed-in hand
+        Hand hand = activeHand;
         ItemStack held = player.getStackInHand(hand);
 
         if (!(held.getItem() instanceof ContractSigned || held.getItem() instanceof WandererTabletSigned || held.getItem() instanceof SoulboundContractSigned))

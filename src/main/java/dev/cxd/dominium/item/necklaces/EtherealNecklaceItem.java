@@ -58,22 +58,32 @@ public class EtherealNecklaceItem extends TrinketItem implements MarkableItem {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         String mark = getMark(stack);
-        if (!mark.isEmpty() && !MinecraftClient.getInstance().options.advancedItemTooltips) {
+        boolean advanced = MinecraftClient.getInstance().options.advancedItemTooltips;
+
+        if (!mark.isEmpty() && !advanced) {
             tooltip.add(Text.literal(mark).formatted(Formatting.GOLD));
         }
 
-        if (MinecraftClient.getInstance().options.advancedItemTooltips && mark.isEmpty()) {
-            tooltip.add(Text.literal("An Ancient Artifact that Empowers its Owner with the Powers & Downsides of an ").formatted(Formatting.GRAY).append(Text.literal("Something").formatted(Formatting.OBFUSCATED)));
-        }
+        if (advanced) {
+            if (!mark.isEmpty()) {
+                tooltip.add(Text.literal(mark).formatted(Formatting.GOLD));
+                tooltip.add(Text.literal(" "));
+            }
 
-        if (MinecraftClient.getInstance().options.advancedItemTooltips && !mark.isEmpty()) {
-            tooltip.add(Text.literal(mark).formatted(Formatting.GOLD));
+            tooltip.add(
+                    Text.literal("An Ancient Artifact that Empowers its Owner with the Powers & Downsides of an ")
+                            .formatted(Formatting.GRAY)
+                            .append(Text.literal("Something").formatted(Formatting.OBFUSCATED))
+            );
+
             tooltip.add(Text.literal(" "));
-            tooltip.add(Text.literal("An Ancient Artifact that Empowers its Owner with the Powers & Downsides of an ").formatted(Formatting.GRAY).append(Text.literal("Something").formatted(Formatting.OBFUSCATED)));
+
+            tooltip.add(Text.literal("⚠ Rooflings ").formatted(Formatting.DARK_RED).append(Text.literal("will kill you in one hit while worn").formatted(Formatting.RED)));
         }
 
         super.appendTooltip(stack, world, tooltip, context);
     }
+
 
     @Override
     public void onEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {

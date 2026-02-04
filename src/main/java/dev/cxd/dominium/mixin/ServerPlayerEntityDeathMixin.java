@@ -17,18 +17,6 @@ public class ServerPlayerEntityDeathMixin {
 
     @Inject(method = "onDeath", at = @At("TAIL"))
     private void dropSoulOrbs(DamageSource damageSource, CallbackInfo ci) {
-        ServerPlayerEntity player = (ServerPlayerEntity) (Object) this;
-
-        BlockPos posBelow = player.getBlockPos().down();
-        boolean onSoulBlock = player.getWorld().getBlockState(posBelow).isOf(Blocks.SOUL_SAND)
-                || player.getWorld().getBlockState(posBelow).isOf(Blocks.SOUL_SOIL);
-
-        if (onSoulBlock) {
-            int amount = 2 + player.getRandom().nextInt(4);
-
-            for (int i = 0; i < amount; i++) {
-                player.dropItem(ModItems.DOMINIC_ORB.getDefaultStack(), false);
-            }
-        }
+        
     }
 }

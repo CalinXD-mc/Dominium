@@ -24,6 +24,7 @@ import net.minecraft.server.BanEntry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
@@ -43,7 +44,7 @@ public class EternalDivinityChainsEntity extends MobEntity {
     public final AnimationState spawnAnimationState = new AnimationState();
 
     private UUID boundPlayer;
-    private int lifetimeTicks; // 3 minutes
+    private int lifetimeTicks;
 
     public EternalDivinityChainsEntity(EntityType<? extends MobEntity> entityType, World world) {
         super(entityType, world);
@@ -62,7 +63,7 @@ public class EternalDivinityChainsEntity extends MobEntity {
 
     @Override
     protected void initDataTracker() {
-        super.initDataTracker(); // this sets up health and other MobEntity/LivingEntity trackers
+        super.initDataTracker();
     }
 
 
@@ -94,6 +95,13 @@ public class EternalDivinityChainsEntity extends MobEntity {
 
         if (this.isRemoved()) return;
 
+        if (age > 12000) {
+            if (!getWorld().isClient()) {
+                discard();
+            }
+            return;
+        }
+
         if (boundPlayer == null) {
             if (age > 5) {
                 if (!getWorld().isClient()) {
@@ -115,39 +123,33 @@ public class EternalDivinityChainsEntity extends MobEntity {
         }
 
         this.setPos(bound.getX(), bound.getY(), bound.getZ());
-
         setVelocity(Vec3d.ZERO);
 
         if (!getWorld().isClient()) {
             StatusEffectInstance soulStrain = bound.getStatusEffect(ModStatusEffects.SOUL_STRAIN);
 
-            if (soulStrain != null) {
-                lifetimeTicks = soulStrain.getDuration();
-            } else {
+            if (soulStrain == null) {
                 bound.velocityModified = true;
                 bound.setVelocity(0, 0, 0);
                 bound.stopRiding();
                 discard();
                 return;
             }
-        }
 
-        lifetimeTicks--;
-        if (lifetimeTicks <= 0) {
-            if (!getWorld().isClient()) {
-                if (bound != null) {
-                    bound.velocityModified = true;
-                    bound.setVelocity(0, 0, 0);
-                    bound.stopRiding();
-                }
+            lifetimeTicks = soulStrain.getDuration();
+
+            if (lifetimeTicks <= 1) {
+                bound.removeStatusEffect(ModStatusEffects.SOUL_STRAIN);
+                bound.velocityModified = true;
+                bound.setVelocity(0, 0, 0);
+                bound.stopRiding();
                 discard();
+                return;
             }
-        }
 
-        if (!getWorld().isClient()) {
             bound.setVelocity(Vec3d.ZERO);
             bound.velocityModified = true;
-            bound.fallDistance = 0; // stop fall damage
+            bound.fallDistance = 0;
         }
     }
 
@@ -181,9 +183,7 @@ public class EternalDivinityChainsEntity extends MobEntity {
     }
 
     @Override
-    public void pushAwayFrom(Entity entity) {
-
-    }
+    public void pushAwayFrom(Entity entity) {}
 
     @Override
     public boolean hasNoGravity() {
@@ -203,30 +203,15 @@ public class EternalDivinityChainsEntity extends MobEntity {
                         if (bound.hasStatusEffect(ModStatusEffects.SOUL_STRAIN)) {
                             if (bound instanceof ServerPlayerEntity serverBound) {
                                 serverBound.removeStatusEffect(ModStatusEffects.SOUL_STRAIN);
+
+                                if (stack.isOf(ModItems.GILDED_ONYX)) {
+                                    spawnBanParticles(bound.getPos());
+                                }
+
                                 banOrSpectator(serverBound);
                             }
 
-                            World world = player.getWorld();
-                            BlockPos blockPos = player.getBlockPos();
-                            Vec3d originalPosition = Vec3d.ofCenter(blockPos);
-
-                            Color startColor = new Color(248, 209, 109);
-                            Color endColor = new Color(211, 149, 77);
-
-                            ParticleSpawnPacketData packetData = new ParticleSpawnPacketData(
-                                    originalPosition, startColor.getRGB(), endColor.getRGB(), "spetum_kill_particle"
-                            );
-
-                            PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-                            packetData.toBytes(buf);
-
-                            if (player instanceof ServerPlayerEntity serverPlayer) {
-                                ServerPlayNetworking.send(serverPlayer, ModPackets.PARTICLE_SPAWN_ID, buf);
-                            }
-
                             if (bound instanceof ServerPlayerEntity serverBound) {
-                                serverBound.removeStatusEffect(ModStatusEffects.SOUL_STRAIN);
-
                                 Text message = Text.literal(serverBound.getName().getString() + "'s existence was forfeited").formatted(Formatting.WHITE);
                                 for (PlayerEntity p : serverBound.getWorld().getPlayers()) {
                                     p.sendMessage(message, false);
@@ -235,7 +220,6 @@ public class EternalDivinityChainsEntity extends MobEntity {
                                 for (PlayerEntity p : serverBound.getWorld().getPlayers()) {
                                     p.playSound(ModSounds.DOMINIC_BOOM, 1.0F, 0.5F);
                                 }
-                                banOrSpectator(serverBound);
                             }
 
                             player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.REGRET, 20 * 5, 0, false, false, true));
@@ -243,7 +227,7 @@ public class EternalDivinityChainsEntity extends MobEntity {
                             ItemStack stackInHand = player.getStackInHand(hand);
 
                             if (stackInHand.isOf(ModItems.DOMINIC_DAGGER)) {
-                                if (!world.isClient()) {
+                                if (!getWorld().isClient()) {
                                     double radius = 8.0D;
                                     int noOfExplosions = 24;
 
@@ -253,7 +237,7 @@ public class EternalDivinityChainsEntity extends MobEntity {
                                         double z = this.getZ() + Math.sin(angle) * radius;
                                         double y = this.getY();
 
-                                        world.createExplosion(
+                                        getWorld().createExplosion(
                                                 null,
                                                 x, y, z,
                                                 12.0f,
@@ -275,6 +259,7 @@ public class EternalDivinityChainsEntity extends MobEntity {
         return super.interactMob(player, hand);
     }
 
+
     public static void banOrSpectator(ServerPlayerEntity player) {
         player.changeGameMode(GameMode.SPECTATOR);
     }
@@ -288,6 +273,11 @@ public class EternalDivinityChainsEntity extends MobEntity {
     public boolean damage(DamageSource source, float amount) {
         if (source.getAttacker() instanceof PlayerEntity player) {
             var stack = player.getMainHandStack();
+
+            if (player.getUuid().equals(boundPlayer)) {
+                return false;
+            }
+
             if (stack.getItem() instanceof CanBanPeopleItem && boundPlayer != null) {
                 PlayerEntity bound = getWorld().getPlayerByUuid(boundPlayer);
                 if (bound instanceof ServerPlayerEntity serverBound) {
@@ -302,6 +292,57 @@ public class EternalDivinityChainsEntity extends MobEntity {
         return false;
     }
 
+    private void spawnBanParticles(Vec3d position) {
+        if (getWorld() instanceof ServerWorld serverWorld) {
+            serverWorld.spawnParticles(
+                    ModParticles.X_GILDED_ONYX_PARTICLE,
+                    position.x, position.y + 1.0, position.z,
+                    1, 0, 0, 0, 0
+            );
+
+            serverWorld.spawnParticles(
+                    ModParticles.Y_GILDED_ONYX_PARTICLE,
+                    position.x, position.y + 1.0, position.z,
+                    1, 0, 0, 0, 0
+            );
+
+            serverWorld.spawnParticles(
+                    ModParticles.Z_GILDED_ONYX_PARTICLE,
+                    position.x, position.y + 1.0, position.z,
+                    1, 0, 0, 0, 0
+            );
+
+            int particleCount = 300;
+            for (int i = 0; i < particleCount; i++) {
+                double angle = serverWorld.getRandom().nextDouble() * Math.PI * 2;
+                double pitch = (serverWorld.getRandom().nextDouble() - 0.5) * Math.PI;
+                double speed = 0.2 + serverWorld.getRandom().nextDouble() * 0.4;
+
+                double velocityX = Math.cos(angle) * Math.cos(pitch) * speed;
+                double velocityY = Math.sin(pitch) * speed;
+                double velocityZ = Math.sin(angle) * Math.cos(pitch) * speed;
+
+                serverWorld.spawnParticles(
+                        ModParticles.GEAR_GILDED_ONYX_PARTICLE,
+                        position.x, position.y + 1.0, position.z,
+                        1, velocityX, velocityY, velocityZ, 0
+                );
+            }
+
+            Color startColor = new Color(248, 209, 109);
+            Color endColor = new Color(211, 149, 77);
+
+            ParticleSpawnPacketData packetData = new ParticleSpawnPacketData(
+                    position, startColor.getRGB(), endColor.getRGB(), "screen_shake_heavy"
+            );
+
+            for (ServerPlayerEntity player : serverWorld.getPlayers()) {
+                PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+                packetData.toBytes(buf);
+                ServerPlayNetworking.send(player, ModPackets.PARTICLE_SPAWN_ID, buf);
+            }
+        }
+    }
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return DefaultAttributeContainer.builder()
@@ -311,5 +352,4 @@ public class EternalDivinityChainsEntity extends MobEntity {
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.0)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 0.0);
     }
-
 }

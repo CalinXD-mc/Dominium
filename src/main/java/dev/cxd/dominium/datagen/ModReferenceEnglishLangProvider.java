@@ -90,10 +90,15 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
         //Sounds
         translationBuilder.add("subtitles.event.dominium_boom","Forfeit...");
         translationBuilder.add("subtitles.soul_glass.soul_glass_pling","Soul Glass Plings");
+        translationBuilder.add("subtitles.roofling.roofling_ambient","???");
+        translationBuilder.add("subtitles.nether.glitch","Garbage Noise");
 
         //misc
         translationBuilder.add("itemGroup.dominium.dominium", "Dominium");
         translationBuilder.add("itemGroup.dominium.dominium_experimental", "Dominium (Experimental)");
+
+        //entities
+        translationBuilder.add("entity.dominium.roofling", "Roofling");
 
         //config
         translationBuilder.add("dominium.midnightconfig.title", "Dominium");

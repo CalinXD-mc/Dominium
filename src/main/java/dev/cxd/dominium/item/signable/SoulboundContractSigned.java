@@ -132,8 +132,8 @@ public class SoulboundContractSigned extends CustomRarityItem {
                     ModParticles.DOMINIC_BALL,
                     x, y, z,
                     1,
-                    0.01, 0.01, 0.01, // spread
-                    0.0 //speed
+                    0.01, 0.01, 0.01,
+                    0.0
             );
 
             if (i % 3 == 0) {

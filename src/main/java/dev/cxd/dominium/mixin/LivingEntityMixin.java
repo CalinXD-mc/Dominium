@@ -128,6 +128,8 @@ public class LivingEntityMixin {
                     victim.addStatusEffect(new StatusEffectInstance((StatusEffect) ModStatusEffects.SOUL_STRAIN, 8 * 20, 0, false, false, true));
 
                     if (amount >= victim.getHealth()) {
+                        victim.addStatusEffect(new StatusEffectInstance((StatusEffect) ModStatusEffects.SOUL_STRAIN, 8 * 20, 0, false, false, true));
+
                         victim.setHealth(1.0F);
                         cir.setReturnValue(false);
 
@@ -205,6 +207,8 @@ public class LivingEntityMixin {
                     victim.addStatusEffect(new StatusEffectInstance((StatusEffect) ModStatusEffects.SOUL_STRAIN, 8 * 20, 0, false, false, true));
 
                     if (amount >= victim.getHealth()) {
+                        victim.addStatusEffect(new StatusEffectInstance((StatusEffect) ModStatusEffects.SOUL_STRAIN, 8 * 20, 0, false, false, true));
+
                         victim.setHealth(1.0F);
                         cir.setReturnValue(false);
 

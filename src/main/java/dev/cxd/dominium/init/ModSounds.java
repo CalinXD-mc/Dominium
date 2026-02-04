@@ -16,6 +16,9 @@ public class ModSounds {
 
     public static final SoundEvent DOMINIC_BOOM = registerSoundEvent("event.dominium.dominium_boom");
 
+    public static final SoundEvent ROOFLING_AMBIENBT = registerSoundEvent("entity.dominium.roofling_ambient");
+    public static final SoundEvent NETHER_GLITCH = registerSoundEvent("nether.dominium.glitch");
+
     private static SoundEvent registerSoundEvent(String name) {
         Identifier id = Identifier.of(Dominium.MOD_ID, name);
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));

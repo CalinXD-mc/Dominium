@@ -15,6 +15,10 @@ public class ModConfig extends MidnightConfig {
     public static boolean showDominicItemsInTab = true;
     @Entry(category = GENERAL, name = "Height of the Nether roof (change this if something alters it).", min = 127, max = 1024)
     public static int NETHER_ROOF_HEIGHT = 128;
+    @Entry(category = GENERAL, name = "Height of the Nether void (change this if something alters it).", min = -1, max = -512)
+    public static int NETHER_VOID_HEIGHT = -16;
+    @Entry(category = GENERAL, name = "Should the Void of The Nether teleport the player 512 blocks above The Nether Roof.")
+    public static boolean isTheNetherVoidSafe = true;
 
     @Comment(category = GENERAL, centered = true) public static Comment idol;
 
