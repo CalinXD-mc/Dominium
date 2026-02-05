@@ -169,6 +169,7 @@ public class ModEvents {
                         1.0F,
                         0.75F
                 );
+                player.setHealth(1F);
             }
         });
 

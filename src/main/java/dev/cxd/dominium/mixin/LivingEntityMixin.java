@@ -125,8 +125,7 @@ public class LivingEntityMixin {
                 if (stack.isOf(ModItems.ETERNAL_DIVINITY)) {
                     int durability = EternalDivinityItem.getDurability(stack);
 
-                    victim.addStatusEffect(new StatusEffectInstance((StatusEffect) ModStatusEffects.SOUL_STRAIN, 8 * 20, 0, false, false, true));
-
+                    // Only apply Soul Strain on lethal hits
                     if (amount >= victim.getHealth()) {
                         victim.addStatusEffect(new StatusEffectInstance((StatusEffect) ModStatusEffects.SOUL_STRAIN, 8 * 20, 0, false, false, true));
 
@@ -198,14 +197,14 @@ public class LivingEntityMixin {
                         });
                         EternalDivinityItem.setDurability(stack, durability - 1);
                     }
+                    // If not a lethal hit, normal damage is applied (no Soul Strain)
                     break;
                 }
             }
 
             for (ItemStack stack : attacker.getInventory().main) {
                 if (stack.isOf(ModItems.BROKEN_ETERNAL_DIVINITY)) {
-                    victim.addStatusEffect(new StatusEffectInstance((StatusEffect) ModStatusEffects.SOUL_STRAIN, 8 * 20, 0, false, false, true));
-
+                    // Only apply Soul Strain on lethal hits
                     if (amount >= victim.getHealth()) {
                         victim.addStatusEffect(new StatusEffectInstance((StatusEffect) ModStatusEffects.SOUL_STRAIN, 8 * 20, 0, false, false, true));
 
@@ -240,6 +239,7 @@ public class LivingEntityMixin {
                             }
 
                             DelayedTaskScheduler.schedule(server, 100, () -> {
+                                assert server != null;
                                 server.execute(() -> {
                                     victim.setVelocity(0D, 0D, 0D);
                                     victim.velocityModified = true;
@@ -250,6 +250,7 @@ public class LivingEntityMixin {
                             if (ModConfig.shouldBrokenEternalDivinityDestroyItself) stack.decrement(1);
                         });
                     }
+                    // If not a lethal hit, normal damage is applied (no Soul Strain)
                     break;
                 }
             }
