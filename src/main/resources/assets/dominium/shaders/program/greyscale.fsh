@@ -40,21 +40,18 @@ vec3 hsv2rgb(vec3 c) {
 }
 
 void main() {
-    // Screen-space wobble
     float xOffset = sin(texCoord.y * Frequency.x + Time * 6.283185307) * WobbleAmount.x;
     float yOffset = cos(texCoord.x * Frequency.y + Time * 6.283185307) * WobbleAmount.y;
     vec2 offset = texCoord + vec2(xOffset, yOffset);
 
     vec4 InTexel = texture(DiffuseSampler, offset);
 
-    // Color matrix transformation
     float RedValue   = dot(InTexel.rgb, RedMatrix);
     float GreenValue = dot(InTexel.rgb, GreenMatrix);
     float BlueValue  = dot(InTexel.rgb, BlueMatrix);
     vec3 OutColor    = vec3(RedValue, GreenValue, BlueValue);
     OutColor         = (OutColor * ColorScale) + Offset;
 
-    // Hue-based cyan protection
     vec3 hsv = rgb2hsv(InTexel.rgb);
     bool isCyanRange =
         hsv.x > 0.49 && hsv.x < 0.54 &&
@@ -66,19 +63,16 @@ void main() {
         OutColor     = (Chroma * Saturation) + Luma;
     }
 
-    // Apply hue wobble (optional: only affect cyan?)
     hsv = rgb2hsv(OutColor);
     if (!isCyanRange) {
-        hsv.x = fract(hsv.x + Time * 0.05); // hue wobble only for non-cyan
+        hsv.x = fract(hsv.x + Time * 0.05);
     }
     OutColor = hsv2rgb(hsv);
 
-    // Folly shimmer
     float f = Folly * 0.5;
     OutColor.r += f;
     OutColor.b += f * 0.35;
 
-    // Darkness fade
     OutColor *= (1.0 - Darkness);
 
     fragColor = vec4(OutColor, 1.0);

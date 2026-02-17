@@ -25,7 +25,6 @@ public class FactionCommand {
     };
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
-        // Main command with full name
         var factionCommand = CommandManager.literal("dominium:faction")
                 .requires(source -> source.hasPermissionLevel(2))
                 .then(CommandManager.literal("create")
@@ -61,7 +60,6 @@ public class FactionCommand {
 
         dispatcher.register(factionCommand);
 
-        // Register alias
         dispatcher.register(CommandManager.literal("faction")
                 .requires(source -> source.hasPermissionLevel(2))
                 .redirect(dispatcher.register(factionCommand)));
@@ -133,7 +131,6 @@ public class FactionCommand {
         FactionManager.acceptInvite(playerUuid);
         context.getSource().sendFeedback(() -> Text.literal("You have joined faction '" + factionName + "'!"), false);
 
-        // Notify faction members
         for (UUID memberUuid : FactionManager.getFactionMembers(factionName)) {
             ServerPlayerEntity member = context.getSource().getServer().getPlayerManager().getPlayer(memberUuid);
             if (member != null && !member.getUuid().equals(playerUuid)) {
@@ -261,7 +258,6 @@ public class FactionCommand {
         FactionManager.setPvp(factionName, enabled);
         context.getSource().sendFeedback(() -> Text.literal("Faction PVP has been " + (enabled ? "enabled" : "disabled") + "!"), true);
 
-        // Notify all faction members
         for (UUID memberUuid : FactionManager.getFactionMembers(factionName)) {
             ServerPlayerEntity member = context.getSource().getServer().getPlayerManager().getPlayer(memberUuid);
             if (member != null && !member.getUuid().equals(playerUuid)) {
@@ -318,7 +314,6 @@ public class FactionCommand {
             return 0;
         }
 
-        // Notify all members
         for (UUID memberUuid : FactionManager.getFactionMembers(factionName)) {
             ServerPlayerEntity member = context.getSource().getServer().getPlayerManager().getPlayer(memberUuid);
             if (member != null && !member.getUuid().equals(playerUuid)) {
