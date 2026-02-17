@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 160,
+  "experience": 0.7,
+  "group": "bone_pile_from_bone_dust",
+  "ingredient": {
+    "item": "minecraft:soul_sand"
+  },
+  "result": "dominium:soul_glass"
+}

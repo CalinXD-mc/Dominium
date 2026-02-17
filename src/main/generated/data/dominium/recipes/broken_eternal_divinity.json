@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "dominium:broken_piece_1"
+    },
+    "2": {
+      "item": "dominium:broken_piece_2"
+    },
+    "3": {
+      "item": "dominium:broken_piece_3"
+    }
+  },
+  "pattern": [
+    " 2 ",
+    "3  ",
+    "  1"
+  ],
+  "result": {
+    "item": "dominium:broken_eternal_divinity"
+  },
+  "show_notification": true
+}

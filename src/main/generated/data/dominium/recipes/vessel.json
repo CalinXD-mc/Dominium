@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "dominium:soul_orb"
+    },
+    "D": {
+      "item": "minecraft:deepslate_tiles"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    }
+  },
+  "pattern": [
+    "DDD",
+    "DED",
+    " A "
+  ],
+  "result": {
+    "item": "dominium:vessel"
+  },
+  "show_notification": true
+}

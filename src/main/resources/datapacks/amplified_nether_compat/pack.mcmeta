@@ -1,0 +1,6 @@
+{
+  "pack": {
+    "pack_format": 15,
+    "description": "Compat between Amplified Nether and Dominium. Make sure to tweak the config too."
+  }
+}

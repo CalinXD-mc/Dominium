@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "dominium:ancient_bone_alloy"
+    }
+  },
+  "pattern": [
+    "1  ",
+    "   ",
+    "   "
+  ],
+  "result": {
+    "count": 4,
+    "item": "dominium:ancient_bone_alloy_chunk"
+  },
+  "show_notification": true
+}

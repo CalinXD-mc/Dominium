@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "dominium:soul_sandstone",
+    "dominium:smooth_soul_sandstone",
+    "dominium:smooth_soul_sandstone_stairs",
+    "dominium:smooth_soul_sandstone_slab",
+    "dominium:smooth_soul_sandstone_wall",
+    "dominium:soul_glass",
+    "dominium:waystone",
+    "dominium:idol",
+    "dominium:vessel"
+  ]
+}

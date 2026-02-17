@@ -1,0 +1,6 @@
+// 1.20.1	2026-02-17T13:34:28.9426619	Dominium/Tags for minecraft:block
+fbb869302f8a4c26df13075798ecbdf37fc792e1 data\minecraft\tags\blocks\stairs.json
+de152ff62ee754a3e58c2cc32bde4456aac46233 data\minecraft\tags\blocks\mineable\pickaxe.json
+995d30ec831273f79c32bc96b22ab50492b2e259 data\minecraft\tags\blocks\needs_stone_tool.json
+d2ae5cf5c9b6db70d7b3e2f48fc629b43e4f7751 data\minecraft\tags\blocks\slabs.json
+d9e2955906f59177f085c50dd9fbcacca4114f72 data\minecraft\tags\blocks\walls.json

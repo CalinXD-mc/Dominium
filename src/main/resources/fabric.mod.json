@@ -1,0 +1,48 @@
+{
+	"schemaVersion": 1,
+		"id": "dominium",
+	"version": "${version}",
+	"name": "Dominium",
+	"description": "A mod that adds Soul Magic and Soul Owning into Minecraft.",
+	"authors": [
+		"CalinXD!"
+	],
+	"custom": {
+		"cardinal-components": [
+			"dominium:chunk_block_cache_component"
+		]
+	},
+	"contact": {
+		"homepage": "https://modrinth.com/mod/dominium",
+		"sources": "https://github.com/CalinXD-mc/Dominium"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/dominium/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"dev.cxd.dominium.Dominium"
+		],
+		"client": [
+			"dev.cxd.dominium.DominiumClient"
+		],
+		"fabric-datagen": [
+			"dev.cxd.dominium.DominiumDataGenerator"
+		],
+		"cardinal-components": [
+			"dev.cxd.dominium.init.ModComponents"
+		]
+	},
+	"mixins": [
+		"dominium.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

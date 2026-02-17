@@ -1,0 +1,40 @@
+{
+  "block.waystone.totem_activate": {
+    "sounds": [
+      "dominium:block/waystone/totem_activate"
+    ],
+    "subtitle": "subtitles.waystone.totem_activate"
+  },
+  "block.waystone.activate": {
+    "sounds": [
+      "dominium:block/waystone/activate"
+    ],
+    "subtitle": "subtitles.waystone.activate"
+  },
+  "block.soul_glass.soul_glass_pling": {
+    "sounds": [
+      "dominium:block/soul_glass/soul_glass_pling"
+    ],
+    "subtitle": "subtitles.soul_glass.soul_glass_pling"
+  },
+  "event.dominium.dominium_boom": {
+    "sounds": [
+      "dominium:block/waystone/dominium_specum_boom"
+    ],
+    "subtitle": "subtitles.event.dominium_boom"
+  },
+  "entity.dominium.roofling_ambient": {
+    "sounds": [
+      "dominium:entity/roofling/roofling1",
+      "dominium:entity/roofling/roofling2",
+      "dominium:entity/roofling/roofling3"
+    ],
+    "subtitle": "subtitles.roofling.roofling_ambient"
+  },
+  "nether.dominium.glitch": {
+    "sounds": [
+      "dominium:world/nether/glitch"
+    ],
+    "subtitle": "subtitles.nether.glitch"
+  }
+}

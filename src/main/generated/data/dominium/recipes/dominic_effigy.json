@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "minecraft:stone"
+    },
+    "2": {
+      "item": "dominium:dominic_orb"
+    }
+  },
+  "pattern": [
+    "111",
+    "121",
+    " 1 "
+  ],
+  "result": {
+    "item": "dominium:dominic_effigy"
+  },
+  "show_notification": true
+}

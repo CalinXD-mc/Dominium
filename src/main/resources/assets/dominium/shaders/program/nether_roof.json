@@ -1,0 +1,129 @@
+{
+  "blend": {
+    "func": "add",
+    "srcrgb": "one",
+    "dstrgb": "zero"
+  },
+  "vertex": "sobel",
+  "fragment": "dominium:greyscale",
+  "attributes": [ "Position" ],
+  "samplers": [
+    { "name": "DiffuseSampler" },
+    { "name": "DepthSampler" }
+  ],
+  "uniforms": [
+    {
+      "name": "FogStart",
+      "type": "float",
+      "count": 1,
+      "values": [ 6.0 ]
+    },
+    {
+      "name": "FogEnd",
+      "type": "float",
+      "count": 1,
+      "values": [ 10.0 ]
+    },
+    {
+      "name": "FogColor",
+      "type": "float",
+      "count": 3,
+      "values": [ 0.15, 0.15, 0.15 ]
+    },
+    {
+      "name": "ProjMat",
+      "type": "matrix4x4",
+      "count": 16,
+      "values": [
+        1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        0.0, 0.0, 0.0, 1.0
+      ]
+    },
+    {
+      "name": "InSize",
+      "type": "float",
+      "count": 2,
+      "values": [ 1.0, 1.0 ]
+    },
+    {
+      "name": "OutSize",
+      "type": "float",
+      "count": 2,
+      "values": [ 1.0, 1.0 ]
+    },
+    {
+      "name": "Gray",
+      "type": "float",
+      "count": 3,
+      "values": [ 0.3, 0.59, 0.11 ]
+    },
+    {
+      "name": "RedMatrix",
+      "type": "float",
+      "count": 3,
+      "values": [ 1.0, 0.0, 0.0 ]
+    },
+    {
+      "name": "GreenMatrix",
+      "type": "float",
+      "count": 3,
+      "values": [ 0.0, 1.0, 0.0 ]
+    },
+    {
+      "name": "BlueMatrix",
+      "type": "float",
+      "count": 3,
+      "values": [ 0.0, 0.0, 1.0 ]
+    },
+    {
+      "name": "Offset",
+      "type": "float",
+      "count": 3,
+      "values": [ 0.0, 0.0, 0.0 ]
+    },
+    {
+      "name": "ColorScale",
+      "type": "float",
+      "count": 3,
+      "values": [ 1.0, 1.0, 1.0 ]
+    },
+    {
+      "name": "Saturation",
+      "type": "float",
+      "count": 1,
+      "values": [ 0.2 ]
+    },
+    {
+      "name": "Folly",
+      "type": "float",
+      "count": 1,
+      "values": [ 0.0 ]
+    },
+    {
+      "name": "Darkness",
+      "type": "float",
+      "count": 1,
+      "values": [ 0.0 ]
+    },
+    {
+      "name": "Time",
+      "type": "float",
+      "count": 1,
+      "values": [ 0.0 ]
+    },
+    {
+      "name": "Frequency",
+      "type": "float",
+      "count": 2,
+      "values": [ 64.0, 36.0 ]
+    },
+    {
+      "name": "WobbleAmount",
+      "type": "float",
+      "count": 2,
+      "values": [ 0.0005, 0.0005 ]
+    }
+  ]
+}

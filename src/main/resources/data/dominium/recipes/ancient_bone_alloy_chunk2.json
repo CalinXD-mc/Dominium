@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "dominium:dominic_orb"
+    },
+    "2": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "pattern": [
+    "21 ",
+    "   ",
+    "   "
+  ],
+  "result": {
+    "item": "dominium:ancient_bone_alloy_chunk"
+  },
+  "show_notification": true
+}

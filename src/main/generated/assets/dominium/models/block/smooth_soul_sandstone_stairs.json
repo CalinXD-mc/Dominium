@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "dominium:block/smooth_soul_sandstone",
+    "side": "dominium:block/smooth_soul_sandstone",
+    "top": "dominium:block/smooth_soul_sandstone"
+  }
+}

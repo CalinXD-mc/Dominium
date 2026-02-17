@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "on=false": { "model": "dominium:block/soulglass_off" },
+    "on=true":  { "model": "dominium:block/soulglass_on" }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "dominium:contract"
+    },
+    "2": {
+      "item": "dominium:dominic_orb"
+    }
+  },
+  "pattern": [
+    " 2 ",
+    "212",
+    " 2 "
+  ],
+  "result": {
+    "item": "dominium:contract_soulbound"
+  },
+  "show_notification": true
+}
