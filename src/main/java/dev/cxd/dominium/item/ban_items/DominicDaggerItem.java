@@ -27,6 +27,7 @@ public class DominicDaggerItem extends SwordItem implements MarkableItem, CanBan
         this.rarity = rarity;
     }
 
+
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand) {
         if (!player.getWorld().isClient()) {
