@@ -31,4 +31,9 @@ public class RooflingRenderer extends LivingEntityRenderer<RooflingEntity, Roofl
     public void render(RooflingEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
     }
+
+    @Override
+    protected boolean hasLabel(RooflingEntity entity) {
+        return false;
+    }
 }

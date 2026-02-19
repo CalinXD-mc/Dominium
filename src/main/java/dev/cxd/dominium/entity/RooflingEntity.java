@@ -184,4 +184,6 @@ public class RooflingEntity extends HostileEntity {
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 24.0F)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0F);
     }
+
+    @Override public boolean isCustomNameVisible() { return false; }
 }

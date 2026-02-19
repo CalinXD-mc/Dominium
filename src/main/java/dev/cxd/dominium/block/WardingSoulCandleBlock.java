@@ -40,7 +40,7 @@ public class WardingSoulCandleBlock extends BlockWithEntity implements BlockEnti
         super.randomDisplayTick(state, world, pos, random);
 
         double x = pos.getX() + 0.5;
-        double y = pos.getY() + 17.5 / 16.0; // Convert height to block space (0-1)
+        double y = pos.getY() + 17.5 / 16.0;
         double z = pos.getZ() + 0.5;
 
         world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x, y, z, 0.0, 0.0, 0.0);

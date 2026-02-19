@@ -1,8 +1,11 @@
 package dev.cxd.dominium.item.ban_items;
 
+import dev.cxd.dominium.client.lodestone_dark_magic_stuff.ScreenParticleEffects;
 import dev.cxd.dominium.utils.CanBanPeopleItem;
 import dev.cxd.dominium.utils.MarkableItem;
 import dev.cxd.dominium.utils.ModRarities;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
@@ -12,10 +15,12 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import team.lodestar.lodestone.handlers.screenparticle.ParticleEmitterHandler;
+import team.lodestar.lodestone.systems.particle.screen.ScreenParticleHolder;
 
 import java.util.List;
 
-public class GildedOnyxItem extends SwordItem implements CanBanPeopleItem, MarkableItem {
+public class GildedOnyxItem extends SwordItem implements CanBanPeopleItem, MarkableItem, ParticleEmitterHandler.ItemParticleSupplier {
     private final ModRarities rarity;
 
     public GildedOnyxItem(Settings settings, int attackDamage, float attackSpeed, ToolMaterial toolMaterial, ModRarities rarity) {
@@ -48,5 +53,11 @@ public class GildedOnyxItem extends SwordItem implements CanBanPeopleItem, Marka
             tooltip.add(Text.literal(mark).formatted(Formatting.GOLD));
         }
         super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    @Environment(EnvType.CLIENT)
+    @Override
+    public void spawnEarlyParticles(ScreenParticleHolder target, World level, float partialTick, ItemStack stack, float x, float y) {
+        ScreenParticleEffects.spawnGildedOnyxParticles(target, level, 0.55f, partialTick);
     }
 }

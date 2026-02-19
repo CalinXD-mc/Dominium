@@ -49,7 +49,7 @@ public class IdolBlockEntity extends BlockEntity {
 
         forbiddenUuids.removeIf(uuid -> {
             ServerPlayerEntity p = serverWorld.getServer().getPlayerManager().getPlayer(uuid);
-            if (p == null) return true; // offline
+            if (p == null) return true;
             double dx = p.getX() - pos.getX();
             double dy = p.getY() - pos.getY();
             double dz = p.getZ() - pos.getZ();

@@ -17,12 +17,14 @@ public class RooflingModel<T extends RooflingEntity> extends SinglePartEntityMod
     private final ModelPart l_arm;
     private final ModelPart torso;
     private final ModelPart head;
+    private final ModelPart root;
 
     private final Animation idlingAnimation;
     private final Animation walkAnimation;
     public static final EntityModelLayer ROOFLING = new EntityModelLayer(Identifier.of(Dominium.MOD_ID, "roofling"), "main");
 
     public RooflingModel(ModelPart root) {
+        this.root = root;
         this.r_leg = root.getChild("r_leg");
         this.l_leg = root.getChild("l_leg");
         this.r_arm = root.getChild("r_arm");
@@ -37,6 +39,9 @@ public class RooflingModel<T extends RooflingEntity> extends SinglePartEntityMod
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
+
+        ModelPartData root = modelPartData.addChild("root", ModelPartBuilder.create(), ModelTransform.NONE);
+
         ModelPartData r_leg = modelPartData.addChild("r_leg", ModelPartBuilder.create().uv(16, 48).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(-2.0F, 12.0F, 0.0F));
 
         ModelPartData l_leg = modelPartData.addChild("l_leg", ModelPartBuilder.create().uv(0, 16).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(2.0F, 12.0F, 0.0F));
@@ -63,7 +68,7 @@ public class RooflingModel<T extends RooflingEntity> extends SinglePartEntityMod
 
     @Override
     public ModelPart getPart() {
-        return torso;
+        return root;
     }
 
     @Override

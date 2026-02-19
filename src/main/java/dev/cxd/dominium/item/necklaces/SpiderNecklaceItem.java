@@ -1,9 +1,12 @@
 package dev.cxd.dominium.item.necklaces;
 
+import dev.cxd.dominium.client.lodestone_dark_magic_stuff.ScreenParticleEffects;
 import dev.cxd.dominium.utils.MarkableItem;
 import dev.cxd.dominium.utils.ModRarities;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketItem;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
@@ -20,10 +23,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import team.lodestar.lodestone.handlers.screenparticle.ParticleEmitterHandler;
+import team.lodestar.lodestone.systems.particle.screen.ScreenParticleHolder;
 
 import java.util.List;
 
-public class SpiderNecklaceItem extends TrinketItem implements MarkableItem {
+public class SpiderNecklaceItem extends TrinketItem implements MarkableItem, ParticleEmitterHandler.ItemParticleSupplier {
 
     private final ModRarities rarity;
     private int tickCounter = 0;
@@ -100,5 +105,11 @@ public class SpiderNecklaceItem extends TrinketItem implements MarkableItem {
     public Text getName(ItemStack stack) {
         return super.getName(stack).copy()
                 .setStyle(Style.EMPTY.withColor(rarity.color));
+    }
+
+    @Environment(EnvType.CLIENT)
+    @Override
+    public void spawnLateParticles(ScreenParticleHolder target, World level, float partialTick, ItemStack stack, float x, float y) {
+        ScreenParticleEffects.spawnSpiderNecklaceParticle(target, level, 0.75f, partialTick);
     }
 }

@@ -119,7 +119,11 @@ public class LivingEntityMixin {
                 }
             }
 
-            for (ItemStack stack : attacker.getInventory().main) {
+            ItemStack offhandEternal = attacker.getOffHandStack();
+            Iterable<ItemStack> eternalSources = offhandEternal.isOf(ModItems.ETERNAL_DIVINITY)
+                    ? java.util.List.of(offhandEternal)
+                    : attacker.getInventory().main;
+            for (ItemStack stack : eternalSources) {
                 if (stack.isOf(ModItems.ETERNAL_DIVINITY)) {
                     int durability = EternalDivinityItem.getDurability(stack);
 
@@ -197,7 +201,7 @@ public class LivingEntityMixin {
                 }
             }
 
-            for (ItemStack stack : attacker.getInventory().main) {
+            for (ItemStack stack : eternalSources) {
                 if (stack.isOf(ModItems.BROKEN_ETERNAL_DIVINITY)) {
                     if (amount >= victim.getHealth()) {
                         victim.addStatusEffect(new StatusEffectInstance((StatusEffect) ModStatusEffects.SOUL_STRAIN, 8 * 20, 0, false, false, true));

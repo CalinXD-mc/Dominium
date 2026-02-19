@@ -1,11 +1,14 @@
 package dev.cxd.dominium.item.ban_items;
 
 import dev.cxd.dominium.client.lodestone_dark_magic_stuff.ParticleSpawnPacketData;
+import dev.cxd.dominium.client.lodestone_dark_magic_stuff.ScreenParticleEffects;
 import dev.cxd.dominium.config.ModConfig;
 import dev.cxd.dominium.init.ModPackets;
 import dev.cxd.dominium.utils.MarkableItem;
 import dev.cxd.dominium.utils.ModRarities;
 import io.netty.buffer.Unpooled;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.item.TooltipContext;
@@ -30,11 +33,13 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import team.lodestar.lodestone.handlers.screenparticle.ParticleEmitterHandler;
+import team.lodestar.lodestone.systems.particle.screen.ScreenParticleHolder;
 
 import java.awt.*;
 import java.util.List;
 
-public class SoultrapSpetumItem extends SwordItem implements MarkableItem {
+public class SoultrapSpetumItem extends SwordItem implements MarkableItem, ParticleEmitterHandler.ItemParticleSupplier {
     private final ModRarities rarity;
 
     public SoultrapSpetumItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings, ModRarities rarity) {
@@ -266,5 +271,11 @@ public class SoultrapSpetumItem extends SwordItem implements MarkableItem {
             tooltip.add(Text.literal(mark).formatted(Formatting.GOLD));
         }
         super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    @Environment(EnvType.CLIENT)
+    @Override
+    public void spawnEarlyParticles(ScreenParticleHolder target, World level, float partialTick, ItemStack stack, float x, float y) {
+        ScreenParticleEffects.spawnSoultrapSpetumParticles(target, level, 0.75f, partialTick);
     }
 }
