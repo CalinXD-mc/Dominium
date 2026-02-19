@@ -6,11 +6,14 @@ import dev.cxd.dominium.entity.RooflingEntity;
 import dev.cxd.dominium.init.*;
 import dev.cxd.dominium.init.mass_init.DominiumInitializer;
 import dev.cxd.dominium.utils.GhostManager;
+import dev.cxd.dominium.utils.NetherRoofHeightProvider;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -53,10 +56,10 @@ public class Dominium implements ModInitializer {
 				ResourcePackActivationType.NORMAL
 		);
 
-		ResourceManagerHelper.registerBuiltinResourcePack(
-				new Identifier(MOD_ID, "amplified_nether_compat"),
-				FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(),
-				ResourcePackActivationType.NORMAL
+		NetherRoofHeightProvider.TYPE = Registry.register(
+				Registries.HEIGHT_PROVIDER_TYPE,
+				new Identifier(MOD_ID, "nether_roof"),
+				() -> NetherRoofHeightProvider.CODEC
 		);
 
 		LOGGER.info("Initializing Dominium");
