@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:nether_roof",
+  "criteria": {
+    "has_necklace_undead": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:necklace_of_the_undead"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Obtain a Necklace of the Undead."
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "item": "dominium:necklace_of_the_undead"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Undead"
+    }
+  },
+  "requirements": [
+    [
+      "has_necklace_undead"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

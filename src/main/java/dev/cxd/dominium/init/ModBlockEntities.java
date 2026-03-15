@@ -3,6 +3,8 @@ package dev.cxd.dominium.init;
 import dev.cxd.dominium.Dominium;
 import dev.cxd.dominium.block.WardingSoulCandleBlock;
 import dev.cxd.dominium.block.entity.IdolBlockEntity;
+import dev.cxd.dominium.block.entity.ObeliskBlockEntity;
+import dev.cxd.dominium.block.entity.VesselBlockEntity;
 import dev.cxd.dominium.block.entity.WardingSoulCandleBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
@@ -21,6 +23,17 @@ public class ModBlockEntities {
             Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Dominium.MOD_ID, "soul_candle_be"),
                     FabricBlockEntityTypeBuilder.create(WardingSoulCandleBlockEntity::new,
                             ModBlocks.SOUL_CANDLE).build());
+
+    public static final BlockEntityType<ObeliskBlockEntity> OBELISK_BLOCK_ENTITY =
+            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Dominium.MOD_ID, "obelisk_be"),
+                    FabricBlockEntityTypeBuilder.create(ObeliskBlockEntity::new,
+                            ModBlocks.OBELISK).build());
+
+    public static final BlockEntityType<VesselBlockEntity> VESSEL_BLOCK_ENTITY =
+            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Dominium.MOD_ID, "vessel_be"),
+                    FabricBlockEntityTypeBuilder.create(VesselBlockEntity::new,
+                            ModBlocks.VESSEL).build());
+
 
     public static void initialize() {
         Dominium.LOGGER.info("initializing Block Entities for " + Dominium.MOD_ID);

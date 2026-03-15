@@ -3,6 +3,7 @@ package dev.cxd.dominium.init;
 import dev.cxd.dominium.Dominium;
 import dev.cxd.dominium.entity.EternalDivinityChainsEntity;
 import dev.cxd.dominium.entity.RooflingEntity;
+import dev.cxd.dominium.entity.VassalEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
@@ -27,6 +28,14 @@ public class ModEntities {
             Identifier.of(Dominium.MOD_ID, "roofling"),
             EntityType.Builder.create(RooflingEntity::new, SpawnGroup.CREATURE)
                     .setDimensions(0.9f, 1.8f).build(String.valueOf(ROOFLING_KEY)));
+
+    private static final RegistryKey<EntityType<?>> VASSAL_KEY =
+            RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(Dominium.MOD_ID, "vassal"));
+
+    public static final EntityType<VassalEntity> VASSAL = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(Dominium.MOD_ID, "vassal"),
+            EntityType.Builder.create(VassalEntity::new, SpawnGroup.CREATURE)
+                    .setDimensions(0.85F, 2.7F).build(String.valueOf(VASSAL_KEY)));
 
     public static void initialize() {
         Dominium.LOGGER.info("Registering Mobs for " + Dominium.MOD_ID);

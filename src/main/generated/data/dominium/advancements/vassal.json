@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:soul_orb",
+  "criteria": {
+    "has_vassal": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:vassal_item"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Obtain a Vassal, a Machine devoted to its Owner."
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dominium:vassal_item"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "War Machines"
+    }
+  },
+  "requirements": [
+    [
+      "has_vassal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:waystone",
+  "criteria": {
+    "has_wanderer_tablet": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:wanderer_tablet"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Obtain a Wanderer's Tablet."
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dominium:wanderer_tablet"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "So That's How Wandering Trades Appear!"
+    }
+  },
+  "requirements": [
+    [
+      "has_wanderer_tablet"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

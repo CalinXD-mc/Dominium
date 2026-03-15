@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "dominium:dominic_bricks"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SSS",
+    "   "
+  ],
+  "result": {
+    "count": 6,
+    "item": "dominium:dominic_bricks_wall"
+  },
+  "show_notification": true
+}

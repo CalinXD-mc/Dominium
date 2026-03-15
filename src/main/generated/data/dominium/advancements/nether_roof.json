@@ -1,0 +1,29 @@
+{
+  "parent": "dominium:root",
+  "criteria": {
+    "nether_roof": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Venture above the Nether Roof."
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:netherrack"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "You Shouldn't Be Here"
+    }
+  },
+  "requirements": [
+    [
+      "nether_roof"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

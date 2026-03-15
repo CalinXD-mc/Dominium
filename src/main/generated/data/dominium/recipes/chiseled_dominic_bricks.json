@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "dominium:dominic_bricks_slab"
+    }
+  },
+  "pattern": [
+    " S ",
+    " S ",
+    "   "
+  ],
+  "result": {
+    "item": "dominium:chiseled_dominic_bricks"
+  },
+  "show_notification": true
+}

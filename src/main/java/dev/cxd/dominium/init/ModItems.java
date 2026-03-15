@@ -66,7 +66,10 @@ public class ModItems {
 
     //Relics
     public static final Item DOMINIC_EFFIGY = registerItem("dominic_effigy",
-            new DominicEffigyItem(new FabricItemSettings().maxCount(1).fireproof(), ModRarities.DOMINIC_EFFIGY));
+            new DominicEffigyItem(new FabricItemSettings().maxCount(1).fireproof(), ModRarities.DOMINIC));
+
+    public static final Item EYE_OF_THE_APEX = registerItem("eye_of_the_apex",
+            new CustomRarityItem(new FabricItemSettings().maxCount(1).fireproof(), ModRarities.CONTRACT));
 
     public static final Item CONVENANT_OF_THE_PROVIDENT = registerItem("convenant_of_the_provident",
             new ProvedientConvenantItem(new FabricItemSettings().maxCount(1), ModRarities.DOMINIC));
@@ -94,15 +97,6 @@ public class ModItems {
                     ModRarities.DOMINIC
             ));
 
-    public static final Item DOMINIC_DAGGER = registerItem("dominic_dagger",
-            new DominicDaggerItem(
-                    ModToolMaterials.DOMINIC,
-                    4,
-                    -1.0F,
-                    new FabricItemSettings().maxCount(1),
-                    ModRarities.DOMINIC
-            ));
-
     public static final Item GILDED_ONYX = registerItem("gilded_onyx",
             new GildedOnyxItem(
                     new FabricItemSettings().maxCount(1),
@@ -118,6 +112,8 @@ public class ModItems {
     public static final Item BROKEN_ETERNAL_DIVINITY = registerItem("broken_eternal_divinity",
             new BrokenEternalDivinityItem(new FabricItemSettings().maxCount(1).fireproof(), ModRarities.DOMINIC));
 
+    public static final Item VASSAL_ITEM = registerItem("vassal_item",
+            new VassalItem(new Item.Settings().maxCount(1)));
 
     //Misc
     public static final Item ITEM_MARKER = registerItem("item_marker",

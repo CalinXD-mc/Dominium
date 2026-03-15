@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:soul_orb",
+  "criteria": {
+    "has_dominic_orb": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:dominic_orb"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "text": "Obtain a Dominic Orb."
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "dominium:dominic_orb"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Forbidden Magic"
+    }
+  },
+  "requirements": [
+    [
+      "has_dominic_orb"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

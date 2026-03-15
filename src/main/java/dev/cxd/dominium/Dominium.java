@@ -3,6 +3,7 @@ package dev.cxd.dominium;
 import dev.cxd.dominium.config.ModConfig;
 import dev.cxd.dominium.entity.EternalDivinityChainsEntity;
 import dev.cxd.dominium.entity.RooflingEntity;
+import dev.cxd.dominium.entity.VassalEntity;
 import dev.cxd.dominium.init.*;
 import dev.cxd.dominium.init.mass_init.DominiumInitializer;
 import dev.cxd.dominium.utils.GhostManager;
@@ -46,6 +47,7 @@ public class Dominium implements ModInitializer {
 
 		FabricDefaultAttributeRegistry.register(ModEntities.ETERNAL_DIVINITY_CHAINS, EternalDivinityChainsEntity.createAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.ROOFLING, RooflingEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.VASSAL, VassalEntity.createAttributes());
 
 		GhostManager.loadGhosts();
 

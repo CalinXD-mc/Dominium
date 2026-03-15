@@ -1,0 +1,29 @@
+{
+  "parent": "dominium:vessel",
+  "criteria": {
+    "has_soul_debt": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "text": "Have the Soul Debt effect applied to you."
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "dominium:vessel"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "You Owe More Than You Know"
+    }
+  },
+  "requirements": [
+    [
+      "has_soul_debt"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "dominium:soul_orb"
+    },
+    "B": {
+      "item": "minecraft:iron_bars"
+    },
+    "D": {
+      "item": "minecraft:deepslate_tiles"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "IBI",
+    "DAD",
+    "IBI"
+  ],
+  "result": {
+    "item": "dominium:swapper"
+  },
+  "show_notification": true
+}

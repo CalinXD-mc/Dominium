@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "minecraft:skeleton_skull"
+    }
+  },
+  "pattern": [
+    "111",
+    "111",
+    "11 "
+  ],
+  "result": {
+    "count": 8,
+    "item": "dominium:block_of_skulls"
+  },
+  "show_notification": true
+}

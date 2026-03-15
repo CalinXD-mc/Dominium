@@ -19,6 +19,13 @@ public class ModSounds {
     public static final SoundEvent ROOFLING_AMBIENBT = registerSoundEvent("entity.dominium.roofling_ambient");
     public static final SoundEvent NETHER_GLITCH = registerSoundEvent("nether.dominium.glitch");
 
+    public static final SoundEvent BONE = registerSoundEvent("misc.funny.bone");
+
+    public static final SoundEvent VASSAL_HURT = registerSoundEvent("entity.dominium.vassal_damage");
+    public static final SoundEvent VASSAL_DEATH = registerSoundEvent("entity.dominium.vassal_death");
+    public static final SoundEvent VASSAL_ATTACK = registerSoundEvent("entity.dominium.vassal_attack");
+    public static final SoundEvent VASSAL_AMBIENT = registerSoundEvent("entity.dominium.vassal_ambient");
+
     private static SoundEvent registerSoundEvent(String name) {
         Identifier id = Identifier.of(Dominium.MOD_ID, name);
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));

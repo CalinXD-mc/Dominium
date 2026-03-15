@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:contract",
+  "criteria": {
+    "has_signed_contract": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:contract_signed"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "text": "Obtain a signed Contract."
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dominium:contract_signed"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Signed in Soul"
+    }
+  },
+  "requirements": [
+    [
+      "has_signed_contract"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

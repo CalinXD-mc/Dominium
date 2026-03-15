@@ -3,19 +3,23 @@
   "package": "dev.cxd.dominium.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ExplosionMixin",
     "ExtendedWaterComponentMixin",
     "LivingEntityMixin",
     "MobBlockerMixin",
+    "NoteBlockMixin",
     "PlayerManagerMixin",
     "PlayerStepMixin",
-    "ServerPlayerEntityDeathMixin",
     "configurable.WitherEntityMixin"
   ],
   "client": [
+    "client.KeyboardInputMixin",
+    "client.ClientPlayerEntityMixin",
     "client.EntityRenderDispatcherMixin",
     "client.ItemRendererAccessor",
     "client.ItemRendererMixin",
     "client.LivingEntityRendererMixin",
+    "client.MinecraftClientMixin",
     "client.ModelLoaderMixin",
     "client.PlayerRendererMixin",
     "client.WorldBorderShaderActivatorMixin"

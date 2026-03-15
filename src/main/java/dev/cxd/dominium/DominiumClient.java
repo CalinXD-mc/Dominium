@@ -4,9 +4,13 @@ import dev.cxd.dominium.client.entity.eternal_divinity_chains.EternalDivinityCha
 import dev.cxd.dominium.client.entity.eternal_divinity_chains.EternalDivinityChainsRenderer;
 import dev.cxd.dominium.client.entity.roofling.RooflingModel;
 import dev.cxd.dominium.client.entity.roofling.RooflingRenderer;
+import dev.cxd.dominium.client.entity.vassal.VassalModel;
+import dev.cxd.dominium.client.entity.vassal.VassalRenderer;
 import dev.cxd.dominium.client.lodestone_dark_magic_stuff.ModClientPackets;
+import dev.cxd.dominium.client.screen.SoulboundContractScreen;
 import dev.cxd.dominium.init.ModBlocks;
 import dev.cxd.dominium.init.ModEntities;
+import dev.cxd.dominium.init.ModPackets;
 import dev.cxd.dominium.init.ModParticles;
 import dev.cxd.dominium.packet.GhostSyncPacket;
 import dev.cxd.dominium.particle.AxisLockedParticles.XAxisParticle;
@@ -15,6 +19,7 @@ import dev.cxd.dominium.particle.AxisLockedParticles.ZAxisParticle;
 import dev.cxd.dominium.particle.ChantDirectionalLockedParticle;
 import dev.cxd.dominium.particle.DominicSymbolParticle;
 import dev.cxd.dominium.particle.ExplosionBurstParticle;
+import dev.cxd.dominium.particle.ObeliskParticle;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -33,12 +38,16 @@ public class DominiumClient implements ClientModInitializer {
         ModClientPackets.initializeClientPackets();
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SOUL_GLASS, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.OBELISK, RenderLayer.getCutout());
 
         EntityRendererRegistry.register(ModEntities.ETERNAL_DIVINITY_CHAINS, EternalDivinityChainsRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(EternalDivinityChainsModel.ETERNAL_DIVINITY_CHAINS, EternalDivinityChainsModel::getTexturedModelData);
 
         EntityRendererRegistry.register(ModEntities.ROOFLING, RooflingRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(RooflingModel.ROOFLING, RooflingModel::getTexturedModelData);
+
+        EntityRendererRegistry.register(ModEntities.VASSAL, VassalRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(VassalModel.VASSAL, VassalModel::getTexturedModelData);
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.CHANT, ChantDirectionalLockedParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.DOMINIC_SYMBOL, DominicSymbolParticle.Factory::new);
@@ -47,6 +56,12 @@ public class DominiumClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticles.Y_GILDED_ONYX_PARTICLE, YAxisParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.Z_GILDED_ONYX_PARTICLE, ZAxisParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.GEAR_GILDED_ONYX_PARTICLE, ExplosionBurstParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.OBELISK_PARTICLE, ObeliskParticle.Factory::new);
+
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.OPEN_SOULBOUND_SCREEN_ID, (client, handler, buf, responseSender) -> {
+            int slot = buf.readInt();
+            client.execute(() -> client.setScreen(new SoulboundContractScreen(slot)));
+        });
 
         ClientPlayNetworking.registerGlobalReceiver(Dominium.GHOST_SYNC_PACKET_ID, (client, handler, buf, responseSender) -> {
             var ghosts = GhostSyncPacket.read(buf);

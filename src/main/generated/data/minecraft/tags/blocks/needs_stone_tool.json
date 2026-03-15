@@ -3,6 +3,7 @@
   "values": [
     "dominium:waystone",
     "dominium:idol",
-    "dominium:vessel"
+    "dominium:vessel",
+    "dominium:swapper"
   ]
 }

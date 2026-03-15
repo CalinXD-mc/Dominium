@@ -15,6 +15,7 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
 
         BlockStateModelGenerator.BlockTexturePool smoothSoulSandstonePool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.SMOOTH_SOUL_SANDSTONE);
+        BlockStateModelGenerator.BlockTexturePool dominicBricksPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.DOMINIC_BRICKS);
 
         blockStateModelGenerator.registerSingleton(ModBlocks.SOUL_SANDSTONE, TexturedModel.CUBE_BOTTOM_TOP);
         smoothSoulSandstonePool.stairs(ModBlocks.SMOOTH_SOUL_SANDSTONE_STAIRS);
@@ -22,6 +23,12 @@ public class ModModelProvider extends FabricModelProvider {
         smoothSoulSandstonePool.wall(ModBlocks.SMOOTH_SOUL_SANDSTONE_WALL);
         blockStateModelGenerator.registerBrushableBlock(ModBlocks.SUS_DIRT);
         blockStateModelGenerator.registerBrushableBlock(ModBlocks.SUS_SOUL_SAND);
+        dominicBricksPool.stairs(ModBlocks.DOMINIC_BRICKS_STAIRS);
+        dominicBricksPool.slab(ModBlocks.DOMINIC_BRICKS_SLAB);
+        dominicBricksPool.wall(ModBlocks.DOMINIC_BRICKS_WALL);
+
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.CHISELED_DOMINIC_BRICKS);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.FUNNY_BONE_BLOCK);
     }
 
     @Override
@@ -57,5 +64,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.ETHEREAL_NECKLACE, Models.GENERATED);
         itemModelGenerator.register(ModItems.SPIDER_NECKLACE, Models.GENERATED);
         itemModelGenerator.register(ModItems.UNDEAD_NECKLACE, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.VASSAL_ITEM, Models.GENERATED);
+        itemModelGenerator.register(ModItems.EYE_OF_THE_APEX, Models.GENERATED);
     }
 }

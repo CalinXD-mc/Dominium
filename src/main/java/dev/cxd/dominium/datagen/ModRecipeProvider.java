@@ -44,23 +44,58 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .offerTo(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.IDOL)
-                .pattern("DED")
+                .pattern("DAD")
                 .pattern("DND")
-                .pattern("DED")
+                .pattern("DAD")
                 .input('D', Items.DEEPSLATE_TILES)
-                .input('E', Items.END_CRYSTAL)
+                .input('A', ModItems.SOUL_ORB)
                 .input('N', Items.NETHERITE_INGOT)
                 .criterion(hasItem(Items.ENDER_EYE), conditionsFromItem(Items.ENDER_EYE))
                 .criterion(hasItem(Items.LODESTONE), conditionsFromItem(Items.LODESTONE))
                 .offerTo(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.VESSEL)
-                .pattern("DDD")
-                .pattern("DED")
-                .pattern(" A ")
+                .pattern("IDI")
+                .pattern("DAD")
+                .pattern("IDI")
                 .input('D', Items.DEEPSLATE_TILES)
-                .input('E', Items.ENDER_EYE)
+                .input('I', Items.IRON_INGOT)
                 .input('A', ModItems.SOUL_ORB)
+                .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.SWAPPER)
+                .pattern("IBI")
+                .pattern("DAD")
+                .pattern("IBI")
+                .input('D', Items.DEEPSLATE_TILES)
+                .input('B', Items.IRON_BARS)
+                .input('I', Items.IRON_INGOT)
+                .input('A', ModItems.SOUL_ORB)
+                .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.VASSAL_ITEM)
+                .pattern("DND")
+                .pattern("NAN")
+                .pattern("DBD")
+                .input('D', Items.POLISHED_DEEPSLATE)
+                .input('B', Items.ANCIENT_DEBRIS)
+                .input('N', Items.NETHERITE_INGOT)
+                .input('A', ModItems.SOUL_ORB)
+                .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.OBELISK)
+                .pattern("D3D")
+                .pattern("1A2")
+                .pattern("DBD")
+                .input('D', Items.DEEPSLATE_TILES)
+                .input('1', ModBlocks.WAYSTONE)
+                .input('2', ModBlocks.IDOL)
+                .input('3', ModBlocks.VESSEL)
+                .input('A', ModItems.EYE_OF_THE_APEX)
+                .input('B', ModItems.SOUL_ORB)
                 .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
                 .offerTo(exporter);
 
@@ -132,6 +167,38 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModBlocks.SMOOTH_SOUL_SANDSTONE), conditionsFromItem(ModBlocks.SMOOTH_SOUL_SANDSTONE))
                 .offerTo(exporter);
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.CHISELED_DOMINIC_BRICKS)
+                .pattern(" S ")
+                .pattern(" S ")
+                .pattern("   ")
+                .input('S', ModBlocks.DOMINIC_BRICKS_SLAB)
+                .criterion(hasItem(ModBlocks.DOMINIC_BRICKS_SLAB), conditionsFromItem(ModBlocks.DOMINIC_BRICKS_SLAB))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.DOMINIC_BRICKS_SLAB, 6)
+                .pattern("SSS")
+                .pattern("   ")
+                .pattern("   ")
+                .input('S', ModBlocks.DOMINIC_BRICKS)
+                .criterion(hasItem(ModBlocks.DOMINIC_BRICKS), conditionsFromItem(ModBlocks.DOMINIC_BRICKS))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.DOMINIC_BRICKS_STAIRS, 4)
+                .pattern("S  ")
+                .pattern("SS ")
+                .pattern("SSS")
+                .input('S', ModBlocks.DOMINIC_BRICKS)
+                .criterion(hasItem(ModBlocks.DOMINIC_BRICKS), conditionsFromItem(ModBlocks.DOMINIC_BRICKS))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.DOMINIC_BRICKS_WALL, 6)
+                .pattern("SSS")
+                .pattern("SSS")
+                .pattern("   ")
+                .input('S', ModBlocks.DOMINIC_BRICKS)
+                .criterion(hasItem(ModBlocks.DOMINIC_BRICKS), conditionsFromItem(ModBlocks.DOMINIC_BRICKS))
+                .offerTo(exporter);
+
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ANCIENT_BONE_ALLOY_CHUNK, 4)
                 .pattern("1  ")
                 .pattern("   ")
@@ -177,15 +244,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
                 .offerTo(exporter);
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.DOMINIC_DAGGER)
-                .pattern(" 1 ")
-                .pattern(" 1 ")
-                .pattern(" 2 ")
-                .input('1', ModItems.ANCIENT_BONE_ALLOY)
-                .input('2', ModItems.ANCIENT_BONE_ALLOY_CHUNK)
-                .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
-                .offerTo(exporter);
-
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.SOULTRAP_SPETUM)
                 .pattern(" 21")
                 .pattern(" 12")
@@ -201,6 +259,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern(" 1 ")
                 .input('1', Items.STONE)
                 .input('2', ModItems.DOMINIC_ORB)
+                .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.FUNNY_BONE_BLOCK, 8)
+                .pattern("111")
+                .pattern("111")
+                .pattern("11 ")
+                .input('1', Items.SKELETON_SKULL)
                 .criterion(hasItem(Items.BEDROCK), conditionsFromItem(Items.BEDROCK))
                 .offerTo(exporter);
 

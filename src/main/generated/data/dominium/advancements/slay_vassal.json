@@ -1,0 +1,29 @@
+{
+  "parent": "dominium:vassal",
+  "criteria": {
+    "slay_vassal": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Slay a Vassal."
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "item": "dominium:vassal_item"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "An End To Your Forever War"
+    }
+  },
+  "requirements": [
+    [
+      "slay_vassal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

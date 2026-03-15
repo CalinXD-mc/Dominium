@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:soul_orb",
+  "criteria": {
+    "has_idol": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:idol"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Obtain an Idol. An Idol protects you from anyone who holds a contract over you."
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dominium:idol"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "False Idol"
+    }
+  },
+  "requirements": [
+    [
+      "has_idol"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

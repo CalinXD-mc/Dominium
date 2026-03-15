@@ -1,10 +1,9 @@
 package dev.cxd.dominium.init;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import dev.cxd.dominium.Dominium;
+import dev.cxd.dominium.block.ObeliskBlock;
 import dev.cxd.dominium.block.entity.IdolBlockEntity;
+import dev.cxd.dominium.block.entity.ObeliskBlockEntity;
 import dev.cxd.dominium.command.FactionCommand;
 import dev.cxd.dominium.command.GhostCommand;
 import dev.cxd.dominium.command.MarkerCommand;
@@ -20,6 +19,7 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.block.*;
@@ -31,15 +31,57 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.WorldSavePath;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.util.Objects;
 
 public class ModEvents {
+
+    @Nullable
+    public static ObeliskBlockEntity findClaimAt(World world, BlockPos target) {
+        int searchRadius = ObeliskBlockEntity.OBELISK_PROTECTION_RADIUS + 1;
+        int searchHeight = ObeliskBlockEntity.OBELISK_PROTECTION_HEIGHT + 1;
+
+        for (BlockPos p : BlockPos.iterateOutwards(target, searchRadius, searchHeight, searchRadius)) {
+            BlockState bs = world.getBlockState(p);
+            if (bs.getBlock() instanceof ObeliskBlock &&
+                    bs.get(ObeliskBlock.PART) == ObeliskBlock.ObeliskPart.LOWER) {
+                if (world.getBlockEntity(p) instanceof ObeliskBlockEntity be) {
+                    if (be.isInClaimRange(target)) {
+                        return be;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public static void clearStaleMining(World world, ServerPlayerEntity player) {
+        var raycast = player.raycast(5.0, 0, false);
+        BlockPos currentTarget = null;
+        if (raycast instanceof BlockHitResult bhr) {
+            currentTarget = bhr.getBlockPos();
+        }
+
+        int searchRadius = ObeliskBlockEntity.OBELISK_PROTECTION_RADIUS + 1;
+        int searchHeight = ObeliskBlockEntity.OBELISK_PROTECTION_HEIGHT + 1;
+
+        for (BlockPos p : BlockPos.iterateOutwards(player.getBlockPos(), searchRadius, searchHeight, searchRadius)) {
+            BlockState bs = world.getBlockState(p);
+            if (bs.getBlock() instanceof ObeliskBlock &&
+                    bs.get(ObeliskBlock.PART) == ObeliskBlock.ObeliskPart.LOWER) {
+                if (world.getBlockEntity(p) instanceof ObeliskBlockEntity be) {
+                    be.stopMiningIfStale(world, player.getUuid(), currentTarget);
+                }
+            }
+        }
+    }
+
     public static void initialize() {
+
         AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
             if (!(entity instanceof PlayerEntity target) || player.isCreative()) return ActionResult.PASS;
 
@@ -80,7 +122,6 @@ public class ModEvents {
                         block instanceof TrapdoorBlock || block instanceof FenceGateBlock ||
                         block instanceof LeverBlock || block instanceof BellBlock ||
                         block instanceof NoteBlock) {
-
                     ActionResult result = state.onUse(world, player, hand, hitResult);
                     return result.isAccepted() ? ActionResult.SUCCESS : ActionResult.PASS;
                 }
@@ -89,49 +130,51 @@ public class ModEvents {
         });
 
         ServerTickEvents.END_WORLD_TICK.register(world -> {
-            if (world.getRegistryKey() != World.NETHER) return;
+            if (world.getRegistryKey() == World.NETHER) {
+                for (ServerPlayerEntity player : world.getPlayers()) {
+                    if (player.getY() >= ModConfig.NETHER_ROOF_HEIGHT && !world.isSkyVisible(player.getBlockPos())) {
+                        boolean wearingEthereal = TrinketsApi.getTrinketComponent(player)
+                                .map(tc -> tc.isEquipped(stack -> stack.getItem() instanceof EtherealNecklaceItem))
+                                .orElse(false);
 
-            for (ServerPlayerEntity player : world.getPlayers()) {
-                if (player.getY() >= ModConfig.NETHER_ROOF_HEIGHT && !world.isSkyVisible(player.getBlockPos())) {
-                    boolean wearingEthereal = TrinketsApi.getTrinketComponent(player)
-                            .map(tc -> tc.isEquipped(stack -> stack.getItem() instanceof EtherealNecklaceItem))
-                            .orElse(false);
+                        if (!wearingEthereal) {
+                            player.addStatusEffect(new StatusEffectInstance(
+                                    StatusEffects.DARKNESS, 200, 0, true, false));
+                        }
 
-                    if (!wearingEthereal) {
-                        player.addStatusEffect(new StatusEffectInstance(
-                                StatusEffects.DARKNESS, 200, 0, true, false));
-                    }
+                        if (world.getRandom().nextInt(4000) == 0) {
+                            int count = 1 + world.getRandom().nextInt(2);
+                            for (int i = 0; i < count; i++) {
+                                double angle = world.getRandom().nextDouble() * Math.PI * 2;
+                                double distance = 16 + world.getRandom().nextDouble() * 8;
+                                double x = player.getX() + Math.cos(angle) * distance;
+                                double z = player.getZ() + Math.sin(angle) * distance;
 
-                    if (world.getRandom().nextInt(4000) == 0) {
-                        int count = 1 + world.getRandom().nextInt(2);
-                        for (int i = 0; i < count; i++) {
-                            double angle = world.getRandom().nextDouble() * Math.PI * 2;
-                            double distance = 16 + world.getRandom().nextDouble() * 8;
-                            double x = player.getX() + Math.cos(angle) * distance;
-                            double z = player.getZ() + Math.sin(angle) * distance;
-
-                            RooflingEntity roofling = ModEntities.ROOFLING.create(world);
-                            if (roofling != null) {
-                                roofling.refreshPositionAndAngles(x, player.getY(), z, 0, 0);
-                                world.spawnEntity(roofling);
+                                RooflingEntity roofling = ModEntities.ROOFLING.create(world);
+                                if (roofling != null) {
+                                    roofling.refreshPositionAndAngles(x, player.getY(), z, 0, 0);
+                                    world.spawnEntity(roofling);
+                                }
                             }
                         }
+
+                        AdvancementsUtils.grantAdvancement(player, "nether_roof");
                     }
-                }
 
-                if (ModConfig.isTheNetherVoidSafe && player.getY() <= ModConfig.NETHER_VOID_HEIGHT) {
-                    double targetY = ModConfig.NETHER_ROOF_HEIGHT + 512;
-                    player.teleport(player.getX(), targetY, player.getZ());
-                    player.setVelocity(0, 0, 0);
-                    player.velocityModified = true;
-                    player.fallDistance = 0;
-                    player.setHealth(1F);
+                    if (ModConfig.isTheNetherVoidSafe && player.getY() <= ModConfig.NETHER_VOID_HEIGHT) {
+                        double targetY = ModConfig.NETHER_ROOF_HEIGHT + 512;
+                        player.teleport(player.getX(), targetY, player.getZ());
+                        player.setVelocity(0, 0, 0);
+                        player.velocityModified = true;
+                        player.fallDistance = 0;
+                        player.setHealth(1F);
 
-                    player.sendMessage(Text.literal("<???> You shouldn't be here...")
-                            .formatted(Formatting.WHITE), true);
-                    world.playSound(null, player.getX(), player.getY(), player.getZ(),
-                            ModSounds.NETHER_GLITCH, net.minecraft.sound.SoundCategory.PLAYERS,
-                            1.0F, 0.75F);
+                        player.sendMessage(Text.literal("<???> You shouldn't be here...")
+                                .formatted(Formatting.WHITE), true);
+                        world.playSound(null, player.getX(), player.getY(), player.getZ(),
+                                ModSounds.NETHER_GLITCH, net.minecraft.sound.SoundCategory.PLAYERS,
+                                1.0F, 0.75F);
+                    }
                 }
             }
         });
@@ -153,8 +196,42 @@ public class ModEvents {
             ZoneManager.shutdown();
         });
 
-        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) ->
-                GhostSyncPacket.send(handler.player));
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+            GhostSyncPacket.send(handler.player);
+            AdvancementsUtils.grantAdvancement(handler.player, "root");
+        });
+
+        PlayerBlockBreakEvents.BEFORE.register((world, player, blockPos, blockState, blockEntity) -> {
+            if (world.isClient()) return true;
+            if (blockState.getBlock() instanceof ObeliskBlock) return true;
+
+            ObeliskBlockEntity claim = findClaimAt(world, blockPos);
+            if (claim != null && !claim.isAllowed(player.getUuid())) {
+                claim.onUnauthorizedBreak(world, blockPos, blockState);
+                world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), Block.NOTIFY_ALL | Block.SKIP_DROPS);
+                return false;
+            }
+            return true;
+        });
+
+        UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
+            if (world.isClient()) return ActionResult.PASS;
+            BlockPos placedAt = hitResult.getBlockPos().offset(hitResult.getSide());
+
+            ObeliskBlockEntity claim = findClaimAt(world, placedAt);
+            if (claim != null && !claim.isAllowed(player.getUuid())) {
+                BlockState previousState = world.getBlockState(placedAt);
+
+                Objects.requireNonNull(world.getServer()).execute(() -> {
+                    BlockState placed = world.getBlockState(placedAt);
+                    if (!placed.isAir() && !placed.equals(previousState)) {
+                        claim.onUnauthorizedPlace(world, placedAt, previousState);
+                    }
+                });
+                return ActionResult.PASS;
+            }
+            return ActionResult.PASS;
+        });
 
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             GhostCommand.register(dispatcher, registryAccess, environment);

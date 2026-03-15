@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:soul_sand",
+  "criteria": {
+    "has_soul_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:soul_glass"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Obtain Soul Glass."
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dominium:soul_glass"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Blindfolds 0.5"
+    }
+  },
+  "requirements": [
+    [
+      "has_soul_glass"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

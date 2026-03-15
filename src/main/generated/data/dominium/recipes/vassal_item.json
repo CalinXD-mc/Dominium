@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "dominium:soul_orb"
+    },
+    "B": {
+      "item": "minecraft:ancient_debris"
+    },
+    "D": {
+      "item": "minecraft:polished_deepslate"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "pattern": [
+    "DND",
+    "NAN",
+    "DBD"
+  ],
+  "result": {
+    "item": "dominium:vassal_item"
+  },
+  "show_notification": true
+}

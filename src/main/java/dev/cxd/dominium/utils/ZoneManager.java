@@ -3,6 +3,7 @@ package dev.cxd.dominium.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import dev.cxd.dominium.block.entity.ObeliskBlockEntity;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
@@ -12,6 +13,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.WorldSavePath;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -39,18 +41,17 @@ public class ZoneManager {
     }
 
     private static void loadZones() {
-        if (saveFile == null || !Files.exists(saveFile)) {
-            return;
-        }
-
+        if (saveFile == null || !Files.exists(saveFile)) return;
         try (Reader reader = Files.newBufferedReader(saveFile)) {
             Type type = new TypeToken<List<SerializedZone>>(){}.getType();
             List<SerializedZone> serializedZones = GSON.fromJson(reader, type);
-
             if (serializedZones != null) {
                 for (SerializedZone sz : serializedZones) {
                     Box box = new Box(sz.minX, sz.minY, sz.minZ, sz.maxX, sz.maxY, sz.maxZ);
-                    ZONES.put(sz.id, new NullZone(box, sz.dimension));
+                    BlockPos obeliskPos = sz.obeliskX != null
+                            ? new BlockPos(sz.obeliskX, sz.obeliskY, sz.obeliskZ)
+                            : null;
+                    ZONES.put(sz.id, new NullZone(box, sz.dimension, obeliskPos));
                 }
             }
         } catch (Exception e) {
@@ -59,13 +60,9 @@ public class ZoneManager {
     }
 
     private static void saveZones() {
-        if (saveFile == null) {
-            return;
-        }
-
+        if (saveFile == null) return;
         try {
             Files.createDirectories(saveFile.getParent());
-
             List<SerializedZone> serializedZones = new ArrayList<>();
             for (Map.Entry<UUID, NullZone> entry : ZONES.entrySet()) {
                 NullZone zone = entry.getValue();
@@ -73,10 +70,9 @@ public class ZoneManager {
                         entry.getKey(),
                         zone.box.minX, zone.box.minY, zone.box.minZ,
                         zone.box.maxX, zone.box.maxY, zone.box.maxZ,
-                        zone.dimension
+                        zone.dimension, zone.obeliskPos
                 ));
             }
-
             try (Writer writer = Files.newBufferedWriter(saveFile)) {
                 GSON.toJson(serializedZones, writer);
             }
@@ -86,7 +82,12 @@ public class ZoneManager {
     }
 
     public static void addZone(UUID id, Box box, String dimension) {
-        ZONES.put(id, new NullZone(box, dimension));
+        ZONES.put(id, new NullZone(box, dimension, null));
+        saveZones();
+    }
+
+    public static void addZone(UUID id, Box box, String dimension, BlockPos obeliskPos) {
+        ZONES.put(id, new NullZone(box, dimension, obeliskPos));
         saveZones();
     }
 
@@ -107,7 +108,7 @@ public class ZoneManager {
 
     public static void tick(MinecraftServer server) {
         for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
-            boolean inZone = isInAnyZone(player);
+            boolean inZone = isInRestrictedZone(player);
             UUID playerId = player.getUuid();
 
             if (inZone && !STORED_ENCHANTS.containsKey(playerId)) {
@@ -116,6 +117,27 @@ public class ZoneManager {
                 restoreEnchantments(player);
             }
         }
+    }
+
+    private static boolean isInRestrictedZone(ServerPlayerEntity player) {
+        String dimension = player.getEntityWorld().getRegistryKey().getValue().toString();
+        for (Map.Entry<UUID, NullZone> entry : ZONES.entrySet()) {
+            NullZone zone = entry.getValue();
+            if (!zone.dimension.equals(dimension)) continue;
+            if (!zone.box.contains(player.getPos())) continue;
+
+            if (zone.obeliskPos != null) {
+                net.minecraft.world.World world = player.getEntityWorld();
+                if (world.getBlockEntity(zone.obeliskPos) instanceof ObeliskBlockEntity be) {
+                    if (be.isAllowed(player.getUuid())) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+        return false;
     }
 
     private static boolean isInAnyZone(ServerPlayerEntity player) {
@@ -195,10 +217,13 @@ public class ZoneManager {
     public static class NullZone {
         public final Box box;
         public final String dimension;
+        @Nullable
+        public final BlockPos obeliskPos;
 
-        public NullZone(Box box, String dimension) {
+        public NullZone(Box box, String dimension, @Nullable BlockPos obeliskPos) {
             this.box = box;
             this.dimension = dimension;
+            this.obeliskPos = obeliskPos;
         }
     }
 
@@ -219,21 +244,28 @@ public class ZoneManager {
 
     private static class SerializedZone {
         UUID id;
-        double minX, minY, minZ;
-        double maxX, maxY, maxZ;
+        double minX, minY, minZ, maxX, maxY, maxZ;
         String dimension;
+        @Nullable Integer obeliskX, obeliskY, obeliskZ;
 
         SerializedZone(UUID id, double minX, double minY, double minZ,
-                       double maxX, double maxY, double maxZ, String dimension) {
+                       double maxX, double maxY, double maxZ,
+                       String dimension, @Nullable BlockPos obeliskPos) {
             this.id = id;
-            this.minX = minX;
-            this.minY = minY;
-            this.minZ = minZ;
-            this.maxX = maxX;
-            this.maxY = maxY;
-            this.maxZ = maxZ;
+            this.minX = minX; this.minY = minY; this.minZ = minZ;
+            this.maxX = maxX; this.maxY = maxY; this.maxZ = maxZ;
             this.dimension = dimension;
+            if (obeliskPos != null) {
+                this.obeliskX = obeliskPos.getX();
+                this.obeliskY = obeliskPos.getY();
+                this.obeliskZ = obeliskPos.getZ();
+            }
         }
+    }
+
+    public static void removeZone(UUID id) {
+        ZONES.remove(id);
+        saveZones();
     }
 }
 

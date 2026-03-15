@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:nether_roof",
+  "criteria": {
+    "has_necklace_ethereal": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:necklace_of_the_ethereal"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Obtain a Necklace of the Ethereal."
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "item": "dominium:necklace_of_the_ethereal"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Ethereal"
+    }
+  },
+  "requirements": [
+    [
+      "has_necklace_ethereal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

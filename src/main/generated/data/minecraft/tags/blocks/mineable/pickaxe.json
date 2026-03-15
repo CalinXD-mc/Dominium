@@ -9,6 +9,13 @@
     "dominium:soul_glass",
     "dominium:waystone",
     "dominium:idol",
-    "dominium:vessel"
+    "dominium:vessel",
+    "dominium:obelisk",
+    "dominium:swapper",
+    "dominium:dominic_bricks",
+    "dominium:dominic_bricks_stairs",
+    "dominium:dominic_bricks_slab",
+    "dominium:dominic_bricks_wall",
+    "dominium:chiseled_dominic_bricks"
   ]
 }

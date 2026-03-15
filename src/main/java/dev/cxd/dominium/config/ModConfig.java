@@ -20,15 +20,22 @@ public class ModConfig extends MidnightConfig {
     @Entry(category = GENERAL, name = "Should the Void of The Nether teleport the player 512 blocks above The Nether Roof.")
     public static boolean isTheNetherVoidSafe = true;
 
+    @Comment(category = GENERAL, centered = true) public static Comment soul_candle;
+
+    @Entry(category = GENERAL, name = "Soul Candle Radius", min = 1, max = 256)
+    public static int SOUL_CANDLE_RADIUS = 64;
+
     @Comment(category = GENERAL, centered = true) public static Comment idol;
 
     @Entry(category = GENERAL, name = "Idol Protection Radius", min = 12, max = 256)
     public static int IDOL_PROTECTION_RADIUS = 96;
 
-    @Comment(category = GENERAL, centered = true) public static Comment soul_candle;
+    @Comment(category = GENERAL, centered = true) public static Comment obelisk;
 
-    @Entry(category = GENERAL, name = "Soul Candle Radius", min = 1, max = 256)
-    public static int SOUL_CANDLE_RADIUS = 64;
+    @Entry(category = GENERAL, name = "Obelisk Protection Radius", min = 8, max = 256)
+    public static int OBELISK_PROTECTION_RADIUS = 24;
+    @Entry(category = GENERAL, name = "Obelisk Protection Height", min = 8, max = 256)
+    public static int OBELISK_PROTECTION_HEIGHT = 64;
 
     @Comment(category = GENERAL, centered = true) public static Comment eternal_divinity;
 

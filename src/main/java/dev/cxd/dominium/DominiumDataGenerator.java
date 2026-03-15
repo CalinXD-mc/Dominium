@@ -7,13 +7,14 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 public class DominiumDataGenerator implements DataGeneratorEntrypoint {
 
 	/*
-		Datagen is Ran by using "./gradlew runDatagenClient"
+		Datagen is Ran by using "runDatagenClient"
 	*/
 
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
+		pack.addProvider(ModAdvancementProvider::new);
 		pack.addProvider(ModModelProvider::new);
 		pack.addProvider(ModReferenceEnglishLangProvider::new);
 		pack.addProvider(ModBlockTagProvider::new);

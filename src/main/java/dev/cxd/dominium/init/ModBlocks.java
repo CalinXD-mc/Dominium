@@ -2,8 +2,11 @@ package dev.cxd.dominium.init;
 
 import dev.cxd.dominium.Dominium;
 import dev.cxd.dominium.block.*;
+import dev.cxd.dominium.block.misc.FunnyBoneBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
+import net.minecraft.block.enums.Instrument;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -34,6 +37,28 @@ public class ModBlocks {
             new SlabBlock(FabricBlockSettings.copyOf(Blocks.SMOOTH_SANDSTONE)));
     public static final Block SMOOTH_SOUL_SANDSTONE_WALL = registerBlock("smooth_soul_sandstone_wall",
             new WallBlock(FabricBlockSettings.copyOf(Blocks.SMOOTH_SANDSTONE)));
+
+    public static final Block DOMINIC_BRICKS = registerBlock("dominic_bricks",
+            new Block(AbstractBlock.Settings.create()
+                    .mapColor(MapColor.GOLD)
+                    .sounds(BlockSoundGroup.STONE)
+                    .strength(3.5F, 6.0F)
+                    .requiresTool()
+            ));
+    public static final Block DOMINIC_BRICKS_STAIRS = registerBlock("dominic_bricks_stairs",
+            new StairsBlock(ModBlocks.DOMINIC_BRICKS.getDefaultState(), FabricBlockSettings.copyOf(Blocks.STONE_BRICKS)));
+    public static final Block DOMINIC_BRICKS_SLAB = registerBlock("dominic_bricks_slab",
+            new SlabBlock(FabricBlockSettings.copyOf(Blocks.STONE_BRICKS)));
+    public static final Block DOMINIC_BRICKS_WALL = registerBlock("dominic_bricks_wall",
+            new WallBlock(FabricBlockSettings.copyOf(Blocks.STONE_BRICKS)));
+
+    public static final Block CHISELED_DOMINIC_BRICKS = registerBlock("chiseled_dominic_bricks",
+            new Block(AbstractBlock.Settings.create()
+                    .mapColor(MapColor.GOLD)
+                    .sounds(BlockSoundGroup.STONE)
+                    .strength(3.5F, 6.0F)
+                    .requiresTool()
+            ));
 
     public static final Block SOUL_GLASS = registerBlock("soul_glass",
             new SoulGlass(FabricBlockSettings.copyOf(Blocks.GLASS)));
@@ -70,6 +95,29 @@ public class ModBlocks {
                     .solidBlock(Blocks::never)
                     .blockVision(Blocks::never)
             ));
+    public static final Block OBELISK = registerBlock("obelisk",
+            new ObeliskBlock(AbstractBlock.Settings.create()
+                    .mapColor(MapColor.GRAY)
+                    .sounds(BlockSoundGroup.LODESTONE)
+                    .strength(3.5F, 50.0F)
+                    .requiresTool()
+                    .nonOpaque()
+                    .solidBlock(Blocks::never)
+                    .blockVision(Blocks::never)
+                    .pistonBehavior(PistonBehavior.BLOCK)
+            ), 1);
+    public static final Block SWAPPER = registerBlock("swapper",
+            new SwapperBlock(AbstractBlock.Settings.create()
+                    .mapColor(MapColor.GRAY)
+                    .sounds(BlockSoundGroup.LODESTONE)
+                    .strength(3.5F, 50.0F)
+                    .requiresTool()
+                    .nonOpaque()
+                    .solidBlock(Blocks::never)
+                    .blockVision(Blocks::never)
+                    .pistonBehavior(PistonBehavior.BLOCK)
+                    .luminance(state -> state.get(SwapperBlock.POWERED) ? 10 : 0)
+            ));
 
     public static final Block SOUL_CANDLE = registerBlock("soul_candle", new WardingSoulCandleBlock(AbstractBlock.Settings.create()
             .mapColor(MapColor.BROWN)
@@ -83,12 +131,24 @@ public class ModBlocks {
     public static final Block SUS_DIRT = registerBlock("suspicious_dirt", new BrushableBlock(Blocks.DIRT, AbstractBlock.Settings.copy(Blocks.SUSPICIOUS_SAND), SoundEvents.ITEM_BRUSH_BRUSHING_GRAVEL, SoundEvents.ITEM_BRUSH_BRUSHING_GRAVEL_COMPLETE));
     public static final Block SUS_SOUL_SAND = registerBlock("suspicious_soul_sand", new BrushableBlock(Blocks.SOUL_SAND, AbstractBlock.Settings.copy(Blocks.SUSPICIOUS_SAND), SoundEvents.ITEM_BRUSH_BRUSHING_SAND, SoundEvents.ITEM_BRUSH_BRUSHING_SAND_COMPLETE));
 
+    public static final Block FUNNY_BONE_BLOCK = registerBlock("block_of_skulls",
+            new FunnyBoneBlock(AbstractBlock.Settings
+                    .copy(Blocks.BONE_BLOCK)
+                    .instrument(Instrument.SKELETON)
+            ));
+
     private static Block registerBlockWithoutBlockItem(String name, Block block) {
         return Registry.register(Registries.BLOCK, Identifier.of(Dominium.MOD_ID, name), block);
     }
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
+        return Registry.register(Registries.BLOCK, Identifier.of(Dominium.MOD_ID, name), block);
+    }
+
+    private static Block registerBlock(String name, Block block, int maxCount) {
+        Registry.register(Registries.ITEM, Identifier.of(Dominium.MOD_ID, name),
+                new BlockItem(block, new Item.Settings().maxCount(maxCount)));
         return Registry.register(Registries.BLOCK, Identifier.of(Dominium.MOD_ID, name), block);
     }
 

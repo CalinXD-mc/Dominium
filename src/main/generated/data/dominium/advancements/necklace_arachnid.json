@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:nether_roof",
+  "criteria": {
+    "has_necklace_arachnid": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:necklace_of_the_arachnid"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Obtain a Necklace of the Arachnid."
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "item": "dominium:necklace_of_the_arachnid"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Arachnid"
+    }
+  },
+  "requirements": [
+    [
+      "has_necklace_arachnid"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:soul_orb",
+  "criteria": {
+    "has_obelisk": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:obelisk"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Obtain the Supreme Device of Soul Magic, The Obelisk."
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "dominium:obelisk"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Claiming Back What's Yours."
+    }
+  },
+  "requirements": [
+    [
+      "has_obelisk"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

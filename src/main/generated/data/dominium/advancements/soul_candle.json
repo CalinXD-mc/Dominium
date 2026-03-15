@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:soul_orb",
+  "criteria": {
+    "has_soul_candle": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:soul_candle"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Obtain a Soul Candle."
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dominium:soul_candle"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Building in the Dark"
+    }
+  },
+  "requirements": [
+    [
+      "has_soul_candle"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

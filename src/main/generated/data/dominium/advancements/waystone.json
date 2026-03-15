@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:root",
+  "criteria": {
+    "has_waystone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:waystone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Obtain a Waystone."
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dominium:waystone"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "The Stone That Leads the Way"
+    }
+  },
+  "requirements": [
+    [
+      "has_waystone"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

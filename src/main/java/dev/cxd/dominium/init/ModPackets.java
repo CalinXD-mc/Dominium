@@ -11,7 +11,11 @@ import java.util.UUID;
 
 public class ModPackets {
     public static final Identifier PARTICLE_SPAWN_ID = new Identifier(Dominium.MOD_ID, "particle_spawn");
-    public static final Map<UUID, UUID> CLIENT_SOUL_CHAINS = new HashMap<>();
+
+    public static final Identifier SOULBOUND_ACTION_ID =
+            new Identifier(Dominium.MOD_ID, "soulbound_action");
+    public static final Identifier OPEN_SOULBOUND_SCREEN_ID =
+            new Identifier(Dominium.MOD_ID, "open_soulbound_screen");
 
     public static void initializePackets() {
         ServerPlayNetworking.registerGlobalReceiver(PARTICLE_SPAWN_ID, (server, player, handler, buf, responseSender) -> {

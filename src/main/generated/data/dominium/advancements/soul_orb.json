@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:root",
+  "criteria": {
+    "has_soul_orb": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:soul_orb"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Obtain a Soul Orb by killing any Player (including you) on Soul Sand."
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dominium:soul_orb"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Thy Demise is Now"
+    }
+  },
+  "requirements": [
+    [
+      "has_soul_orb"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

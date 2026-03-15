@@ -2,6 +2,7 @@ package dev.cxd.dominium.client.entity.eternal_divinity_chains;
 
 import dev.cxd.dominium.Dominium;
 import dev.cxd.dominium.entity.EternalDivinityChainsEntity;
+import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
@@ -29,7 +30,7 @@ public class EternalDivinityChainsRenderer extends EntityRenderer<EternalDivinit
     public void render(EternalDivinityChainsEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         matrices.push();
         model.setAngles(entity, 0, 0, entity.age + tickDelta, 0, 0);
-        model.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(getTexture(entity))), light, 0, 1, 1, 1, 1);
+        model.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(getTexture(entity))), light, OverlayTexture.DEFAULT_UV, 1, 1, 1, 1);
         matrices.pop();
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
     }

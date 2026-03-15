@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=y,powered=false": { "model": "dominium:block/swapper" },
+    "axis=z,powered=false": { "model": "dominium:block/swapper", "x": 90 },
+    "axis=x,powered=false": { "model": "dominium:block/swapper", "x": 90, "y": 90 },
+    "axis=y,powered=true":  { "model": "dominium:block/swapper_on" },
+    "axis=z,powered=true":  { "model": "dominium:block/swapper_on", "x": 90 },
+    "axis=x,powered=true":  { "model": "dominium:block/swapper_on", "x": 90, "y": 90 }
+  }
+}

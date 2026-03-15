@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "part=lower":  { "model": "dominium:block/obelisk_empty" },
+    "part=middle": { "model": "dominium:block/obelisk" },
+    "part=upper":  { "model": "dominium:block/obelisk_empty" }
+  }
+}

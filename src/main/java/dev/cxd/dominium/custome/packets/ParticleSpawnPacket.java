@@ -279,6 +279,102 @@ public class ParticleSpawnPacket {
                 ScreenshakeHandler.addScreenshake(new PositionedScreenshakeInstance
                         (150, pos, 600f, 1000f, Easing.SINE_IN_OUT).setIntensity(5f, 10f, 0f));
             }
+            case "block_outline_dominic_orb" -> {
+                int COUNT = 12;
+
+                double[][] edges = {
+                        {-0.5, -0.5, -0.5,   0.5, -0.5, -0.5},
+                        { 0.5, -0.5, -0.5,   0.5, -0.5,  0.5},
+                        { 0.5, -0.5,  0.5,  -0.5, -0.5,  0.5},
+                        {-0.5, -0.5,  0.5,  -0.5, -0.5, -0.5},
+
+                        {-0.5,  0.5, -0.5,   0.5,  0.5, -0.5},
+                        { 0.5,  0.5, -0.5,   0.5,  0.5,  0.5},
+                        { 0.5,  0.5,  0.5,  -0.5,  0.5,  0.5},
+                        {-0.5,  0.5,  0.5,  -0.5,  0.5, -0.5},
+
+                        {-0.5, -0.5, -0.5,  -0.5,  0.5, -0.5},
+                        { 0.5, -0.5, -0.5,   0.5,  0.5, -0.5},
+                        { 0.5, -0.5,  0.5,   0.5,  0.5,  0.5},
+                        {-0.5, -0.5,  0.5,  -0.5,  0.5,  0.5},
+                };
+
+                for (double[] edge : edges) {
+                    double x1 = edge[0], y1 = edge[1], z1 = edge[2];
+                    double x2 = edge[3], y2 = edge[4], z2 = edge[5];
+
+                    for (int i = 0; i < COUNT; i++) {
+                        double t = (i + 0.5) / COUNT;
+
+                        double px = pos.x + x1 + t * (x2 - x1);
+                        double py = pos.y + y1 + t * (y2 - y1);
+                        double pz = pos.z + z1 + t * (z2 - z1);
+
+                        WorldParticleBuilder.create(LodestoneParticleRegistry.SMOKE_PARTICLE)
+                                .setScaleData(GenericParticleData.create(0.15f, 0.3f, 0f).build())
+                                .setTransparencyData(GenericParticleData.create(1f, 0f)
+                                        .setEasing(Easing.EXPO_OUT)
+                                        .build())
+                                .setColorData(ColorParticleData.create(startColor, endColor)
+                                        .setCoefficient(1.2f)
+                                        .setEasing(Easing.LINEAR)
+                                        .build())
+                                .setLifetime(40)
+                                .addMotion(0, 0, 0)
+                                .enableNoClip()
+                                .setForceSpawn(true)
+                                .spawn(world, px, py, pz);
+                    }
+                }
+            }
+            case "block_outline_obelisk" -> {
+                int COUNT = 12;
+
+                double[][] edges = {
+                        {-0.5, -0.5, -0.5,   0.5, -0.5, -0.5},
+                        { 0.5, -0.5, -0.5,   0.5, -0.5,  0.5},
+                        { 0.5, -0.5,  0.5,  -0.5, -0.5,  0.5},
+                        {-0.5, -0.5,  0.5,  -0.5, -0.5, -0.5},
+
+                        {-0.5,  0.5, -0.5,   0.5,  0.5, -0.5},
+                        { 0.5,  0.5, -0.5,   0.5,  0.5,  0.5},
+                        { 0.5,  0.5,  0.5,  -0.5,  0.5,  0.5},
+                        {-0.5,  0.5,  0.5,  -0.5,  0.5, -0.5},
+
+                        {-0.5, -0.5, -0.5,  -0.5,  0.5, -0.5},
+                        { 0.5, -0.5, -0.5,   0.5,  0.5, -0.5},
+                        { 0.5, -0.5,  0.5,   0.5,  0.5,  0.5},
+                        {-0.5, -0.5,  0.5,  -0.5,  0.5,  0.5},
+                };
+
+                for (double[] edge : edges) {
+                    double x1 = edge[0], y1 = edge[1], z1 = edge[2];
+                    double x2 = edge[3], y2 = edge[4], z2 = edge[5];
+
+                    for (int i = 0; i < COUNT; i++) {
+                        double t = (i + 0.5) / COUNT;
+
+                        double px = pos.x + x1 + t * (x2 - x1);
+                        double py = pos.y + y1 + t * (y2 - y1);
+                        double pz = pos.z + z1 + t * (z2 - z1);
+
+                        WorldParticleBuilder.create(LodestoneParticleRegistry.SMOKE_PARTICLE)
+                                .setScaleData(GenericParticleData.create(0.15f, 0.3f, 0f).build())
+                                .setTransparencyData(GenericParticleData.create(0.05f, 0.05f)
+                                        .setEasing(Easing.EXPO_OUT)
+                                        .build())
+                                .setColorData(ColorParticleData.create(startColor, endColor)
+                                        .setCoefficient(1.2f)
+                                        .setEasing(Easing.LINEAR)
+                                        .build())
+                                .setLifetime(20)
+                                .setRandomMotion(0.01f, 0.01f, 0.01f)
+                                .enableNoClip()
+                                .setForceSpawn(true)
+                                .spawn(world, px, py, pz);
+                    }
+                }
+            }
         }
     }
 }

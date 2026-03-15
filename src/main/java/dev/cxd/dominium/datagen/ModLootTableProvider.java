@@ -24,5 +24,11 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.IDOL);
         addDrop(ModBlocks.VESSEL);
         addDrop(ModBlocks.SOUL_CANDLE);
+        addDrop(ModBlocks.SWAPPER);
+        addDrop(ModBlocks.DOMINIC_BRICKS);
+        addDrop(ModBlocks.DOMINIC_BRICKS_STAIRS);
+        addDrop(ModBlocks.DOMINIC_BRICKS_WALL);
+        addDrop(ModBlocks.CHISELED_DOMINIC_BRICKS);
+        slabDrops(ModBlocks.DOMINIC_BRICKS_SLAB);
     }
 }

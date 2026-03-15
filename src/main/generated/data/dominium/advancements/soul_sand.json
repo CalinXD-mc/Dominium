@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:root",
+  "criteria": {
+    "has_soul_sand": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:soul_sand"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Obtain Soul Sand."
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:soul_sand"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Soul Rich Sand"
+    }
+  },
+  "requirements": [
+    [
+      "has_soul_sand"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

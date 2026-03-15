@@ -32,6 +32,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 
 import java.awt.*;
@@ -224,29 +225,6 @@ public class EternalDivinityChainsEntity extends MobEntity {
 
                             player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.REGRET, 20 * 5, 0, false, false, true));
 
-                            ItemStack stackInHand = player.getStackInHand(hand);
-
-                            if (stackInHand.isOf(ModItems.DOMINIC_DAGGER)) {
-                                if (!getWorld().isClient()) {
-                                    double radius = 8.0D;
-                                    int noOfExplosions = 24;
-
-                                    for (int i = 0; i < noOfExplosions; i++) {
-                                        double angle = (Math.PI * 2 / 8) * i;
-                                        double x = this.getX() + Math.cos(angle) * radius;
-                                        double z = this.getZ() + Math.sin(angle) * radius;
-                                        double y = this.getY();
-
-                                        getWorld().createExplosion(
-                                                null,
-                                                x, y, z,
-                                                12.0f,
-                                                World.ExplosionSourceType.BLOCK
-                                        );
-                                    }
-                                }
-                            }
-
                             this.discard();
 
                             return ActionResult.SUCCESS;
@@ -261,7 +239,13 @@ public class EternalDivinityChainsEntity extends MobEntity {
 
 
     public static void banOrSpectator(ServerPlayerEntity player) {
+        MinecraftServer server = player.getServer();
+        assert server != null;
+        server.getGameRules().get(GameRules.SHOW_DEATH_MESSAGES).set(false, server);
+        player.changeGameMode(GameMode.SURVIVAL);
+        player.damage(player.getWorld().getDamageSources().genericKill(), Float.MAX_VALUE);
         player.changeGameMode(GameMode.SPECTATOR);
+        server.getGameRules().get(GameRules.SHOW_DEATH_MESSAGES).set(true, server);
     }
 
     @Override

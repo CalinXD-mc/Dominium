@@ -2,7 +2,9 @@ package dev.cxd.dominium.mixin.client;
 
 import dev.cxd.dominium.config.ModConfig;
 import dev.cxd.dominium.satin.ShaderHandler;
+import dev.cxd.dominium.utils.AdvancementsUtils;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.border.WorldBorder;

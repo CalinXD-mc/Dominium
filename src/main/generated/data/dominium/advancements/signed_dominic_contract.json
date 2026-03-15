@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:dominic_contract",
+  "criteria": {
+    "has_signed_dominic_contract": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:contract_signed_soulbound"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "text": "Obtain a Signed Dominic Contract. Don't give it away to anyone. Get rid of it while you still can."
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "item": "dominium:contract_signed_soulbound"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Don't Give That Away."
+    }
+  },
+  "requirements": [
+    [
+      "has_signed_dominic_contract"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "dominium:block/dominic_bricks",
+    "side": "dominium:block/dominic_bricks",
+    "top": "dominium:block/dominic_bricks"
+  }
+}

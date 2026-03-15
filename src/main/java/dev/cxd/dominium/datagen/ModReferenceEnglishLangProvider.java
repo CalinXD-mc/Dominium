@@ -20,6 +20,13 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("block.dominium.smooth_soul_sandstone_slab", "Smooth Soul Sandstone Slab");
         translationBuilder.add("block.dominium.smooth_soul_sandstone_wall", "Smooth Soul Sandstone Wall");
 
+        translationBuilder.add("block.dominium.dominic_bricks", "Dominic Bricks");
+
+        translationBuilder.add("block.dominium.chiseled_dominic_bricks", "Chiseled Dominic Bricks");
+        translationBuilder.add("block.dominium.dominic_bricks_stairs", "Dominic Brick Stairs");
+        translationBuilder.add("block.dominium.dominic_bricks_slab", "Dominic Brick Slab");
+        translationBuilder.add("block.dominium.dominic_bricks_wall", "Dominic Brick Wall");
+
         translationBuilder.add("block.dominium.suspicious_bone_block", "Bone Block");
         translationBuilder.add("block.dominium.suspicious_bone_block.alt", "Bone Block?");
 
@@ -29,6 +36,8 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("block.dominium.waystone", "Waystone");
         translationBuilder.add("block.dominium.idol", "Idol");
         translationBuilder.add("block.dominium.vessel", "Vessel");
+        translationBuilder.add("block.dominium.swapper", "Swapper");
+        translationBuilder.add("block.dominium.obelisk", "Obelisk");
 
         translationBuilder.add("block.dominium.suspicious_dirt", "Suspicious Dirt");
         translationBuilder.add("block.dominium.suspicious_soul_sand", "Suspicious Soul Sand");
@@ -76,6 +85,10 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("item.dominium.necklace_of_the_arachnid", "Necklace of the Arachnid");
         translationBuilder.add("item.dominium.necklace_of_the_ethereal", "Necklace of the Ethereal");
 
+        translationBuilder.add("item.dominium.vassal_item", "Vassal");
+        translationBuilder.add("block.dominium.block_of_skulls", "Block of Skulls");
+        translationBuilder.add("item.dominium.eye_of_the_apex", "Eye of the Apex");
+
         //Damage Types
         translationBuilder.add("death.attack.disobedience", "%1$s's life was punished by the contract");
         translationBuilder.add("death.attack.disobedience.player", "%1$s's life was punished by the contract");
@@ -92,6 +105,10 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("subtitles.soul_glass.soul_glass_pling","Soul Glass Plings");
         translationBuilder.add("subtitles.roofling.roofling_ambient","???");
         translationBuilder.add("subtitles.nether.glitch","Garbage Noise");
+        translationBuilder.add("subtitles.vassal.vassal_damage", "Vassal Hurts");
+        translationBuilder.add("subtitles.vassal.vassal_death", "Vassal Dies");
+        translationBuilder.add("subtitles.vassal.vassal_attack", "Vassal Attacks");
+        translationBuilder.add("subtitles.vassal.vassal_ambient", "Vassal Noise");
 
         //misc
         translationBuilder.add("itemGroup.dominium.dominium", "Dominium");
@@ -99,6 +116,8 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
 
         //entities
         translationBuilder.add("entity.dominium.roofling", "Roofling");
+        translationBuilder.add("info.dominium.vassal_deactivate", "Vassal Deactivated");
+        translationBuilder.add("info.dominium.vassal_activate", "Vassal Activated");
 
         //config
         translationBuilder.add("dominium.midnightconfig.title", "Dominium");

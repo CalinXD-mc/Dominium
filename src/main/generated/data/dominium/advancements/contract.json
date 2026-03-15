@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:soul_orb",
+  "criteria": {
+    "has_contract": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:contract"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Obtain a Contract."
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dominium:contract"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Dealing in Souls"
+    }
+  },
+  "requirements": [
+    [
+      "has_contract"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

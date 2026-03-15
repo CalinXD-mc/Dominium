@@ -23,6 +23,33 @@
     ],
     "subtitle": "subtitles.event.dominium_boom"
   },
+  "entity.dominium.vassal_damage": {
+    "sounds": [
+      "dominium:entity/vassal/vassal_damage_1"
+    ],
+    "subtitle": "subtitles.vassal.vassal_damage"
+  },
+  "entity.dominium.vassal_death": {
+    "sounds": [
+      "dominium:entity/vassal/vassal_death_1"
+    ],
+    "subtitle": "subtitles.vassal.vassal_death"
+  },
+  "entity.dominium.vassal_attack": {
+    "sounds": [
+      "dominium:entity/vassal/vassal_attack_1",
+      "dominium:entity/vassal/vassal_attack_2",
+      "dominium:entity/vassal/vassal_attack_3"
+    ],
+    "subtitle": "subtitles.vassal.vassal_attack"
+  },
+  "entity.dominium.vassal_ambient": {
+    "sounds": [
+      "dominium:entity/vassal/vassal_ambient_1",
+      "dominium:entity/vassal/vassal_ambient_2"
+    ],
+    "subtitle": "subtitles.vassal.vassal_ambient"
+  },
   "entity.dominium.roofling_ambient": {
     "sounds": [
       "dominium:entity/roofling/roofling1",
@@ -36,5 +63,11 @@
       "dominium:world/nether/glitch"
     ],
     "subtitle": "subtitles.nether.glitch"
+  },
+  "misc.funny.bone": {
+    "sounds": [
+      "dominium:bone"
+    ],
+    "subtitle": "!?!?!?"
   }
 }

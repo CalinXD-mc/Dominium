@@ -16,6 +16,7 @@ public class ModParticles {
     public static final DefaultParticleType Y_GILDED_ONYX_PARTICLE = FabricParticleTypes.simple();
     public static final DefaultParticleType Z_GILDED_ONYX_PARTICLE = FabricParticleTypes.simple();
     public static final DefaultParticleType GEAR_GILDED_ONYX_PARTICLE = FabricParticleTypes.simple();
+    public static final DefaultParticleType OBELISK_PARTICLE = FabricParticleTypes.simple();
 
     public static void initialize() {
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(Dominium.MOD_ID, "chant"), CHANT);
@@ -25,5 +26,6 @@ public class ModParticles {
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(Dominium.MOD_ID, "y_gilded_onyx_particle"), Y_GILDED_ONYX_PARTICLE);
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(Dominium.MOD_ID, "z_gilded_onyx_particle"), Z_GILDED_ONYX_PARTICLE);
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(Dominium.MOD_ID, "gear_gilded_onyx_particle"), GEAR_GILDED_ONYX_PARTICLE);
+        Registry.register(Registries.PARTICLE_TYPE, Identifier.of(Dominium.MOD_ID, "obelisk_particle"), OBELISK_PARTICLE);
     }
 }

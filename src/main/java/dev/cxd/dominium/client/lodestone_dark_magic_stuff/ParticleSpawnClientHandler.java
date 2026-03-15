@@ -55,6 +55,12 @@ public class ParticleSpawnClientHandler {
                 case "screen_shake_extreme":
                     ParticleSpawnPacket.spawnCustomParticle(client.world, pos, startColor, endColor, "screen_shake_extreme");
                     break;
+                case "block_outline_dominic_orb":
+                    ParticleSpawnPacket.spawnCustomParticle(client.world, pos, startColor, endColor, "block_outline_dominic_orb");
+                    break;
+                case "block_outline_obelisk":
+                    ParticleSpawnPacket.spawnCustomParticle(client.world, pos, startColor, endColor, "block_outline_obelisk");
+                    break;
             }
         });
     }

@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:root",
+  "criteria": {
+    "has_swapper": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:swapper"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Obtain a Swapper."
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dominium:swapper"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Switcheroo"
+    }
+  },
+  "requirements": [
+    [
+      "has_swapper"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

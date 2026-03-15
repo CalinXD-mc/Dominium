@@ -8,14 +8,14 @@
     "D": {
       "item": "minecraft:deepslate_tiles"
     },
-    "E": {
-      "item": "minecraft:ender_eye"
+    "I": {
+      "item": "minecraft:iron_ingot"
     }
   },
   "pattern": [
-    "DDD",
-    "DED",
-    " A "
+    "IDI",
+    "DAD",
+    "IDI"
   ],
   "result": {
     "item": "dominium:vessel"

@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "dominium:block/swapper/swapper",
+    "side": "dominium:block/swapper/swapper_side"
+  }
+}

@@ -24,9 +24,12 @@ public class GhostedEffect extends StatusEffect {
     @Override
     public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
         if (entity instanceof ServerPlayerEntity player) {
-            player.changeGameMode(GameMode.SURVIVAL);
-            player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.REGRET, 20 * 15, 0, true, false, false));
-            player.teleport(0, 200, 0);
+            player.getServer().execute(() -> {
+                player.changeGameMode(GameMode.SURVIVAL);
+                player.addStatusEffect(new StatusEffectInstance(
+                        ModStatusEffects.REGRET, 20 * 15, 0, true, false, false));
+                player.teleport(0, 360, 0);
+            });
         }
         super.onRemoved(entity, attributes, amplifier);
     }

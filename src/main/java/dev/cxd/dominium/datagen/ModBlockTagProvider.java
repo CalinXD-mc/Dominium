@@ -24,20 +24,34 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.SOUL_GLASS)
                 .add(ModBlocks.WAYSTONE)
                 .add(ModBlocks.IDOL)
-                .add(ModBlocks.VESSEL);
+                .add(ModBlocks.VESSEL)
+                .add(ModBlocks.OBELISK)
+                .add(ModBlocks.SWAPPER)
+                .add(ModBlocks.DOMINIC_BRICKS)
+                .add(ModBlocks.DOMINIC_BRICKS_STAIRS)
+                .add(ModBlocks.DOMINIC_BRICKS_SLAB)
+                .add(ModBlocks.DOMINIC_BRICKS_WALL)
+                .add(ModBlocks.CHISELED_DOMINIC_BRICKS);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL)
                 .add(ModBlocks.WAYSTONE)
                 .add(ModBlocks.IDOL)
-                .add(ModBlocks.VESSEL);
+                .add(ModBlocks.VESSEL)
+                .add(ModBlocks.SWAPPER);
+
+        getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL)
+                .add(ModBlocks.OBELISK);
 
         getOrCreateTagBuilder(BlockTags.STAIRS)
-                .add(ModBlocks.SMOOTH_SOUL_SANDSTONE_STAIRS);
+                .add(ModBlocks.SMOOTH_SOUL_SANDSTONE_STAIRS)
+                .add(ModBlocks.DOMINIC_BRICKS_STAIRS);
 
         getOrCreateTagBuilder(BlockTags.SLABS)
-                .add(ModBlocks.SMOOTH_SOUL_SANDSTONE_SLAB);
+                .add(ModBlocks.SMOOTH_SOUL_SANDSTONE_SLAB)
+                .add(ModBlocks.DOMINIC_BRICKS_SLAB);
 
         getOrCreateTagBuilder(BlockTags.WALLS)
-                .add(ModBlocks.SMOOTH_SOUL_SANDSTONE_WALL);
+                .add(ModBlocks.SMOOTH_SOUL_SANDSTONE_WALL)
+                .add(ModBlocks.DOMINIC_BRICKS_WALL);
     }
 }

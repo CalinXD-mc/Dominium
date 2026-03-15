@@ -1,0 +1,30 @@
+{
+  "criteria": {
+    "tick": {
+      "conditions": {},
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
+    "description": {
+      "text": "Thanks for Using Dominium!!!"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dominium:soul_orb"
+    },
+    "show_toast": false,
+    "title": {
+      "text": "Dominium"
+    }
+  },
+  "requirements": [
+    [
+      "tick"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

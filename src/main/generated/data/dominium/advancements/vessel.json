@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:contract",
+  "criteria": {
+    "has_vessel": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:vessel"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Obtain a Vessel. Place a Soul Fire source 2 blocks below it and insert a Contract inside it to apply bad effects to The Signer."
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dominium:vessel"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Masonic Voodoo"
+    }
+  },
+  "requirements": [
+    [
+      "has_vessel"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

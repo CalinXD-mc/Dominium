@@ -1,6 +1,8 @@
 package dev.cxd.dominium.mixin;
 
 import dev.cxd.dominium.Dominium;
+import dev.cxd.dominium.init.ModStatusEffects;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -8,6 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerManager.class)
 public abstract class PlayerManagerMixin {
@@ -31,5 +34,21 @@ public abstract class PlayerManagerMixin {
                 return;
             }
         }
+    }
+
+    @Inject(method = "respawnPlayer", at = @At("RETURN"))
+    private void reapplyGhostedEffect(ServerPlayerEntity oldPlayer, boolean alive, CallbackInfoReturnable<ServerPlayerEntity> cir) {
+        StatusEffectInstance ghosted = oldPlayer.getStatusEffect(ModStatusEffects.GHOSTED);
+        if (ghosted == null) return;
+
+        ServerPlayerEntity newPlayer = cir.getReturnValue();
+        newPlayer.addStatusEffect(new StatusEffectInstance(
+                ghosted.getEffectType(),
+                ghosted.getDuration(),
+                ghosted.getAmplifier(),
+                ghosted.isAmbient(),
+                ghosted.shouldShowParticles(),
+                ghosted.shouldShowIcon()
+        ));
     }
 }

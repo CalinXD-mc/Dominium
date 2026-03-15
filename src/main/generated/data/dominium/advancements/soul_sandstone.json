@@ -1,0 +1,38 @@
+{
+  "parent": "dominium:soul_sand",
+  "criteria": {
+    "has_soul_sandstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dominium:soul_sandstone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Obtain Soul Sandstone."
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dominium:soul_sandstone"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Stylish Souls"
+    }
+  },
+  "requirements": [
+    [
+      "has_soul_sandstone"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
