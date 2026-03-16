@@ -13,14 +13,17 @@
     "configurable.WitherEntityMixin"
   ],
   "client": [
-    "client.KeyboardInputMixin",
+    "client.ChatHudMixin",
     "client.ClientPlayerEntityMixin",
     "client.EntityRenderDispatcherMixin",
     "client.ItemRendererAccessor",
     "client.ItemRendererMixin",
+    "client.KeyboardInputMixin",
     "client.LivingEntityRendererMixin",
+    "client.MessageHandlerMixin",
     "client.MinecraftClientMixin",
     "client.ModelLoaderMixin",
+    "client.PlayerListHudMixin",
     "client.PlayerRendererMixin",
     "client.WorldBorderShaderActivatorMixin"
   ],

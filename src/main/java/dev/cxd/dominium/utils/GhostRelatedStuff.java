@@ -29,5 +29,4 @@ public class GhostRelatedStuff {
 
         return x > borderX && x < w - borderX && yDown > borderY && yUp < h - borderY;
     }
-
 }

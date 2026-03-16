@@ -46,7 +46,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModItems.SOUL_ORB,
                         Text.literal("Thy Demise is Now"),
                         Text.literal("Obtain a Soul Orb by killing any Player (including you) on Soul Sand."),
-                        null, AdvancementFrame.TASK, true, true, false
+                        null, AdvancementFrame.TASK, true, false, false
                 )
                 .criterion("has_soul_orb", InventoryChangedCriterion.Conditions.items(ModItems.SOUL_ORB))
                 .build(consumer, Dominium.MOD_ID + ":soul_orb");
@@ -57,7 +57,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModBlocks.WAYSTONE,
                         Text.literal("The Stone That Leads the Way"),
                         Text.literal("Obtain a Waystone."),
-                        null, AdvancementFrame.TASK, true, true, false
+                        null, AdvancementFrame.TASK, true, false, false
                 )
                 .criterion("has_waystone", InventoryChangedCriterion.Conditions.items(ModBlocks.WAYSTONE))
                 .build(consumer, Dominium.MOD_ID + ":waystone");
@@ -68,7 +68,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModItems.WANDERER_TABLET,
                         Text.literal("So That's How Wandering Trades Appear!"),
                         Text.literal("Obtain a Wanderer's Tablet."),
-                        null, AdvancementFrame.TASK, true, true, false
+                        null, AdvancementFrame.TASK, true, false, false
                 )
                 .criterion("has_wanderer_tablet", InventoryChangedCriterion.Conditions.items(ModItems.WANDERER_TABLET))
                 .build(consumer, Dominium.MOD_ID + ":wanderer_tablet");
@@ -79,7 +79,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModBlocks.IDOL,
                         Text.literal("False Idol"),
                         Text.literal("Obtain an Idol. An Idol protects you from anyone who holds a contract over you."),
-                        null, AdvancementFrame.TASK, true, true, false
+                        null, AdvancementFrame.TASK, true, false, false
                 )
                 .criterion("has_idol", InventoryChangedCriterion.Conditions.items(ModBlocks.IDOL))
                 .build(consumer, Dominium.MOD_ID + ":idol");
@@ -90,7 +90,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         net.minecraft.item.Items.SOUL_SAND,
                         Text.literal("Soul Rich Sand"),
                         Text.literal("Obtain Soul Sand."),
-                        null, AdvancementFrame.TASK, true, true, false
+                        null, AdvancementFrame.TASK, true, false, false
                 )
                 .criterion("has_soul_sand", InventoryChangedCriterion.Conditions.items(net.minecraft.item.Items.SOUL_SAND))
                 .build(consumer, Dominium.MOD_ID + ":soul_sand");
@@ -101,7 +101,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModBlocks.SOUL_SANDSTONE,
                         Text.literal("Stylish Souls"),
                         Text.literal("Obtain Soul Sandstone."),
-                        null, AdvancementFrame.TASK, true, true, false
+                        null, AdvancementFrame.TASK, true, false, false
                 )
                 .criterion("has_soul_sandstone", InventoryChangedCriterion.Conditions.items(ModBlocks.SOUL_SANDSTONE))
                 .build(consumer, Dominium.MOD_ID + ":soul_sandstone");
@@ -112,7 +112,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModBlocks.SOUL_GLASS,
                         Text.literal("Blindfolds 0.5"),
                         Text.literal("Obtain Soul Glass."),
-                        null, AdvancementFrame.TASK, true, true, false
+                        null, AdvancementFrame.TASK, true, false, false
                 )
                 .criterion("has_soul_glass", InventoryChangedCriterion.Conditions.items(ModBlocks.SOUL_GLASS))
                 .build(consumer, Dominium.MOD_ID + ":soul_glass");
@@ -123,7 +123,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         net.minecraft.item.Items.NETHERRACK,
                         Text.literal("You Shouldn't Be Here"),
                         Text.literal("Venture above the Nether Roof."),
-                        null, AdvancementFrame.GOAL, true, true, false
+                        null, AdvancementFrame.GOAL, true, false, true
                 )
                 .criterion("nether_roof", new ImpossibleCriterion.Conditions())
                 .build(consumer, Dominium.MOD_ID + ":nether_roof");
@@ -134,7 +134,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModItems.CONTRACT,
                         Text.literal("Dealing in Souls"),
                         Text.literal("Obtain a Contract."),
-                        null, AdvancementFrame.TASK, true, true, false
+                        null, AdvancementFrame.TASK, true, false, false
                 )
                 .criterion("has_contract", InventoryChangedCriterion.Conditions.items(ModItems.CONTRACT))
                 .build(consumer, Dominium.MOD_ID + ":contract");
@@ -179,7 +179,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModBlocks.VESSEL,
                         Text.literal("Masonic Voodoo"),
                         Text.literal("Obtain a Vessel. Place a Soul Fire source 2 blocks below it and insert a Contract inside it to apply bad effects to The Signer."),
-                        null, AdvancementFrame.TASK, true, true, false
+                        null, AdvancementFrame.TASK, true, false, false
                 )
                 .criterion("has_vessel", InventoryChangedCriterion.Conditions.items(ModBlocks.VESSEL))
                 .build(consumer, Dominium.MOD_ID + ":vessel");
@@ -201,7 +201,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModBlocks.SWAPPER,
                         Text.literal("Switcheroo"),
                         Text.literal("Obtain a Swapper."),
-                        null, AdvancementFrame.TASK, true, true, false
+                        null, AdvancementFrame.TASK, true, false, false
                 )
                 .criterion("has_swapper", InventoryChangedCriterion.Conditions.items(ModBlocks.SWAPPER))
                 .build(consumer, Dominium.MOD_ID + ":swapper");
@@ -212,7 +212,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModBlocks.OBELISK,
                         Text.literal("Claiming Back What's Yours."),
                         Text.literal("Obtain the Supreme Device of Soul Magic, The Obelisk."),
-                        null, AdvancementFrame.CHALLENGE, true, true, false
+                        null, AdvancementFrame.CHALLENGE, true, false, true
                 )
                 .criterion("has_obelisk", InventoryChangedCriterion.Conditions.items(ModBlocks.OBELISK))
                 .build(consumer, Dominium.MOD_ID + ":obelisk");
@@ -234,7 +234,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModItems.VASSAL_ITEM,
                         Text.literal("War Machines"),
                         Text.literal("Obtain a Vassal, a Machine devoted to its Owner."),
-                        null, AdvancementFrame.TASK, true, true, false
+                        null, AdvancementFrame.TASK, true, false, true
                 )
                 .criterion("has_vassal", InventoryChangedCriterion.Conditions.items(ModItems.VASSAL_ITEM))
                 .build(consumer, Dominium.MOD_ID + ":vassal");
@@ -245,7 +245,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModItems.VASSAL_ITEM,
                         Text.literal("An End To Your Forever War"),
                         Text.literal("Slay a Vassal."),
-                        null, AdvancementFrame.CHALLENGE, true, true, true
+                        null, AdvancementFrame.CHALLENGE, true, false, true
                 )
                 .criterion("slay_vassal", new ImpossibleCriterion.Conditions())
                 .build(consumer, Dominium.MOD_ID + ":slay_vassal");
@@ -256,7 +256,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModBlocks.SOUL_CANDLE,
                         Text.literal("Building in the Dark"),
                         Text.literal("Obtain a Soul Candle."),
-                        null, AdvancementFrame.TASK, true, true, false
+                        null, AdvancementFrame.TASK, true, false, false
                 )
                 .criterion("has_soul_candle", InventoryChangedCriterion.Conditions.items(ModBlocks.SOUL_CANDLE))
                 .build(consumer, Dominium.MOD_ID + ":soul_candle");
@@ -267,7 +267,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModItems.UNDEAD_NECKLACE,
                         Text.literal("Undead"),
                         Text.literal("Obtain a Necklace of the Undead."),
-                        null, AdvancementFrame.GOAL, true, true, true
+                        null, AdvancementFrame.GOAL, true, false, true
                 )
                 .criterion("has_necklace_undead", InventoryChangedCriterion.Conditions.items(ModItems.UNDEAD_NECKLACE))
                 .build(consumer, Dominium.MOD_ID + ":necklace_undead");
@@ -278,7 +278,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModItems.SPIDER_NECKLACE,
                         Text.literal("Arachnid"),
                         Text.literal("Obtain a Necklace of the Arachnid."),
-                        null, AdvancementFrame.GOAL, true, true, true
+                        null, AdvancementFrame.GOAL, true, false, true
                 )
                 .criterion("has_necklace_arachnid", InventoryChangedCriterion.Conditions.items(ModItems.SPIDER_NECKLACE))
                 .build(consumer, Dominium.MOD_ID + ":necklace_arachnid");
@@ -289,7 +289,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         ModItems.ETHEREAL_NECKLACE,
                         Text.literal("Ethereal"),
                         Text.literal("Obtain a Necklace of the Ethereal."),
-                        null, AdvancementFrame.GOAL, true, true, true
+                        null, AdvancementFrame.GOAL, true, false, true
                 )
                 .criterion("has_necklace_ethereal", InventoryChangedCriterion.Conditions.items(ModItems.ETHEREAL_NECKLACE))
                 .build(consumer, Dominium.MOD_ID + ":necklace_ethereal");

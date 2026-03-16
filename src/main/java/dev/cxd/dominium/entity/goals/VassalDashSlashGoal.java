@@ -62,20 +62,23 @@ public class VassalDashSlashGoal extends Goal {
         boolean facingTarget = Math.abs(MathHelper.wrapDegrees(
                 this.mould.getAngleBetweenEntities(target, this.mould) - (double) this.mould.getYaw())) < 35.0;
 
-        if (heightDiff >= -1.0 && heightDiff <= 6.0 && facingTarget) {
-            if (heightDiff > 1.5 && this.mould.isOnGround()) {
+        if (heightDiff >= -1.0 && heightDiff <= 8.0 && facingTarget) {
+            if (heightDiff > 2.5 && this.mould.isOnGround()) {
                 double horizontalDist = Math.sqrt(
                         (target.getX() - this.mould.getX()) * (target.getX() - this.mould.getX()) +
                                 (target.getZ() - this.mould.getZ()) * (target.getZ() - this.mould.getZ())
                 );
-                double jumpY = Math.min(0.6 + heightDiff * 0.15, 1.0);
-                double jumpXZ = horizontalDist > 0.1 ? Math.min(0.4, 1.5 / horizontalDist) : 0.3;
+
+                double jumpY = Math.min(0.5 + heightDiff * 0.12, 0.9);
+                double jumpXZ = horizontalDist > 0.1 ? Math.min(0.4, 1.5 / horizontalDist) : 0.25;
+
                 Vec3d dir = new Vec3d(
                         target.getX() - this.mould.getX(),
                         0,
                         target.getZ() - this.mould.getZ()
                 ).normalize().multiply(jumpXZ);
                 this.mould.setVelocity(dir.x, jumpY, dir.z);
+                this.mould.velocityModified = true;
             }
 
             this.mould.setAttackState(2);

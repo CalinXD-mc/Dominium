@@ -36,6 +36,8 @@ public class ModConfig extends MidnightConfig {
     public static int OBELISK_PROTECTION_RADIUS = 24;
     @Entry(category = GENERAL, name = "Obelisk Protection Height", min = 8, max = 256)
     public static int OBELISK_PROTECTION_HEIGHT = 64;
+    @Entry(category = GENERAL, name = "How long does it take for an Obelisk to restore Blocks in Ticks. (1 second = 20 ticks)", min = 20, max = 2000000)
+    public static int RESTORE_TICKS = 100;
 
     @Comment(category = GENERAL, centered = true) public static Comment eternal_divinity;
 

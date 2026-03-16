@@ -116,6 +116,7 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
 
         //entities
         translationBuilder.add("entity.dominium.roofling", "Roofling");
+        translationBuilder.add("entity.dominium.vassal", "Vassal");
         translationBuilder.add("info.dominium.vassal_deactivate", "Vassal Deactivated");
         translationBuilder.add("info.dominium.vassal_activate", "Vassal Activated");
 
@@ -127,5 +128,7 @@ public class ModReferenceEnglishLangProvider extends FabricLanguageProvider {
         translationBuilder.add("dominium.midnightconfig.eternal_divinity", "Eternal Divinity");
         translationBuilder.add("dominium.midnightconfig.broken_eternal_divinity", "Broken Eternal Divinity");
         translationBuilder.add("dominium.midnightconfig.idol", "Idol");
+        translationBuilder.add("dominium.midnightconfig.soultrap_spetum", "Eternal Divinity");
+        translationBuilder.add("dominium.midnightconfig.obelisk", "Broken Eternal Divinity");
     }
 }

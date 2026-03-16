@@ -21,6 +21,7 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.BatEntity;
@@ -99,16 +100,22 @@ public class VassalEntity extends HostileEntity implements TameableHostileEntity
         this.targetSelector.add(1, new TamedTrackAttackerGoal(this));
         this.targetSelector.add(2, new TamedAttackWithOwnerGoal<>(this));
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, LivingEntity.class, 10, true, false,
-                livingEntity -> !livingEntity.equals(this.getOwner())
-                        && !(livingEntity instanceof TameableEntity tamed
-                        && tamed.getOwner() != null
-                        && tamed.getOwner().equals(this.getOwner()))
-                        && !(livingEntity instanceof ArmorStandEntity)
-                        && !(livingEntity instanceof VassalEntity other && other.isOwner(this.getOwner()))
-                        && this.getActionState() == 2
-                        && !(livingEntity instanceof BatEntity)
-                        && !(livingEntity instanceof PlayerEntity player
-                        && player.getUuid().equals(UUID.fromString("1ece513b-8d36-4f04-9be2-f341aa8c9ee2")))));
+                livingEntity -> {
+                    boolean isFeral = this.getOwnerUuid() == null;
+
+                    if (!isFeral && this.getActionState() != 2) return false;
+
+                    return !livingEntity.equals(this.getOwner())
+                            && !(livingEntity instanceof TameableEntity tamed
+                            && tamed.getOwner() != null
+                            && tamed.getOwner().equals(this.getOwner()))
+                            && !(livingEntity instanceof ArmorStandEntity)
+                            && !(livingEntity instanceof VassalEntity other && other.isOwner(this.getOwner()))
+                            && !(livingEntity instanceof BatEntity)
+                            && !(livingEntity instanceof CreeperEntity)
+                            && !(livingEntity instanceof PlayerEntity player
+                            && player.getUuid().equals(UUID.fromString("1ece513b-8d36-4f04-9be2-f341aa8c9ee2")));
+                }));
     }
 
     @Override
@@ -120,7 +127,7 @@ public class VassalEntity extends HostileEntity implements TameableHostileEntity
         this.dataTracker.startTracking(DORMANT_DIR, this.getHorizontalFacing());
         this.dataTracker.startTracking(DORMANT, true);
         this.dataTracker.startTracking(TAMEABLE, (byte) 0);
-        this.dataTracker.startTracking(OWNER_UUID, Optional.of(UUID.fromString("1ece513b-8d36-4f04-9be2-f341aa8c9ee2")));
+        this.dataTracker.startTracking(OWNER_UUID, Optional.empty());
     }
 
     @Override
@@ -136,6 +143,12 @@ public class VassalEntity extends HostileEntity implements TameableHostileEntity
     @Override
     public boolean damage(DamageSource source, float amount) {
         if (!getWorld().isClient()) {
+            if (getOwnerUuid() == null
+                    && source.getAttacker() instanceof PlayerEntity player
+                    && player.isCreative()) {
+                return super.damage(source, Float.MAX_VALUE);
+            }
+
             if (source.isIn(DamageTypeTags.IS_EXPLOSION)) {
                 amount *= 0.5f;
             }
@@ -201,7 +214,7 @@ public class VassalEntity extends HostileEntity implements TameableHostileEntity
 
     @Override
     public UUID getOwnerUuid() {
-        return ((Optional<UUID>) this.dataTracker.get(OWNER_UUID)).orElse(null);
+        return this.dataTracker.get(OWNER_UUID).orElse(null);
     }
 
     @Override
@@ -375,35 +388,41 @@ public class VassalEntity extends HostileEntity implements TameableHostileEntity
         }
 
         if (!getWorld().isClient) {
-            if (!isDormant()) {
-                if ((this.getTarget() == null || (this.getDormantPos().isPresent()
-                        && !this.getDormantPos().get().isWithinDistance(this.getTarget().getBlockPos(), 16)))
-                        && forwardSpeed == 0
-                        && this.getNavigation().isIdle()
-                        && isAtDormantPos()) {
-                    setDormant(true);
-                    this.playSound(ModSounds.VASSAL_AMBIENT, 1f, 1f);
-                    this.updatePositionAndAngles(
-                            getDormantPos().get().getX() + 0.5,
-                            getDormantPos().get().getY(),
-                            getDormantPos().get().getZ() + 0.5,
-                            this.getYaw(), this.getPitch());
-                }
-            } else if (getTarget() != null
-                    && squaredDistanceTo(getTarget()) < 100
-                    && dataTracker.get(ACTION_STATE) != 0) {
-                if (activationTicks == 0) {
-                    this.playSound(ModSounds.VASSAL_AMBIENT, 1f, 1f);
-                }
-                activationTicks++;
-                setAttackState(1);
-                if (activationTicks > 60) {
-                    this.setDormant(false);
-                    this.setAttackState(0);
-                    this.activationTicks = 0;
+            if (getOwnerUuid() == null) {
+                setDormant(false);
+                if (getActionState() != 2) setActionState(2);
+            } else {
+                if (!isDormant()) {
+                    if ((this.getTarget() == null || (this.getDormantPos().isPresent()
+                            && !this.getDormantPos().get().isWithinDistance(this.getTarget().getBlockPos(), 16)))
+                            && forwardSpeed == 0
+                            && this.getNavigation().isIdle()
+                            && isAtDormantPos()) {
+                        setDormant(true);
+                        this.playSound(ModSounds.VASSAL_AMBIENT, 1f, 1f);
+                        this.updatePositionAndAngles(
+                                getDormantPos().get().getX() + 0.5,
+                                getDormantPos().get().getY(),
+                                getDormantPos().get().getZ() + 0.5,
+                                this.getYaw(), this.getPitch());
+                    }
+                } else if (getTarget() != null
+                        && squaredDistanceTo(getTarget()) < 100
+                        && dataTracker.get(ACTION_STATE) != 0) {
+                    if (activationTicks == 0) {
+                        this.playSound(ModSounds.VASSAL_AMBIENT, 1f, 1f);
+                    }
+                    activationTicks++;
+                    setAttackState(1);
+                    if (activationTicks > 60) {
+                        this.setDormant(false);
+                        this.setAttackState(0);
+                        this.activationTicks = 0;
+                    }
                 }
             }
         }
+
 
         if (isDormant()) {
             setVelocity(0, getVelocity().y, 0);
@@ -418,6 +437,10 @@ public class VassalEntity extends HostileEntity implements TameableHostileEntity
                 && !isAtDormantPos()
                 && !isDormant()) {
             updateDormantPos();
+        }
+
+        if (this.getTarget() != null && this.getTarget().equals(this.getOwner())) {
+            this.setTarget(null);
         }
     }
 
@@ -484,25 +507,27 @@ public class VassalEntity extends HostileEntity implements TameableHostileEntity
             AdvancementsUtils.grantAdvancement(killer, "slay_vassal");
         }
 
-        if (!getWorld().isClient()) {
-            for (int i = 0; i < 3; i++) {
-                net.minecraft.entity.ItemEntity item = new net.minecraft.entity.ItemEntity(
-                        getWorld(),
-                        getX(), getY() + 1, getZ(),
-                        new ItemStack(net.minecraft.item.Items.NETHERITE_INGOT)
-                );
+        if (getOwnerUuid() != null) {
+            if (!getWorld().isClient()) {
+                for (int i = 0; i < 3; i++) {
+                    net.minecraft.entity.ItemEntity item = new net.minecraft.entity.ItemEntity(
+                            getWorld(),
+                            getX(), getY() + 1, getZ(),
+                            new ItemStack(net.minecraft.item.Items.NETHERITE_INGOT)
+                    );
 
-                double angle = getWorld().getRandom().nextDouble() * Math.PI * 2;
-                double speed = 0.2 + getWorld().getRandom().nextDouble() * 0.3;
-                double upward = 0.2 + getWorld().getRandom().nextDouble() * 0.2;
+                    double angle = getWorld().getRandom().nextDouble() * Math.PI * 2;
+                    double speed = 0.2 + getWorld().getRandom().nextDouble() * 0.3;
+                    double upward = 0.2 + getWorld().getRandom().nextDouble() * 0.2;
 
-                item.setVelocity(
-                        Math.cos(angle) * speed,
-                        upward,
-                        Math.sin(angle) * speed
-                );
+                    item.setVelocity(
+                            Math.cos(angle) * speed,
+                            upward,
+                            Math.sin(angle) * speed
+                    );
 
-                getWorld().spawnEntity(item);
+                    getWorld().spawnEntity(item);
+                }
             }
         }
 

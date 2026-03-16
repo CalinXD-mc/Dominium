@@ -1,9 +1,11 @@
 package dev.cxd.dominium.init;
 
+import com.mojang.authlib.minecraft.client.MinecraftClient;
 import dev.cxd.dominium.Dominium;
 import dev.cxd.dominium.block.ObeliskBlock;
 import dev.cxd.dominium.block.entity.IdolBlockEntity;
 import dev.cxd.dominium.block.entity.ObeliskBlockEntity;
+import dev.cxd.dominium.block.entity.VesselBlockEntity;
 import dev.cxd.dominium.command.FactionCommand;
 import dev.cxd.dominium.command.GhostCommand;
 import dev.cxd.dominium.command.MarkerCommand;
@@ -14,6 +16,7 @@ import dev.cxd.dominium.item.necklaces.EtherealNecklaceItem;
 import dev.cxd.dominium.packet.GhostSyncPacket;
 import dev.cxd.dominium.utils.*;
 import dev.emi.trinkets.api.TrinketsApi;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -21,12 +24,15 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -37,6 +43,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class ModEvents {
 
@@ -177,6 +184,51 @@ public class ModEvents {
                     }
                 }
             }
+            if (world.getTime() % 40 != 0) return;
+
+            for (ServerPlayerEntity player : world.getPlayers()) {
+                if (!player.hasStatusEffect(ModStatusEffects.SOUL_DEBT)) continue;
+
+                BlockPos nearest = null;
+                double nearestDist = Double.MAX_VALUE;
+
+                for (VesselBlockEntity vessel : VesselBlockEntity.getActiveVessels()) {
+                    if (!vessel.hasContract()) continue;
+                    UUID signer = vessel.getSignerUUID();
+                    if (!player.getUuid().equals(signer)) continue;
+
+                    double dist = player.squaredDistanceTo(
+                            vessel.getPos().getX(), vessel.getPos().getY(), vessel.getPos().getZ());
+                    if (dist < nearestDist) {
+                        nearestDist = dist;
+                        nearest = vessel.getPos();
+                    }
+                }
+
+                if (nearest != null) {
+                    PacketByteBuf buf = PacketByteBufs.create();
+                    buf.writeBlockPos(nearest);
+                    ServerPlayNetworking.send(player, ModPackets.SOUL_DEBT_HINT_ID, buf);
+                }
+            }
+            for (ServerPlayerEntity player : world.getPlayers()) {
+                if (world.getTime() % 40 != 0) break;
+                BlockPos playerPos = player.getBlockPos();
+                ObeliskBlockEntity claim = ModEvents.findClaimAt(world, playerPos);
+                if (claim == null) continue;
+                if (!claim.isAllowed(player.getUuid())) continue;
+
+                UUID ownerUuid = claim.getOwner();
+                String ownerName = ownerUuid != null
+                        ? (world.getServer().getPlayerManager().getPlayer(ownerUuid) != null
+                        ? world.getServer().getPlayerManager().getPlayer(ownerUuid).getName().getString()
+                        : ownerUuid.toString())
+                        : "Unknown";
+
+                PacketByteBuf buf = PacketByteBufs.create();
+                buf.writeString(ownerName);
+                ServerPlayNetworking.send(player, ModPackets.CLAIM_PRESENCE_ID, buf);
+            }
         });
 
         ServerTickEvents.END_SERVER_TICK.register(server -> {
@@ -232,6 +284,8 @@ public class ModEvents {
             }
             return ActionResult.PASS;
         });
+
+
 
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             GhostCommand.register(dispatcher, registryAccess, environment);

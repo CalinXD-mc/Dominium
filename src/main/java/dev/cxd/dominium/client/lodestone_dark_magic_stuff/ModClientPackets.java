@@ -15,14 +15,51 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
 import java.util.UUID;
 
 public class ModClientPackets {
+    public static volatile Vec3d lastVesselPos = null;
+    public static volatile BlockPos claimRenderCenter = null;
+    public static volatile long claimRenderUntil = 0;
+    public static volatile int claimRadius = 0;
+    public static volatile int claimHeight = 0;
+    public static volatile String claimOwnerName = null;
+    public static volatile long claimPresenceUntil = 0;
+
     public static void initializeClientPackets() {
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.SHOW_CLAIM_RADIUS_ID, (client, handler, buf, responseSender) -> {
+            BlockPos center = buf.readBlockPos();
+            int radius = buf.readInt();
+            int height = buf.readInt();
+            client.execute(() -> {
+                claimRenderCenter = center;
+                claimRadius = radius;
+                claimHeight = height;
+                claimRenderUntil = System.currentTimeMillis() + 5000;
+            });
+        });
+
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.CLAIM_PRESENCE_ID, (client, handler, buf, responseSender) -> {
+            String ownerName = buf.readString(64);
+            client.execute(() -> {
+                claimOwnerName = ownerName;
+                claimPresenceUntil = System.currentTimeMillis() + 2000;
+            });
+        });
+
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.PARTICLE_SPAWN_ID, (client, handler, buf, responseSender) -> {
             ParticleSpawnPacketData data = new ParticleSpawnPacketData(buf);
             ParticleSpawnClientHandler.handle(client, data);
+        });
+
+        ClientPlayNetworking.registerGlobalReceiver(ModPackets.SOUL_DEBT_HINT_ID, (client, handler, buf, responseSender) -> {
+            BlockPos vesselPos = buf.readBlockPos();
+            client.execute(() -> {
+                lastVesselPos = Vec3d.ofCenter(vesselPos);
+            });
         });
 
         ServerPlayNetworking.registerGlobalReceiver(ModPackets.SOULBOUND_ACTION_ID, (server, player, handler, buf, responseSender) -> {
@@ -64,7 +101,7 @@ public class ModClientPackets {
                     }
                     case 3 -> {
                         target.addStatusEffect(new StatusEffectInstance(
-                                (StatusEffect) ModStatusEffects.SOUL_STRAIN, 20 * 30, 0, false, false, true));
+                                (StatusEffect) ModStatusEffects.SOUL_STRAIN, 20 * 300, 0, false, false, true));
 
                         EternalDivinityChainsEntity chain = ModEntities.ETERNAL_DIVINITY_CHAINS.create(serverWorld);
                         if (chain != null) {

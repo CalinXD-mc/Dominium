@@ -15,14 +15,18 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class VesselBlockEntity extends BlockEntity {
 
     private ItemStack insertedContract = ItemStack.EMPTY;
+    private static final List<VesselBlockEntity> ACTIVE_VESSELS = new ArrayList<>();
 
     public VesselBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.VESSEL_BLOCK_ENTITY, pos, state);
+        ACTIVE_VESSELS.add(this);
     }
 
     public boolean hasContract() {
@@ -35,12 +39,28 @@ public class VesselBlockEntity extends BlockEntity {
 
     public void insertContract(ItemStack stack) {
         this.insertedContract = stack.copy();
+        if (world instanceof ServerWorld serverWorld) {
+            serverWorld.getChunkManager().addTicket(
+                    net.minecraft.server.world.ChunkTicketType.FORCED,
+                    new net.minecraft.util.math.ChunkPos(pos),
+                    0,
+                    new net.minecraft.util.math.ChunkPos(pos)
+            );
+        }
         markDirty();
     }
 
     public ItemStack removeContract() {
         ItemStack contract = insertedContract.copy();
         this.insertedContract = ItemStack.EMPTY;
+        if (world instanceof ServerWorld serverWorld) {
+            serverWorld.getChunkManager().removeTicket(
+                    net.minecraft.server.world.ChunkTicketType.FORCED,
+                    new net.minecraft.util.math.ChunkPos(pos),
+                    0,
+                    new net.minecraft.util.math.ChunkPos(pos)
+            );
+        }
         markDirty();
         return contract;
     }
@@ -56,11 +76,25 @@ public class VesselBlockEntity extends BlockEntity {
         }
     }
 
+    private boolean chunkTicketAdded = false;
+
     public static void tick(World world, BlockPos pos, BlockState state, VesselBlockEntity be) {
         if (world.isClient()) return;
         if (world.getTime() % 20 != 0) return;
         if (!state.get(dev.cxd.dominium.block.VesselBlock.LIT)) return;
         if (!be.hasContract()) return;
+
+        if (!world.isClient() && !be.chunkTicketAdded && be.hasContract()) {
+            if (world instanceof ServerWorld serverWorld) {
+                serverWorld.getChunkManager().addTicket(
+                        net.minecraft.server.world.ChunkTicketType.FORCED,
+                        new net.minecraft.util.math.ChunkPos(pos),
+                        0,
+                        new net.minecraft.util.math.ChunkPos(pos)
+                );
+                be.chunkTicketAdded = true;
+            }
+        }
 
         UUID signerUUID = be.getSignerUUID();
         if (signerUUID == null) return;
@@ -90,5 +124,15 @@ public class VesselBlockEntity extends BlockEntity {
         } else {
             insertedContract = ItemStack.EMPTY;
         }
+    }
+
+    @Override
+    public void markRemoved() {
+        ACTIVE_VESSELS.remove(this);
+        super.markRemoved();
+    }
+
+    public static List<VesselBlockEntity> getActiveVessels() {
+        return ACTIVE_VESSELS;
     }
 }

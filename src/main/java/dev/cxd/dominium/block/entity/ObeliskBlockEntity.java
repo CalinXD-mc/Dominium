@@ -34,7 +34,7 @@ public class ObeliskBlockEntity extends BlockEntity {
 
     public static final int OBELISK_PROTECTION_RADIUS = ModConfig.OBELISK_PROTECTION_RADIUS;
     public static final int OBELISK_PROTECTION_HEIGHT = ModConfig.OBELISK_PROTECTION_HEIGHT;
-    private static final int RESTORE_TICKS = 100;
+    private static final int RESTORE_TICKS = ModConfig.RESTORE_TICKS;
 
     private UUID ownerUUID = null;
 

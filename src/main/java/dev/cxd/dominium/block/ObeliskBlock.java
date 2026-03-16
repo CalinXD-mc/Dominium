@@ -3,6 +3,9 @@ package dev.cxd.dominium.block;
 import dev.cxd.dominium.block.entity.ObeliskBlockEntity;
 import dev.cxd.dominium.init.ModBlockEntities;
 import dev.cxd.dominium.init.ModItems;
+import dev.cxd.dominium.init.ModPackets;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -11,6 +14,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -72,6 +77,16 @@ public class ObeliskBlock extends BlockWithEntity {
             player.sendMessage(Text.literal("No-enchant zone " + (newState ? "§aenabled" : "§cdisabled")), true);
             world.playSound(null, pos, SoundEvents.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 4F, 0.5F);
             return ActionResult.SUCCESS;
+        }
+
+        if (be.isAllowed(player.getUuid()) && player instanceof ServerPlayerEntity serverPlayer) {
+            PacketByteBuf buf = PacketByteBufs.create();
+            buf.writeBlockPos(lowerPos);
+            buf.writeInt(be.OBELISK_PROTECTION_RADIUS);
+            buf.writeInt(be.OBELISK_PROTECTION_HEIGHT);
+            ServerPlayNetworking.send(serverPlayer, ModPackets.SHOW_CLAIM_RADIUS_ID, buf);
+            player.sendMessage(Text.literal("§3Claim radius: §b" +
+                    be.OBELISK_PROTECTION_RADIUS + " blocks"), true);
         }
 
         return ActionResult.PASS;
