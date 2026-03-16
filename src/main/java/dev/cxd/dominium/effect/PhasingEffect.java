@@ -12,7 +12,7 @@ public class PhasingEffect extends StatusEffect {
     private static final Map<LivingEntity, Integer> startTicks = new WeakHashMap<>();
 
     public PhasingEffect() {
-        super(StatusEffectCategory.NEUTRAL, 0xFF004F);
+        super(StatusEffectCategory.NEUTRAL, 0x2D2D2D);
     }
 
     @Override
