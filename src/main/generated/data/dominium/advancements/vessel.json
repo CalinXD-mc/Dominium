@@ -15,7 +15,7 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
+    "announce_to_chat": false,
     "description": {
       "text": "Obtain a Vessel. Place a Soul Fire source 2 blocks below it and insert a Contract inside it to apply bad effects to The Signer."
     },

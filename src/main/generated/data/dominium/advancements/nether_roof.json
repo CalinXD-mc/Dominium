@@ -6,12 +6,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
+    "announce_to_chat": false,
     "description": {
       "text": "Venture above the Nether Roof."
     },
     "frame": "goal",
-    "hidden": false,
+    "hidden": true,
     "icon": {
       "item": "minecraft:netherrack"
     },

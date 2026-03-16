@@ -15,7 +15,7 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
+    "announce_to_chat": false,
     "description": {
       "text": "Obtain a Soul Orb by killing any Player (including you) on Soul Sand."
     },

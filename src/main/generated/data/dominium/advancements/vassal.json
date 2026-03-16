@@ -15,12 +15,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
+    "announce_to_chat": false,
     "description": {
       "text": "Obtain a Vassal, a Machine devoted to its Owner."
     },
     "frame": "task",
-    "hidden": false,
+    "hidden": true,
     "icon": {
       "item": "dominium:vassal_item"
     },

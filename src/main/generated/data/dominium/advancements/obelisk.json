@@ -15,12 +15,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
+    "announce_to_chat": false,
     "description": {
       "text": "Obtain the Supreme Device of Soul Magic, The Obelisk."
     },
     "frame": "challenge",
-    "hidden": false,
+    "hidden": true,
     "icon": {
       "item": "dominium:obelisk"
     },
